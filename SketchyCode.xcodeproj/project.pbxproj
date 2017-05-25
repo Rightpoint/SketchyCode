@@ -14,6 +14,7 @@
 		863E3EAA1ECFD1B3008AF9E5 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863E3EA91ECFD1B3008AF9E5 /* Log.swift */; };
 		863E3EB51ECFEAF0008AF9E5 /* SketchTypeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863E3EB41ECFEAF0008AF9E5 /* SketchTypeBuilder.swift */; };
 		863E3EBA1ECFED54008AF9E5 /* SketchClass.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 863E3EB81ECFEBE6008AF9E5 /* SketchClass.stencil */; };
+		8672E0881ED774AE00A4D480 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8672E0871ED774AE00A4D480 /* String.swift */; };
 		86AC75161ED610D300981BE2 /* SketchClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863E3EAB1ECFD786008AF9E5 /* SketchClasses.swift */; };
 		86AC75181ED6622200981BE2 /* SketchClasses+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AC75171ED6622200981BE2 /* SketchClasses+Helpers.swift */; };
 		940BA686A771AB2D6A2ACD48 /* Pods_SketchyCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F57022D6CC792DD283CE341 /* Pods_SketchyCode.framework */; };
@@ -45,6 +46,7 @@
 		863E3EAB1ECFD786008AF9E5 /* SketchClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchClasses.swift; sourceTree = "<group>"; };
 		863E3EB41ECFEAF0008AF9E5 /* SketchTypeBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchTypeBuilder.swift; sourceTree = "<group>"; };
 		863E3EB81ECFEBE6008AF9E5 /* SketchClass.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SketchClass.stencil; sourceTree = "<group>"; };
+		8672E0871ED774AE00A4D480 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		86A907881ED6780B00ECECE9 /* TextStyle.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = TextStyle.stencil; sourceTree = "<group>"; };
 		86AC75171ED6622200981BE2 /* SketchClasses+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SketchClasses+Helpers.swift"; sourceTree = "<group>"; };
 		8F57022D6CC792DD283CE341 /* Pods_SketchyCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SketchyCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +143,7 @@
 			children = (
 				863E3EA71ECFCFC4008AF9E5 /* Command.swift */,
 				863E3EA91ECFD1B3008AF9E5 /* Log.swift */,
+				8672E0871ED774AE00A4D480 /* String.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				863E3EA01ECFB24C008AF9E5 /* main.swift in Sources */,
 				863E3EB51ECFEAF0008AF9E5 /* SketchTypeBuilder.swift in Sources */,
 				86AC75161ED610D300981BE2 /* SketchClasses.swift in Sources */,
+				8672E0881ED774AE00A4D480 /* String.swift in Sources */,
 				863E3EA81ECFCFC4008AF9E5 /* Command.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

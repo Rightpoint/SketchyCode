@@ -8,7 +8,11 @@ import Marshal
 {% if c.parent %}
 class {{ c.name }}: {{ c.parent.name }} {
 {% else %}
+ {% if c.hasSubclasses %}
+class {{ c.name }}: ValueType {
+ {% else %}
 class {{ c.name }}: Unmarshaling {
+ {% endif %}
 {% endif %}
 
 {% for attr in c.attributes %}
@@ -24,6 +28,33 @@ class {{ c.name }}: Unmarshaling {
         try super.init(object: object)
 {% endif %}
     }
+
+{% if c.hasSubclasses %}
+    static func value(from object: Any) throws -> Value {
+        guard let obj = object as? [String: Any] else {
+            throw MarshalError.typeMismatch(expected: [String:Any].self, actual: type(of: object))
+        }
+        guard let classKey = obj["<class>"] as? String else {
+            throw MarshalError.nullValue(key: "<class>")
+        }
+        switch classKey {
+        case "{{ c.name }}":
+            return try {{ c.name }}(object: obj)
+ {% for s in c.subclasses %}
+        case "{{ s.name }}":
+            return try {{ s.name }}(object: obj)
+ {% endfor %}
+        default:
+            throw MarshalError.keyNotFound(key: classKey)
+        }
+    }
+ {% for s in c.subclasses %}
+    var {{ s.name.objcnessShapeAndLayerRemoved }}: {{ s.name }}? {
+        return self as? {{ s.name }}
+    }
+
+ {% endfor %}
+{% endif %}
 }
 
 {% endfor %}

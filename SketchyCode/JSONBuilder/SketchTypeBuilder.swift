@@ -48,7 +48,20 @@ final class SketchClass: NSObject {
         }
     }
 
-    var parent: SketchClass?
+    weak var parent: SketchClass? {
+        didSet {
+            if let parent = parent {
+                parent.subclasses.append(self)
+            }
+            if let oldParent = oldValue {
+                if let index = oldParent.subclasses.index(of: self) {
+                    oldParent.subclasses.remove(at: index)
+                }
+            }
+        }
+    }
+    var subclasses: [SketchClass] = []
+    var hasSubclasses: Bool { return subclasses.count > 0 }
     let name: String
     var attributes: [Attribute]
 
@@ -281,7 +294,6 @@ final class SketchTypeDocument: NSObject {
         consolidateClassAttributes()
     }
 }
-
 // Extension to assist with JSON loading and attribute / class lookup.
 private extension SketchTypeDocument {
     /// This load method allows the same SketchClass to be updated with every JSON blob
@@ -318,13 +330,7 @@ private extension SketchTypeDocument {
         // If the attribute name is a builtin class, remove it's NS prefix. This
         // easily cleans up some attributes named NSColor, NSParagraphStyle and NSFont
         if builtinClasses[name] != nil {
-            var name = name
-            let indicies = name.characters.indices
-            let firstIndex = indicies.startIndex
-            let lowerIndex = indicies.index(after: indicies.index(after: firstIndex))
-            let toLower = name.characters[lowerIndex]
-            name.replaceSubrange(firstIndex...lowerIndex, with: String(toLower).lowercased())
-            return name
+            return name.objcnessRemoved()
         }
         return name
     }
@@ -357,8 +363,7 @@ private extension SketchTypeDocument {
     func configureParentClass() {
         for (name, cls) in byName {
             if let parentName = superclassMappings[name] {
-                let parent = lookupClass(for: parentName)
-                cls.parent = parent
+                cls.parent = lookupClass(for: parentName)
             }
         }
     }

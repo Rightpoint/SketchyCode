@@ -4,7 +4,7 @@ import CoreGraphics
 import AppKit
 import Marshal
 
-class MSArtboardGroup: Unmarshaling {
+class MSArtboardGroup: ValueType {
     
     var resizesContent: CGFloat
     var includeInCloudUpload: CGFloat
@@ -57,6 +57,27 @@ class MSArtboardGroup: Unmarshaling {
         self.hasClickThrough = try object.value(for: "hasClickThrough")
         self.isLocked = try object.value(for: "isLocked")
     }
+    
+    static func value(from object: Any) throws -> Value {
+        guard let obj = object as? [String: Any] else {
+            throw MarshalError.typeMismatch(expected: [String:Any].self, actual: type(of: object))
+        }
+        guard let classKey = obj["<class>"] as? String else {
+            throw MarshalError.nullValue(key: "<class>")
+        }
+        switch classKey {
+        case "MSArtboardGroup":
+            return try MSArtboardGroup(object: obj)
+        case "MSSymbolMaster":
+            return try MSSymbolMaster(object: obj)
+        default:
+            throw MarshalError.keyNotFound(key: classKey)
+        }
+    }
+    var symbolMaster: MSSymbolMaster? {
+        return self as? MSSymbolMaster
+    }
+    
 }
 
 class MSAssetCollection: Unmarshaling {
@@ -72,6 +93,7 @@ class MSAssetCollection: Unmarshaling {
         self.images = try object.value(for: "images")
         self.imageCollection = try object.value(for: "imageCollection")
     }
+    
 }
 
 class MSBitmapLayer: MSShapeLayer {
@@ -93,6 +115,7 @@ class MSBitmapLayer: MSShapeLayer {
         
         try super.init(object: object)
     }
+    
 }
 
 class MSColor: Unmarshaling {
@@ -102,6 +125,7 @@ class MSColor: Unmarshaling {
     required init(object: MarshaledObject) throws {
         self.value = try object.value(for: "value")
     }
+    
 }
 
 class MSCurvePoint: Unmarshaling {
@@ -125,6 +149,7 @@ class MSCurvePoint: Unmarshaling {
         self.point = try object.value(for: "point")
         self.objectID = try object.value(for: "objectID")
     }
+    
 }
 
 class MSDocumentData: Unmarshaling {
@@ -152,6 +177,7 @@ class MSDocumentData: Unmarshaling {
         self.layerTextStyles = try object.value(for: "layerTextStyles")
         self.pages = try object.value(for: "pages")
     }
+    
 }
 
 class MSExportFormat: Unmarshaling {
@@ -171,6 +197,7 @@ class MSExportFormat: Unmarshaling {
         self.scale = try object.value(for: "scale")
         self.absoluteSize = try object.value(for: "absoluteSize")
     }
+    
 }
 
 class MSExportOptions: Unmarshaling {
@@ -186,6 +213,7 @@ class MSExportOptions: Unmarshaling {
         self.includedLayerIds = try object.value(for: "includedLayerIds")
         self.shouldTrim = try object.value(for: "shouldTrim")
     }
+    
 }
 
 class MSGradient: Unmarshaling {
@@ -207,6 +235,7 @@ class MSGradient: Unmarshaling {
         self.elipseLength = try object.value(for: "elipseLength")
         self.objectID = try object.value(for: "objectID")
     }
+    
 }
 
 class MSGradientStop: Unmarshaling {
@@ -220,6 +249,7 @@ class MSGradientStop: Unmarshaling {
         self.position = try object.value(for: "position")
         self.objectID = try object.value(for: "objectID")
     }
+    
 }
 
 class MSGraphicsContextSettings: Unmarshaling {
@@ -233,6 +263,7 @@ class MSGraphicsContextSettings: Unmarshaling {
         self.opacity = try object.value(for: "opacity")
         self.objectID = try object.value(for: "objectID")
     }
+    
 }
 
 class MSImageCollection: Unmarshaling {
@@ -242,6 +273,7 @@ class MSImageCollection: Unmarshaling {
     required init(object: MarshaledObject) throws {
         self.images = try object.value(for: "images")
     }
+    
 }
 
 class MSImageData: Unmarshaling {
@@ -253,6 +285,7 @@ class MSImageData: Unmarshaling {
         self.size = try object.value(for: "size")
         self.sha1 = try object.value(for: "sha1")
     }
+    
 }
 
 class MSLayerGroup: MSShapeLayer {
@@ -270,6 +303,7 @@ class MSLayerGroup: MSShapeLayer {
         
         try super.init(object: object)
     }
+    
 }
 
 class MSOvalShape: MSShapeLayer {
@@ -285,6 +319,7 @@ class MSOvalShape: MSShapeLayer {
         
         try super.init(object: object)
     }
+    
 }
 
 class MSPage: Unmarshaling {
@@ -332,6 +367,7 @@ class MSPage: Unmarshaling {
         self.hasClickThrough = try object.value(for: "hasClickThrough")
         self.isLocked = try object.value(for: "isLocked")
     }
+    
 }
 
 class MSRect: Unmarshaling {
@@ -351,6 +387,7 @@ class MSRect: Unmarshaling {
         self.width = try object.value(for: "width")
         self.objectID = try object.value(for: "objectID")
     }
+    
 }
 
 class MSRectangleShape: MSShapeLayer {
@@ -370,6 +407,7 @@ class MSRectangleShape: MSShapeLayer {
         
         try super.init(object: object)
     }
+    
 }
 
 class MSRulerData: Unmarshaling {
@@ -381,6 +419,7 @@ class MSRulerData: Unmarshaling {
         self.guides = try object.value(for: "guides")
         self.base = try object.value(for: "base")
     }
+    
 }
 
 class MSShapeGroup: MSShapeLayer {
@@ -404,9 +443,10 @@ class MSShapeGroup: MSShapeLayer {
         
         try super.init(object: object)
     }
+    
 }
 
-class MSShapeLayer: Unmarshaling {
+class MSShapeLayer: ValueType {
     
     var resizingConstraint: CGFloat
     var nameIsFixed: CGFloat
@@ -439,6 +479,69 @@ class MSShapeLayer: Unmarshaling {
         self.exportOptions = try object.value(for: "exportOptions")
         self.isLocked = try object.value(for: "isLocked")
     }
+    
+    static func value(from object: Any) throws -> Value {
+        guard let obj = object as? [String: Any] else {
+            throw MarshalError.typeMismatch(expected: [String:Any].self, actual: type(of: object))
+        }
+        guard let classKey = obj["<class>"] as? String else {
+            throw MarshalError.nullValue(key: "<class>")
+        }
+        switch classKey {
+        case "MSShapeLayer":
+            return try MSShapeLayer(object: obj)
+        case "MSOvalShape":
+            return try MSOvalShape(object: obj)
+        case "MSTextLayer":
+            return try MSTextLayer(object: obj)
+        case "MSShapePathLayer":
+            return try MSShapePathLayer(object: obj)
+        case "MSShapeGroup":
+            return try MSShapeGroup(object: obj)
+        case "MSRectangleShape":
+            return try MSRectangleShape(object: obj)
+        case "MSBitmapLayer":
+            return try MSBitmapLayer(object: obj)
+        case "MSLayerGroup":
+            return try MSLayerGroup(object: obj)
+        case "MSSymbolInstance":
+            return try MSSymbolInstance(object: obj)
+        default:
+            throw MarshalError.keyNotFound(key: classKey)
+        }
+    }
+    var oval: MSOvalShape? {
+        return self as? MSOvalShape
+    }
+    
+    var text: MSTextLayer? {
+        return self as? MSTextLayer
+    }
+    
+    var shapePath: MSShapePathLayer? {
+        return self as? MSShapePathLayer
+    }
+    
+    var shapeGroup: MSShapeGroup? {
+        return self as? MSShapeGroup
+    }
+    
+    var rectangle: MSRectangleShape? {
+        return self as? MSRectangleShape
+    }
+    
+    var bitmap: MSBitmapLayer? {
+        return self as? MSBitmapLayer
+    }
+    
+    var layerGroup: MSLayerGroup? {
+        return self as? MSLayerGroup
+    }
+    
+    var symbolInstance: MSSymbolInstance? {
+        return self as? MSSymbolInstance
+    }
+    
 }
 
 class MSShapePath: Unmarshaling {
@@ -452,6 +555,7 @@ class MSShapePath: Unmarshaling {
         self.isClosed = try object.value(for: "isClosed")
         self.points = try object.value(for: "points")
     }
+    
 }
 
 class MSShapePathLayer: MSShapeLayer {
@@ -467,6 +571,7 @@ class MSShapePathLayer: MSShapeLayer {
         
         try super.init(object: object)
     }
+    
 }
 
 class MSSharedStyle: Unmarshaling {
@@ -480,6 +585,7 @@ class MSSharedStyle: Unmarshaling {
         self.value = try object.value(for: "value")
         self.objectID = try object.value(for: "objectID")
     }
+    
 }
 
 class MSSharedStyleContainer: Unmarshaling {
@@ -489,6 +595,7 @@ class MSSharedStyleContainer: Unmarshaling {
     required init(object: MarshaledObject) throws {
         self.objects = try object.value(for: "objects")
     }
+    
 }
 
 class MSSharedTextStyleContainer: Unmarshaling {
@@ -498,6 +605,7 @@ class MSSharedTextStyleContainer: Unmarshaling {
     required init(object: MarshaledObject) throws {
         self.objects = try object.value(for: "objects")
     }
+    
 }
 
 class MSStyle: Unmarshaling {
@@ -535,6 +643,7 @@ class MSStyle: Unmarshaling {
         self.textStyle = try object.value(for: "textStyle")
         self.objectID = try object.value(for: "objectID")
     }
+    
 }
 
 class MSStyleBlur: Unmarshaling {
@@ -554,6 +663,7 @@ class MSStyleBlur: Unmarshaling {
         self.motionAngle = try object.value(for: "motionAngle")
         self.objectID = try object.value(for: "objectID")
     }
+    
 }
 
 class MSStyleBorder: Unmarshaling {
@@ -577,6 +687,7 @@ class MSStyleBorder: Unmarshaling {
         self.color = try object.value(for: "color")
         self.objectID = try object.value(for: "objectID")
     }
+    
 }
 
 class MSStyleBorderOptions: Unmarshaling {
@@ -594,6 +705,7 @@ class MSStyleBorderOptions: Unmarshaling {
         self.isEnabled = try object.value(for: "isEnabled")
         self.objectID = try object.value(for: "objectID")
     }
+    
 }
 
 class MSStyleColorControls: Unmarshaling {
@@ -611,6 +723,7 @@ class MSStyleColorControls: Unmarshaling {
         self.brightness = try object.value(for: "brightness")
         self.isEnabled = try object.value(for: "isEnabled")
     }
+    
 }
 
 class MSStyleFill: Unmarshaling {
@@ -638,6 +751,7 @@ class MSStyleFill: Unmarshaling {
         self.isEnabled = try object.value(for: "isEnabled")
         self.objectID = try object.value(for: "objectID")
     }
+    
 }
 
 class MSStyleInnerShadow: Unmarshaling {
@@ -661,6 +775,7 @@ class MSStyleInnerShadow: Unmarshaling {
         self.color = try object.value(for: "color")
         self.objectID = try object.value(for: "objectID")
     }
+    
 }
 
 class MSStyleReflection: Unmarshaling {
@@ -674,6 +789,7 @@ class MSStyleReflection: Unmarshaling {
         self.strength = try object.value(for: "strength")
         self.isEnabled = try object.value(for: "isEnabled")
     }
+    
 }
 
 class MSStyleShadow: Unmarshaling {
@@ -697,6 +813,7 @@ class MSStyleShadow: Unmarshaling {
         self.color = try object.value(for: "color")
         self.objectID = try object.value(for: "objectID")
     }
+    
 }
 
 class MSSymbolContainer: Unmarshaling {
@@ -706,6 +823,7 @@ class MSSymbolContainer: Unmarshaling {
     required init(object: MarshaledObject) throws {
         self.objects = try object.value(for: "objects")
     }
+    
 }
 
 class MSSymbolInstance: MSShapeLayer {
@@ -733,6 +851,7 @@ class MSSymbolInstance: MSShapeLayer {
         
         try super.init(object: object)
     }
+    
 }
 
 class MSSymbolMaster: MSArtboardGroup {
@@ -746,6 +865,7 @@ class MSSymbolMaster: MSArtboardGroup {
         
         try super.init(object: object)
     }
+    
 }
 
 class MSTextLayer: MSShapeLayer {
@@ -773,6 +893,7 @@ class MSTextLayer: MSShapeLayer {
         
         try super.init(object: object)
     }
+    
 }
 
 class MSTextStyle: Unmarshaling {
@@ -788,6 +909,7 @@ class MSTextStyle: Unmarshaling {
         self.paragraphStyle = try object.value(for: "paragraphStyle")
         self.font = try object.value(for: "font")
     }
+    
 }
 
 
