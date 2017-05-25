@@ -11,6 +11,7 @@ class MSArtboardGroup: ValueType {
     var backgroundColor: MSColor
     var nameIsFixed: CGFloat
     var isVisible: Bool
+    var grid: MSSimpleGrid?
     var resizingConstraint: CGFloat
     var style: MSStyle
     var rotation: CGFloat
@@ -30,6 +31,8 @@ class MSArtboardGroup: ValueType {
     var exportOptions: MSExportOptions
     var hasClickThrough: Bool
     var isLocked: Bool
+    var userInfo: [String: Any]?
+    var layout: MSLayoutGrid?
     
     required init(object: MarshaledObject) throws {
         self.resizesContent = try object.value(for: "resizesContent")
@@ -37,6 +40,7 @@ class MSArtboardGroup: ValueType {
         self.backgroundColor = try object.value(for: "backgroundColor")
         self.nameIsFixed = try object.value(for: "nameIsFixed")
         self.isVisible = try object.value(for: "isVisible")
+        self.grid = try object.value(for: "grid")
         self.resizingConstraint = try object.value(for: "resizingConstraint")
         self.style = try object.value(for: "style")
         self.rotation = try object.value(for: "rotation")
@@ -56,6 +60,8 @@ class MSArtboardGroup: ValueType {
         self.exportOptions = try object.value(for: "exportOptions")
         self.hasClickThrough = try object.value(for: "hasClickThrough")
         self.isLocked = try object.value(for: "isLocked")
+        self.userInfo = try object.value(for: "userInfo")
+        self.layout = try object.value(for: "layout")
     }
     
     static func value(from object: Any) throws -> Value {
@@ -83,7 +89,7 @@ class MSArtboardGroup: ValueType {
 class MSAssetCollection: Unmarshaling {
     
     var gradients: [SketchUnknown]
-    var colors: [SketchUnknown]
+    var colors: [MSColor]
     var images: [SketchUnknown]
     var imageCollection: MSImageCollection
     
@@ -104,6 +110,7 @@ class MSBitmapLayer: MSShapeLayer {
     var nineSliceScale: CGSize
     var fillReplacesImage: CGFloat
     var nineSliceCenterRect: CGPoint
+    var userInfo: [String: Any]?
     
     required init(object: MarshaledObject) throws {
         self.style = try object.value(for: "style")
@@ -112,6 +119,7 @@ class MSBitmapLayer: MSShapeLayer {
         self.nineSliceScale = try object.value(for: "nineSliceScale")
         self.fillReplacesImage = try object.value(for: "fillReplacesImage")
         self.nineSliceCenterRect = try object.value(for: "nineSliceCenterRect")
+        self.userInfo = try object.value(for: "userInfo")
         
         try super.init(object: object)
     }
@@ -137,7 +145,6 @@ class MSCurvePoint: Unmarshaling {
     var hasCurveFrom: Bool
     var cornerRadius: CGFloat
     var point: CGPoint
-    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.hasCurveTo = try object.value(for: "hasCurveTo")
@@ -147,7 +154,6 @@ class MSCurvePoint: Unmarshaling {
         self.hasCurveFrom = try object.value(for: "hasCurveFrom")
         self.cornerRadius = try object.value(for: "cornerRadius")
         self.point = try object.value(for: "point")
-        self.objectID = try object.value(for: "objectID")
     }
     
 }
@@ -224,7 +230,6 @@ class MSGradient: Unmarshaling {
     var stops: [MSGradientStop]
     var to: CGPoint
     var elipseLength: CGFloat
-    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.gradientType = try object.value(for: "gradientType")
@@ -233,7 +238,6 @@ class MSGradient: Unmarshaling {
         self.stops = try object.value(for: "stops")
         self.to = try object.value(for: "to")
         self.elipseLength = try object.value(for: "elipseLength")
-        self.objectID = try object.value(for: "objectID")
     }
     
 }
@@ -242,12 +246,10 @@ class MSGradientStop: Unmarshaling {
     
     var color: MSColor
     var position: CGFloat
-    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.color = try object.value(for: "color")
         self.position = try object.value(for: "position")
-        self.objectID = try object.value(for: "objectID")
     }
     
 }
@@ -256,12 +258,10 @@ class MSGraphicsContextSettings: Unmarshaling {
     
     var blendMode: CGFloat
     var opacity: CGFloat
-    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.blendMode = try object.value(for: "blendMode")
         self.opacity = try object.value(for: "opacity")
-        self.objectID = try object.value(for: "objectID")
     }
     
 }
@@ -292,16 +292,50 @@ class MSLayerGroup: MSShapeLayer {
     
     var style: MSStyle
     var layers: [MSShapeLayer]
-    var originalObjectID: String?
     var hasClickThrough: Bool
+    var userInfo: [String: Any]?
+    var originalObjectID: String?
     
     required init(object: MarshaledObject) throws {
         self.style = try object.value(for: "style")
         self.layers = try object.value(for: "layers")
-        self.originalObjectID = try object.value(for: "originalObjectID")
         self.hasClickThrough = try object.value(for: "hasClickThrough")
+        self.userInfo = try object.value(for: "userInfo")
+        self.originalObjectID = try object.value(for: "originalObjectID")
         
         try super.init(object: object)
+    }
+    
+}
+
+class MSLayoutGrid: Unmarshaling {
+    
+    var isEnabled: Bool
+    var gutterWidth: CGFloat
+    var horizontalOffset: CGFloat
+    var drawHorizontalLines: CGFloat
+    var drawVertical: CGFloat
+    var drawHorizontal: CGFloat
+    var totalWidth: CGFloat
+    var rowHeightMultiplication: CGFloat
+    var numberOfColumns: CGFloat
+    var gutterHeight: CGFloat
+    var guttersOutside: CGFloat
+    var columnWidth: CGFloat
+    
+    required init(object: MarshaledObject) throws {
+        self.isEnabled = try object.value(for: "isEnabled")
+        self.gutterWidth = try object.value(for: "gutterWidth")
+        self.horizontalOffset = try object.value(for: "horizontalOffset")
+        self.drawHorizontalLines = try object.value(for: "drawHorizontalLines")
+        self.drawVertical = try object.value(for: "drawVertical")
+        self.drawHorizontal = try object.value(for: "drawHorizontal")
+        self.totalWidth = try object.value(for: "totalWidth")
+        self.rowHeightMultiplication = try object.value(for: "rowHeightMultiplication")
+        self.numberOfColumns = try object.value(for: "numberOfColumns")
+        self.gutterHeight = try object.value(for: "gutterHeight")
+        self.guttersOutside = try object.value(for: "guttersOutside")
+        self.columnWidth = try object.value(for: "columnWidth")
     }
     
 }
@@ -377,7 +411,6 @@ class MSRect: Unmarshaling {
     var y: CGFloat
     var constrainProportions: CGFloat
     var width: CGFloat
-    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.height = try object.value(for: "height")
@@ -385,7 +418,6 @@ class MSRect: Unmarshaling {
         self.y = try object.value(for: "y")
         self.constrainProportions = try object.value(for: "constrainProportions")
         self.width = try object.value(for: "width")
-        self.objectID = try object.value(for: "objectID")
     }
     
 }
@@ -412,7 +444,7 @@ class MSRectangleShape: MSShapeLayer {
 
 class MSRulerData: Unmarshaling {
     
-    var guides: [SketchUnknown]
+    var guides: [CGFloat]
     var base: CGFloat
     
     required init(object: MarshaledObject) throws {
@@ -430,6 +462,7 @@ class MSShapeGroup: MSShapeLayer {
     var windingRule: CGFloat
     var hasClippingMask: Bool
     var hasClickThrough: Bool
+    var userInfo: [String: Any]?
     var originalObjectID: String?
     
     required init(object: MarshaledObject) throws {
@@ -439,6 +472,7 @@ class MSShapeGroup: MSShapeLayer {
         self.windingRule = try object.value(for: "windingRule")
         self.hasClippingMask = try object.value(for: "hasClippingMask")
         self.hasClickThrough = try object.value(for: "hasClickThrough")
+        self.userInfo = try object.value(for: "userInfo")
         self.originalObjectID = try object.value(for: "originalObjectID")
         
         try super.init(object: object)
@@ -498,10 +532,10 @@ class MSShapeLayer: ValueType {
             return try MSShapePathLayer(object: obj)
         case "MSShapeGroup":
             return try MSShapeGroup(object: obj)
-        case "MSRectangleShape":
-            return try MSRectangleShape(object: obj)
         case "MSBitmapLayer":
             return try MSBitmapLayer(object: obj)
+        case "MSRectangleShape":
+            return try MSRectangleShape(object: obj)
         case "MSLayerGroup":
             return try MSLayerGroup(object: obj)
         case "MSSymbolInstance":
@@ -526,12 +560,12 @@ class MSShapeLayer: ValueType {
         return self as? MSShapeGroup
     }
     
-    var rectangle: MSRectangleShape? {
-        return self as? MSRectangleShape
-    }
-    
     var bitmap: MSBitmapLayer? {
         return self as? MSBitmapLayer
+    }
+    
+    var rectangle: MSRectangleShape? {
+        return self as? MSRectangleShape
     }
     
     var layerGroup: MSLayerGroup? {
@@ -576,14 +610,14 @@ class MSShapePathLayer: MSShapeLayer {
 
 class MSSharedStyle: Unmarshaling {
     
-    var name: String
     var value: MSStyle
     var objectID: String
+    var name: String?
     
     required init(object: MarshaledObject) throws {
-        self.name = try object.value(for: "name")
         self.value = try object.value(for: "value")
         self.objectID = try object.value(for: "objectID")
+        self.name = try object.value(for: "name")
     }
     
 }
@@ -608,6 +642,20 @@ class MSSharedTextStyleContainer: Unmarshaling {
     
 }
 
+class MSSimpleGrid: Unmarshaling {
+    
+    var thickGridTimes: CGFloat
+    var gridSize: CGFloat
+    var isEnabled: Bool
+    
+    required init(object: MarshaledObject) throws {
+        self.thickGridTimes = try object.value(for: "thickGridTimes")
+        self.gridSize = try object.value(for: "gridSize")
+        self.isEnabled = try object.value(for: "isEnabled")
+    }
+    
+}
+
 class MSStyle: Unmarshaling {
     
     var fills: [MSStyleFill]
@@ -624,7 +672,6 @@ class MSStyle: Unmarshaling {
     var colorControls: MSStyleColorControls
     var blur: MSStyleBlur
     var textStyle: MSTextStyle?
-    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.fills = try object.value(for: "fills")
@@ -641,7 +688,6 @@ class MSStyle: Unmarshaling {
         self.colorControls = try object.value(for: "colorControls")
         self.blur = try object.value(for: "blur")
         self.textStyle = try object.value(for: "textStyle")
-        self.objectID = try object.value(for: "objectID")
     }
     
 }
@@ -653,7 +699,6 @@ class MSStyleBlur: Unmarshaling {
     var radius: CGFloat
     var type: CGFloat
     var motionAngle: CGFloat
-    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.isEnabled = try object.value(for: "isEnabled")
@@ -661,7 +706,6 @@ class MSStyleBlur: Unmarshaling {
         self.radius = try object.value(for: "radius")
         self.type = try object.value(for: "type")
         self.motionAngle = try object.value(for: "motionAngle")
-        self.objectID = try object.value(for: "objectID")
     }
     
 }
@@ -675,7 +719,6 @@ class MSStyleBorder: Unmarshaling {
     var thickness: CGFloat
     var contextSettings: MSGraphicsContextSettings
     var color: MSColor
-    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.position = try object.value(for: "position")
@@ -685,7 +728,6 @@ class MSStyleBorder: Unmarshaling {
         self.thickness = try object.value(for: "thickness")
         self.contextSettings = try object.value(for: "contextSettings")
         self.color = try object.value(for: "color")
-        self.objectID = try object.value(for: "objectID")
     }
     
 }
@@ -693,17 +735,15 @@ class MSStyleBorder: Unmarshaling {
 class MSStyleBorderOptions: Unmarshaling {
     
     var lineCapStyle: CGFloat
-    var dashPattern: [SketchUnknown]
+    var dashPattern: [CGFloat]
     var lineJoinStyle: CGFloat
     var isEnabled: Bool
-    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.lineCapStyle = try object.value(for: "lineCapStyle")
         self.dashPattern = try object.value(for: "dashPattern")
         self.lineJoinStyle = try object.value(for: "lineJoinStyle")
         self.isEnabled = try object.value(for: "isEnabled")
-        self.objectID = try object.value(for: "objectID")
     }
     
 }
@@ -737,7 +777,6 @@ class MSStyleFill: Unmarshaling {
     var patternTileScale: CGFloat
     var contextSettings: MSGraphicsContextSettings
     var isEnabled: Bool
-    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.color = try object.value(for: "color")
@@ -749,7 +788,6 @@ class MSStyleFill: Unmarshaling {
         self.patternTileScale = try object.value(for: "patternTileScale")
         self.contextSettings = try object.value(for: "contextSettings")
         self.isEnabled = try object.value(for: "isEnabled")
-        self.objectID = try object.value(for: "objectID")
     }
     
 }
@@ -763,7 +801,6 @@ class MSStyleInnerShadow: Unmarshaling {
     var spread: CGFloat
     var contextSettings: MSGraphicsContextSettings
     var color: MSColor
-    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.isEnabled = try object.value(for: "isEnabled")
@@ -773,7 +810,6 @@ class MSStyleInnerShadow: Unmarshaling {
         self.spread = try object.value(for: "spread")
         self.contextSettings = try object.value(for: "contextSettings")
         self.color = try object.value(for: "color")
-        self.objectID = try object.value(for: "objectID")
     }
     
 }
@@ -801,7 +837,6 @@ class MSStyleShadow: Unmarshaling {
     var spread: CGFloat
     var contextSettings: MSGraphicsContextSettings
     var color: MSColor
-    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.isEnabled = try object.value(for: "isEnabled")
@@ -811,7 +846,6 @@ class MSStyleShadow: Unmarshaling {
         self.spread = try object.value(for: "spread")
         self.contextSettings = try object.value(for: "contextSettings")
         self.color = try object.value(for: "color")
-        self.objectID = try object.value(for: "objectID")
     }
     
 }
@@ -830,24 +864,26 @@ class MSSymbolInstance: MSShapeLayer {
     
     var symbolID: String
     var masterInfluenceEdgeMinXPadding: CGFloat
-    var overrides: [String: Any]
     var masterInfluenceEdgeMinYPadding: CGFloat
     var verticalSpacing: CGFloat
     var style: MSStyle
     var horizontalSpacing: CGFloat
     var masterInfluenceEdgeMaxXPadding: CGFloat
     var masterInfluenceEdgeMaxYPadding: CGFloat
+    var overrides: [String: Any]?
+    var userInfo: [String: Any]?
     
     required init(object: MarshaledObject) throws {
         self.symbolID = try object.value(for: "symbolID")
         self.masterInfluenceEdgeMinXPadding = try object.value(for: "masterInfluenceEdgeMinXPadding")
-        self.overrides = try object.value(for: "overrides")
         self.masterInfluenceEdgeMinYPadding = try object.value(for: "masterInfluenceEdgeMinYPadding")
         self.verticalSpacing = try object.value(for: "verticalSpacing")
         self.style = try object.value(for: "style")
         self.horizontalSpacing = try object.value(for: "horizontalSpacing")
         self.masterInfluenceEdgeMaxXPadding = try object.value(for: "masterInfluenceEdgeMaxXPadding")
         self.masterInfluenceEdgeMaxYPadding = try object.value(for: "masterInfluenceEdgeMaxYPadding")
+        self.overrides = try object.value(for: "overrides")
+        self.userInfo = try object.value(for: "userInfo")
         
         try super.init(object: object)
     }
@@ -858,10 +894,12 @@ class MSSymbolMaster: MSArtboardGroup {
     
     var symbolID: String
     var includeBackgroundColorInInstance: CGFloat
+    var originalObjectID: String?
     
     required init(object: MarshaledObject) throws {
         self.symbolID = try object.value(for: "symbolID")
         self.includeBackgroundColorInInstance = try object.value(for: "includeBackgroundColorInInstance")
+        self.originalObjectID = try object.value(for: "originalObjectID")
         
         try super.init(object: object)
     }
@@ -874,22 +912,24 @@ class MSTextLayer: MSShapeLayer {
     var dontSynchroniseWithSymbol: CGFloat
     var glyphBounds: CGPoint
     var attributedString: NSAttributedString
-    var originalObjectID: String?
     var automaticallyDrawOnUnderlyingPath: CGFloat
     var lineSpacingBehaviour: CGFloat
     var textBehaviour: CGFloat
     var heightIsClipped: CGFloat
+    var userInfo: [String: Any]?
+    var originalObjectID: String?
     
     required init(object: MarshaledObject) throws {
         self.style = try object.value(for: "style")
         self.dontSynchroniseWithSymbol = try object.value(for: "dontSynchroniseWithSymbol")
         self.glyphBounds = try object.value(for: "glyphBounds")
         self.attributedString = try object.value(for: "attributedString")
-        self.originalObjectID = try object.value(for: "originalObjectID")
         self.automaticallyDrawOnUnderlyingPath = try object.value(for: "automaticallyDrawOnUnderlyingPath")
         self.lineSpacingBehaviour = try object.value(for: "lineSpacingBehaviour")
         self.textBehaviour = try object.value(for: "textBehaviour")
         self.heightIsClipped = try object.value(for: "heightIsClipped")
+        self.userInfo = try object.value(for: "userInfo")
+        self.originalObjectID = try object.value(for: "originalObjectID")
         
         try super.init(object: object)
     }
@@ -898,19 +938,25 @@ class MSTextLayer: MSShapeLayer {
 
 class MSTextStyle: Unmarshaling {
     
+    var NSLigature: CGFloat?
+    var font: NSFont?
+    var paragraphStyle: NSParagraphStyle?
     var color: NSColor?
     var NSKern: CGFloat?
-    var paragraphStyle: NSParagraphStyle?
-    var font: NSFont?
+    var NSStrikethrough: CGFloat?
+    var NSUnderline: CGFloat?
+    var MSAttributedStringTextTransformAttribute: CGFloat?
     
     required init(object: MarshaledObject) throws {
+        self.NSLigature = try object.value(for: "NSLigature")
+        self.font = try object.value(for: "font")
+        self.paragraphStyle = try object.value(for: "paragraphStyle")
         self.color = try object.value(for: "color")
         self.NSKern = try object.value(for: "NSKern")
-        self.paragraphStyle = try object.value(for: "paragraphStyle")
-        self.font = try object.value(for: "font")
+        self.NSStrikethrough = try object.value(for: "NSStrikethrough")
+        self.NSUnderline = try object.value(for: "NSUnderline")
+        self.MSAttributedStringTextTransformAttribute = try object.value(for: "MSAttributedStringTextTransformAttribute")
     }
     
 }
-
-
 
