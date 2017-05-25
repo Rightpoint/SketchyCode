@@ -45,6 +45,7 @@
 		863E3EAB1ECFD786008AF9E5 /* SketchClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchClasses.swift; sourceTree = "<group>"; };
 		863E3EB41ECFEAF0008AF9E5 /* SketchTypeBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchTypeBuilder.swift; sourceTree = "<group>"; };
 		863E3EB81ECFEBE6008AF9E5 /* SketchClass.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SketchClass.stencil; sourceTree = "<group>"; };
+		86A907881ED6780B00ECECE9 /* TextStyle.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = TextStyle.stencil; sourceTree = "<group>"; };
 		86AC75171ED6622200981BE2 /* SketchClasses+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SketchClasses+Helpers.swift"; sourceTree = "<group>"; };
 		8F57022D6CC792DD283CE341 /* Pods_SketchyCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SketchyCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B612193179ACEFAAA5C48D /* Pods-SketchyCode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SketchyCode.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SketchyCode/Pods-SketchyCode.debug.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				863E3EB11ECFEA97008AF9E5 /* JSONBuilder */,
+				86A907871ED677DC00ECECE9 /* Templates */,
 				863E3EA61ECFCFC4008AF9E5 /* Utils */,
 				863E3E8B1ECFB1A7008AF9E5 /* Info.plist */,
 				863E3E9F1ECFB24C008AF9E5 /* main.swift */,
@@ -150,6 +152,14 @@
 				863E3EB81ECFEBE6008AF9E5 /* SketchClass.stencil */,
 			);
 			path = JSONBuilder;
+			sourceTree = "<group>";
+		};
+		86A907871ED677DC00ECECE9 /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				86A907881ED6780B00ECECE9 /* TextStyle.stencil */,
+			);
+			path = Templates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

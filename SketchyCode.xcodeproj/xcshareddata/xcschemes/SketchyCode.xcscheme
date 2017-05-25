@@ -77,11 +77,11 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = " --file"
+            argument = " --file /Users/bking/Downloads/Fitness\ App.sketch"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "/Users/bking/Downloads/Fitness\ App.sketch"
+            argument = "--templates /Users/bking/sandbox/SketchyCode/SketchyCode/Templates/TextStyle.stencil"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

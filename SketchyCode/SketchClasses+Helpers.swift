@@ -31,8 +31,8 @@ extension NSFont: ValueType {
         }
         let attrs: [String: Any] = try obj.value(for: "attributes")
         guard let font = NSFont(
-            name: try attrs.value(for: "NSFontSizeAttribute"),
-            size: try attrs.value(for: "NSFontNameAttribute")
+            name: try attrs.value(for: "NSFontNameAttribute"),
+            size: try attrs.value(for: "NSFontSizeAttribute")
             ) else {
                 throw MarshalError.typeMismatch(expected: [String:Any].self, actual: type(of: object))
         }

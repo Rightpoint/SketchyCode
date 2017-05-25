@@ -48,7 +48,7 @@ final class SketchClass: NSObject {
         }
     }
 
-    let parent: SketchClass?
+    var parent: SketchClass?
     let name: String
     var attributes: [Attribute]
 
@@ -62,9 +62,8 @@ final class SketchClass: NSObject {
    
     static var classMarker = "<class>"
     
-    init(name: String, parent: SketchClass?) {
+    init(name: String) {
         self.name = name
-        self.parent = parent
         self.attributes = []
     }
     
@@ -85,8 +84,13 @@ final class SketchClass: NSObject {
                 attributes.append(newAttribute)
                 return newAttribute
             }()
-            let new = try SketchType(any: value, document: document, keyHint: key)
+            let new = try SketchType(any: value, document: document, hint: .key(key))
             try attribute.type.update(new: new, document: document)
+        }
+        // Make sure that any attribute that is not in the payload is upgraded to optional
+        for attribute in attributes {
+            guard !json.keys.contains(attribute.name) else { continue }
+            try attribute.type.update(new: .unknown, document: document)
         }
     }
 }
@@ -101,21 +105,42 @@ indirect enum SketchType: Equatable {
     case optional(SketchType)
     case unknown
     
-    init(any: Any, document: SketchTypeDocument, keyHint: String = "") throws {
-        if let type = document.propertyTypes[keyHint] {
+    enum Hint {
+        case none
+        case key(String)
+        case useParentClass
+        
+        var isBoolKeyHint: Bool {
+            guard case .key(let keyHint) = self else { return false }
+            return keyHint.hasPrefix("is") || keyHint.hasPrefix("should") || keyHint.hasPrefix("has") || keyHint.hasPrefix("enable")
+        }
+        
+    }
+    
+    init(any: Any, document: SketchTypeDocument, hint: Hint = .none) throws {
+        if case .key(let keyHint) = hint,
+            let type = document.propertyTypes[keyHint] {
             self = .builtin(type)
         }
         switch any {
-        case is Int where keyHint.hasPrefix("is") || keyHint.hasPrefix("should") || keyHint.hasPrefix("has"):
+        case is Int where hint.isBoolKeyHint:
             self = .builtin("Bool")
         case is CGFloat:
             self = .builtin("CGFloat")
         case is String:
             self = .builtin("String")
         case let json as [String: Any]:
-            self = try document.loadJSON(json: json)
+            let object = try document.loadJSON(json: json)
+            if  case .useParentClass = hint,
+                case .class(let sketchClass) = object,
+                let parentName = document.superclassMappings[sketchClass.name] {
+                self = .class(document.lookupClass(for: parentName))
+            }
+            else {
+                self = object
+            }
         case let array as [Any]:
-            let types = try array.map { try SketchType(any: $0, document: document) }
+            let types = try array.map { try SketchType(any: $0, document: document, hint: .useParentClass) }
             self = .array(types.first ?? .unknown)
         default:
             throw ParserError.unknownType(any)
@@ -125,27 +150,34 @@ indirect enum SketchType: Equatable {
     // swiftlint:disable:next cyclomatic_complexity
     mutating func update(new: SketchType, document: SketchTypeDocument) throws {
         switch (self, new) {
-        // No-Op equality
+        // No-Op when the two types are equal
         case (_, _) where self == new:
             break
-        // If we are unknown, take new value
+        // If we are unknown, take new value.
         case (.unknown, _):
             self = new
         case (.array(.unknown), .array(_)):
             self = new
         case (.optional(.unknown), .optional(_)):
             self = new
-        // not sure if this will ever fire.
-        case (.builtin("Int"), .builtin("Float")):
-            self = new
-        // If the new value is unknown skip it
+        // If the new value is unknown, and the type is known, make it optional.
+        case (.builtin, .unknown):
+            self = .optional(self)
+        case (.class, .unknown):
+            self = .optional(self)
+        case (.array, .unknown):
+            self = .optional(self)
+        // If the new value is unknown but the type isn't known, ignore it.
         case (_, .unknown):
             break
         case (_, .array(.unknown)):
             break
         case (_, .optional(.unknown)):
             break
-        // Check for subclasses
+        // If the new value is known, but the existing type is optional, ignore it.
+        case (.optional, _):
+            break
+        // The payload may refer to a subclass in a child heirarchy. Use a reference to the base class.
         case (.array(.class(let cur)), .array(.class(let new))):
             let container = document.containerClass(of: cur, and: new)
             self = .array(.class(container))
@@ -209,7 +241,8 @@ final class SketchTypeDocument: NSObject {
         "NSConcreteAttributedString": "NSAttributedString",
         "NSMutableParagraphStyle": "NSParagraphStyle",
         "NSParagraphStyle": "NSParagraphStyle",
-        "NSColor": "NSColor"
+        "NSColor": "NSColor",
+        "NSFont": "NSFont"
     ]
     
     // Some of the collections persist a class hierarchy, where the type may differ between
@@ -222,8 +255,14 @@ final class SketchTypeDocument: NSObject {
         "MSOvalShape": "MSShapeLayer",
         "MSLayerGroup": "MSShapeLayer",
         "MSTextLayer": "MSShapeLayer",
-        "MSBitmapLayer": "MSShapeLayer"
+        "MSSymbolInstance": "MSShapeLayer",
+        "MSBitmapLayer": "MSShapeLayer",
+        "MSSymbolMaster": "MSArtboardGroup"
     ]
+    
+    // MSShapeLayer is not counted because it's an abstract baseclass and never shows up in the
+    // JSON so counting MSShapeLayer properties breaks the property consolidation.
+    let skipClassWhenConsolidatingAttributes: [String] = ["MSShapeLayer"]
     
     let propertyTypes: [String: String] =  [
         "objectID": "NSUUID",
@@ -238,6 +277,7 @@ final class SketchTypeDocument: NSObject {
     init(any: Any) throws {
         super.init()
         _ = try SketchType(any: any, document: self)
+        configureParentClass()
         consolidateClassAttributes()
     }
 }
@@ -291,8 +331,7 @@ private extension SketchTypeDocument {
     
     func lookupClass(for name: String) -> SketchClass {
         let sketchClass = byName[name] ?? {
-            let parent = byName[superclassMappings[name] ?? "No Super Class Key"]
-            let newClass = SketchClass(name: name, parent: parent)
+            let newClass = SketchClass(name: name)
             byName[name] = newClass
             return newClass
             }()
@@ -311,6 +350,17 @@ private extension SketchTypeDocument {
     func containerClass(of sketchClass: SketchClass, and otherSketchClass: SketchClass) -> SketchClass {
         let name = containerClass(of: sketchClass.name, and: otherSketchClass.name)
         return lookupClass(for: name)
+    }
+}
+
+private extension SketchTypeDocument {
+    func configureParentClass() {
+        for (name, cls) in byName {
+            if let parentName = superclassMappings[name] {
+                let parent = lookupClass(for: parentName)
+                cls.parent = parent
+            }
+        }
     }
 }
 
@@ -343,6 +393,13 @@ private extension SketchTypeDocument {
             superClassCounters[parent.name] = counter
             counter.count(subclass: sketchClass)
         }
+        // Count parent classes
+        for (name, counter) in superClassCounters {
+            guard !skipClassWhenConsolidatingAttributes.contains(name) else { continue }
+            let parent = byName[name]!
+            counter.count(subclass: parent)
+        }
+
         for (superclassName, counter) in superClassCounters {
             let baseclass = lookupClass(for: superclassName)
             let subclass = counter.subclasses[0]
@@ -351,9 +408,13 @@ private extension SketchTypeDocument {
                 guard let attribute = subclass.lookup(attribute: attributeName) else {
                     fatalError("Should always have item in attributes list")
                 }
-                baseclass.attributes.append(attribute)
+                if baseclass.attributes.index(where: { $0.name == attributeName}) == nil {
+                    baseclass.attributes.append(attribute)
+                }
 
                 for subclass in counter.subclasses {
+                    // Do not remove the attribute from the root object
+                    guard subclass.parent != nil else { continue }
                     guard let index = subclass.attributes.index(where: { $0.name == attributeName}) else {
                         fatalError("Should always have item in attributes list")
                     }

@@ -14,7 +14,7 @@ class MSArtboardGroup: Unmarshaling {
     var resizingConstraint: CGFloat
     var style: MSStyle
     var rotation: CGFloat
-    var layers: [MSSymbolInstance]
+    var layers: [MSShapeLayer]
     var isFlippedHorizontal: Bool
     var horizontalRulerData: MSRulerData
     var hasBackgroundColor: Bool
@@ -113,7 +113,7 @@ class MSCurvePoint: Unmarshaling {
     var hasCurveFrom: Bool
     var cornerRadius: CGFloat
     var point: CGPoint
-    var objectID: String
+    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.hasCurveTo = try object.value(for: "hasCurveTo")
@@ -133,10 +133,10 @@ class MSDocumentData: Unmarshaling {
     var layerStyles: MSSharedStyleContainer
     var objectID: String
     var currentPageIndex: CGFloat
-    var enableLayerInteraction: CGFloat
+    var enableLayerInteraction: Bool
     var layerSymbols: MSSymbolContainer
     var assets: MSAssetCollection
-    var enableSliceInteraction: CGFloat
+    var enableSliceInteraction: Bool
     var layerTextStyles: MSSharedTextStyleContainer
     var pages: [MSPage]
     
@@ -196,7 +196,7 @@ class MSGradient: Unmarshaling {
     var stops: [MSGradientStop]
     var to: CGPoint
     var elipseLength: CGFloat
-    var objectID: String
+    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.gradientType = try object.value(for: "gradientType")
@@ -213,7 +213,7 @@ class MSGradientStop: Unmarshaling {
     
     var color: MSColor
     var position: CGFloat
-    var objectID: String
+    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.color = try object.value(for: "color")
@@ -226,7 +226,7 @@ class MSGraphicsContextSettings: Unmarshaling {
     
     var blendMode: CGFloat
     var opacity: CGFloat
-    var objectID: String
+    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.blendMode = try object.value(for: "blendMode")
@@ -255,46 +255,20 @@ class MSImageData: Unmarshaling {
     }
 }
 
-class MSLayerGroup: Unmarshaling {
+class MSLayerGroup: MSShapeLayer {
     
-    var name: String
-    var resizingConstraint: CGFloat
-    var nameIsFixed: CGFloat
-    var isVisible: Bool
-    var objectID: String
     var style: MSStyle
-    var frame: MSRect
-    var isFlippedVertical: Bool
-    var rotation: CGFloat
     var layers: [MSShapeLayer]
-    var resizingType: CGFloat
-    var layerListExpandedType: CGFloat
-    var shouldBreakMaskChain: Bool
-    var isFlippedHorizontal: Bool
-    var originalObjectID: String
-    var exportOptions: MSExportOptions
+    var originalObjectID: String?
     var hasClickThrough: Bool
-    var isLocked: Bool
     
     required init(object: MarshaledObject) throws {
-        self.name = try object.value(for: "name")
-        self.resizingConstraint = try object.value(for: "resizingConstraint")
-        self.nameIsFixed = try object.value(for: "nameIsFixed")
-        self.isVisible = try object.value(for: "isVisible")
-        self.objectID = try object.value(for: "objectID")
         self.style = try object.value(for: "style")
-        self.frame = try object.value(for: "frame")
-        self.isFlippedVertical = try object.value(for: "isFlippedVertical")
-        self.rotation = try object.value(for: "rotation")
         self.layers = try object.value(for: "layers")
-        self.resizingType = try object.value(for: "resizingType")
-        self.layerListExpandedType = try object.value(for: "layerListExpandedType")
-        self.shouldBreakMaskChain = try object.value(for: "shouldBreakMaskChain")
-        self.isFlippedHorizontal = try object.value(for: "isFlippedHorizontal")
         self.originalObjectID = try object.value(for: "originalObjectID")
-        self.exportOptions = try object.value(for: "exportOptions")
         self.hasClickThrough = try object.value(for: "hasClickThrough")
-        self.isLocked = try object.value(for: "isLocked")
+        
+        try super.init(object: object)
     }
 }
 
@@ -367,7 +341,7 @@ class MSRect: Unmarshaling {
     var y: CGFloat
     var constrainProportions: CGFloat
     var width: CGFloat
-    var objectID: String
+    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.height = try object.value(for: "height")
@@ -379,48 +353,22 @@ class MSRect: Unmarshaling {
     }
 }
 
-class MSRectangleShape: Unmarshaling {
+class MSRectangleShape: MSShapeLayer {
     
-    var name: String
-    var resizingConstraint: CGFloat
-    var nameIsFixed: CGFloat
-    var objectID: String
-    var isVisible: Bool
-    var frame: MSRect
-    var layerListExpandedType: CGFloat
-    var isFlippedVertical: Bool
-    var rotation: CGFloat
-    var resizingType: CGFloat
     var fixedRadius: CGFloat
     var hasConvertedToNewRoundCorners: Bool
     var edited: CGFloat
-    var isFlippedHorizontal: Bool
     var path: MSShapePath
-    var shouldBreakMaskChain: Bool
     var booleanOperation: CGFloat
-    var exportOptions: MSExportOptions
-    var isLocked: Bool
     
     required init(object: MarshaledObject) throws {
-        self.name = try object.value(for: "name")
-        self.resizingConstraint = try object.value(for: "resizingConstraint")
-        self.nameIsFixed = try object.value(for: "nameIsFixed")
-        self.objectID = try object.value(for: "objectID")
-        self.isVisible = try object.value(for: "isVisible")
-        self.frame = try object.value(for: "frame")
-        self.layerListExpandedType = try object.value(for: "layerListExpandedType")
-        self.isFlippedVertical = try object.value(for: "isFlippedVertical")
-        self.rotation = try object.value(for: "rotation")
-        self.resizingType = try object.value(for: "resizingType")
         self.fixedRadius = try object.value(for: "fixedRadius")
         self.hasConvertedToNewRoundCorners = try object.value(for: "hasConvertedToNewRoundCorners")
         self.edited = try object.value(for: "edited")
-        self.isFlippedHorizontal = try object.value(for: "isFlippedHorizontal")
         self.path = try object.value(for: "path")
-        self.shouldBreakMaskChain = try object.value(for: "shouldBreakMaskChain")
         self.booleanOperation = try object.value(for: "booleanOperation")
-        self.exportOptions = try object.value(for: "exportOptions")
-        self.isLocked = try object.value(for: "isLocked")
+        
+        try super.init(object: object)
     }
 }
 
@@ -435,85 +383,59 @@ class MSRulerData: Unmarshaling {
     }
 }
 
-class MSShapeGroup: Unmarshaling {
+class MSShapeGroup: MSShapeLayer {
     
     var clippingMaskMode: CGFloat
-    var name: String
-    var resizingConstraint: CGFloat
-    var nameIsFixed: CGFloat
-    var objectID: String
-    var isVisible: Bool
     var style: MSStyle
-    var frame: MSRect
-    var layerListExpandedType: CGFloat
-    var rotation: CGFloat
-    var isFlippedVertical: Bool
-    var resizingType: CGFloat
     var layers: [MSShapeLayer]
     var windingRule: CGFloat
-    var isFlippedHorizontal: Bool
     var hasClippingMask: Bool
-    var shouldBreakMaskChain: Bool
-    var exportOptions: MSExportOptions
     var hasClickThrough: Bool
-    var isLocked: Bool
-    var originalObjectID: String
+    var originalObjectID: String?
     
     required init(object: MarshaledObject) throws {
         self.clippingMaskMode = try object.value(for: "clippingMaskMode")
-        self.name = try object.value(for: "name")
-        self.resizingConstraint = try object.value(for: "resizingConstraint")
-        self.nameIsFixed = try object.value(for: "nameIsFixed")
-        self.objectID = try object.value(for: "objectID")
-        self.isVisible = try object.value(for: "isVisible")
         self.style = try object.value(for: "style")
-        self.frame = try object.value(for: "frame")
-        self.layerListExpandedType = try object.value(for: "layerListExpandedType")
-        self.rotation = try object.value(for: "rotation")
-        self.isFlippedVertical = try object.value(for: "isFlippedVertical")
-        self.resizingType = try object.value(for: "resizingType")
         self.layers = try object.value(for: "layers")
         self.windingRule = try object.value(for: "windingRule")
-        self.isFlippedHorizontal = try object.value(for: "isFlippedHorizontal")
         self.hasClippingMask = try object.value(for: "hasClippingMask")
-        self.shouldBreakMaskChain = try object.value(for: "shouldBreakMaskChain")
-        self.exportOptions = try object.value(for: "exportOptions")
         self.hasClickThrough = try object.value(for: "hasClickThrough")
-        self.isLocked = try object.value(for: "isLocked")
         self.originalObjectID = try object.value(for: "originalObjectID")
+        
+        try super.init(object: object)
     }
 }
 
 class MSShapeLayer: Unmarshaling {
     
-    var name: String
     var resizingConstraint: CGFloat
     var nameIsFixed: CGFloat
-    var objectID: String
     var isVisible: Bool
+    var rotation: CGFloat
+    var isFlippedHorizontal: Bool
+    var name: String
+    var objectID: String
     var frame: MSRect
     var layerListExpandedType: CGFloat
     var isFlippedVertical: Bool
     var resizingType: CGFloat
-    var rotation: CGFloat
     var shouldBreakMaskChain: Bool
-    var isFlippedHorizontal: Bool
     var exportOptions: MSExportOptions
     var isLocked: Bool
     
     required init(object: MarshaledObject) throws {
-        self.name = try object.value(for: "name")
         self.resizingConstraint = try object.value(for: "resizingConstraint")
         self.nameIsFixed = try object.value(for: "nameIsFixed")
-        self.objectID = try object.value(for: "objectID")
         self.isVisible = try object.value(for: "isVisible")
+        self.rotation = try object.value(for: "rotation")
+        self.isFlippedHorizontal = try object.value(for: "isFlippedHorizontal")
+        self.name = try object.value(for: "name")
+        self.objectID = try object.value(for: "objectID")
         self.frame = try object.value(for: "frame")
         self.layerListExpandedType = try object.value(for: "layerListExpandedType")
         self.isFlippedVertical = try object.value(for: "isFlippedVertical")
         self.resizingType = try object.value(for: "resizingType")
-        self.rotation = try object.value(for: "rotation")
         self.shouldBreakMaskChain = try object.value(for: "shouldBreakMaskChain")
-        self.isFlippedHorizontal = try object.value(for: "isFlippedHorizontal")
         self.exportOptions = try object.value(for: "exportOptions")
         self.isLocked = try object.value(for: "isLocked")
     }
@@ -532,44 +454,18 @@ class MSShapePath: Unmarshaling {
     }
 }
 
-class MSShapePathLayer: Unmarshaling {
+class MSShapePathLayer: MSShapeLayer {
     
-    var name: String
-    var resizingConstraint: CGFloat
-    var nameIsFixed: CGFloat
-    var objectID: String
-    var isVisible: Bool
-    var frame: MSRect
-    var isFlippedVertical: Bool
-    var resizingType: CGFloat
-    var rotation: CGFloat
-    var layerListExpandedType: CGFloat
     var booleanOperation: CGFloat
-    var shouldBreakMaskChain: Bool
     var edited: CGFloat
     var path: MSShapePath
-    var isFlippedHorizontal: Bool
-    var exportOptions: MSExportOptions
-    var isLocked: Bool
     
     required init(object: MarshaledObject) throws {
-        self.name = try object.value(for: "name")
-        self.resizingConstraint = try object.value(for: "resizingConstraint")
-        self.nameIsFixed = try object.value(for: "nameIsFixed")
-        self.objectID = try object.value(for: "objectID")
-        self.isVisible = try object.value(for: "isVisible")
-        self.frame = try object.value(for: "frame")
-        self.isFlippedVertical = try object.value(for: "isFlippedVertical")
-        self.resizingType = try object.value(for: "resizingType")
-        self.rotation = try object.value(for: "rotation")
-        self.layerListExpandedType = try object.value(for: "layerListExpandedType")
         self.booleanOperation = try object.value(for: "booleanOperation")
-        self.shouldBreakMaskChain = try object.value(for: "shouldBreakMaskChain")
         self.edited = try object.value(for: "edited")
         self.path = try object.value(for: "path")
-        self.isFlippedHorizontal = try object.value(for: "isFlippedHorizontal")
-        self.exportOptions = try object.value(for: "exportOptions")
-        self.isLocked = try object.value(for: "isLocked")
+        
+        try super.init(object: object)
     }
 }
 
@@ -615,12 +511,12 @@ class MSStyle: Unmarshaling {
     var innerShadows: [MSStyleInnerShadow]
     var contextSettings: MSGraphicsContextSettings
     var endDecorationType: CGFloat
-    var sharedObjectID: String
+    var sharedObjectID: String?
     var borders: [MSStyleBorder]
     var colorControls: MSStyleColorControls
     var blur: MSStyleBlur
-    var textStyle: MSTextStyle
-    var objectID: String
+    var textStyle: MSTextStyle?
+    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.fills = try object.value(for: "fills")
@@ -648,7 +544,7 @@ class MSStyleBlur: Unmarshaling {
     var radius: CGFloat
     var type: CGFloat
     var motionAngle: CGFloat
-    var objectID: String
+    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.isEnabled = try object.value(for: "isEnabled")
@@ -669,7 +565,7 @@ class MSStyleBorder: Unmarshaling {
     var thickness: CGFloat
     var contextSettings: MSGraphicsContextSettings
     var color: MSColor
-    var objectID: String
+    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.position = try object.value(for: "position")
@@ -689,7 +585,7 @@ class MSStyleBorderOptions: Unmarshaling {
     var dashPattern: [SketchUnknown]
     var lineJoinStyle: CGFloat
     var isEnabled: Bool
-    var objectID: String
+    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.lineCapStyle = try object.value(for: "lineCapStyle")
@@ -728,7 +624,7 @@ class MSStyleFill: Unmarshaling {
     var patternTileScale: CGFloat
     var contextSettings: MSGraphicsContextSettings
     var isEnabled: Bool
-    var objectID: String
+    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.color = try object.value(for: "color")
@@ -753,7 +649,7 @@ class MSStyleInnerShadow: Unmarshaling {
     var spread: CGFloat
     var contextSettings: MSGraphicsContextSettings
     var color: MSColor
-    var objectID: String
+    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.isEnabled = try object.value(for: "isEnabled")
@@ -789,7 +685,7 @@ class MSStyleShadow: Unmarshaling {
     var spread: CGFloat
     var contextSettings: MSGraphicsContextSettings
     var color: MSColor
-    var objectID: String
+    var objectID: String?
     
     required init(object: MarshaledObject) throws {
         self.isEnabled = try object.value(for: "isEnabled")
@@ -812,183 +708,85 @@ class MSSymbolContainer: Unmarshaling {
     }
 }
 
-class MSSymbolInstance: Unmarshaling {
+class MSSymbolInstance: MSShapeLayer {
     
     var symbolID: String
-    var name: String
     var masterInfluenceEdgeMinXPadding: CGFloat
     var overrides: [String: Any]
-    var resizingConstraint: CGFloat
-    var nameIsFixed: CGFloat
-    var objectID: String
-    var isVisible: Bool
     var masterInfluenceEdgeMinYPadding: CGFloat
     var verticalSpacing: CGFloat
-    var frame: MSRect
-    var layerListExpandedType: CGFloat
     var style: MSStyle
-    var rotation: CGFloat
-    var isFlippedVertical: Bool
-    var resizingType: CGFloat
     var horizontalSpacing: CGFloat
-    var isFlippedHorizontal: Bool
-    var shouldBreakMaskChain: Bool
-    var exportOptions: MSExportOptions
     var masterInfluenceEdgeMaxXPadding: CGFloat
-    var isLocked: Bool
     var masterInfluenceEdgeMaxYPadding: CGFloat
     
     required init(object: MarshaledObject) throws {
         self.symbolID = try object.value(for: "symbolID")
-        self.name = try object.value(for: "name")
         self.masterInfluenceEdgeMinXPadding = try object.value(for: "masterInfluenceEdgeMinXPadding")
         self.overrides = try object.value(for: "overrides")
-        self.resizingConstraint = try object.value(for: "resizingConstraint")
-        self.nameIsFixed = try object.value(for: "nameIsFixed")
-        self.objectID = try object.value(for: "objectID")
-        self.isVisible = try object.value(for: "isVisible")
         self.masterInfluenceEdgeMinYPadding = try object.value(for: "masterInfluenceEdgeMinYPadding")
         self.verticalSpacing = try object.value(for: "verticalSpacing")
-        self.frame = try object.value(for: "frame")
-        self.layerListExpandedType = try object.value(for: "layerListExpandedType")
         self.style = try object.value(for: "style")
-        self.rotation = try object.value(for: "rotation")
-        self.isFlippedVertical = try object.value(for: "isFlippedVertical")
-        self.resizingType = try object.value(for: "resizingType")
         self.horizontalSpacing = try object.value(for: "horizontalSpacing")
-        self.isFlippedHorizontal = try object.value(for: "isFlippedHorizontal")
-        self.shouldBreakMaskChain = try object.value(for: "shouldBreakMaskChain")
-        self.exportOptions = try object.value(for: "exportOptions")
         self.masterInfluenceEdgeMaxXPadding = try object.value(for: "masterInfluenceEdgeMaxXPadding")
-        self.isLocked = try object.value(for: "isLocked")
         self.masterInfluenceEdgeMaxYPadding = try object.value(for: "masterInfluenceEdgeMaxYPadding")
+        
+        try super.init(object: object)
     }
 }
 
-class MSSymbolMaster: Unmarshaling {
+class MSSymbolMaster: MSArtboardGroup {
     
-    var resizesContent: CGFloat
-    var includeInCloudUpload: CGFloat
-    var backgroundColor: MSColor
-    var nameIsFixed: CGFloat
-    var isVisible: Bool
-    var resizingConstraint: CGFloat
-    var style: MSStyle
-    var rotation: CGFloat
-    var layers: [MSShapeLayer]
-    var isFlippedHorizontal: Bool
-    var horizontalRulerData: MSRulerData
-    var hasBackgroundColor: Bool
-    var includeBackgroundColorInExport: CGFloat
     var symbolID: String
-    var name: String
-    var verticalRulerData: MSRulerData
-    var objectID: String
     var includeBackgroundColorInInstance: CGFloat
-    var frame: MSRect
-    var layerListExpandedType: CGFloat
-    var isFlippedVertical: Bool
-    var resizingType: CGFloat
-    var shouldBreakMaskChain: Bool
-    var exportOptions: MSExportOptions
-    var hasClickThrough: Bool
-    var isLocked: Bool
     
     required init(object: MarshaledObject) throws {
-        self.resizesContent = try object.value(for: "resizesContent")
-        self.includeInCloudUpload = try object.value(for: "includeInCloudUpload")
-        self.backgroundColor = try object.value(for: "backgroundColor")
-        self.nameIsFixed = try object.value(for: "nameIsFixed")
-        self.isVisible = try object.value(for: "isVisible")
-        self.resizingConstraint = try object.value(for: "resizingConstraint")
-        self.style = try object.value(for: "style")
-        self.rotation = try object.value(for: "rotation")
-        self.layers = try object.value(for: "layers")
-        self.isFlippedHorizontal = try object.value(for: "isFlippedHorizontal")
-        self.horizontalRulerData = try object.value(for: "horizontalRulerData")
-        self.hasBackgroundColor = try object.value(for: "hasBackgroundColor")
-        self.includeBackgroundColorInExport = try object.value(for: "includeBackgroundColorInExport")
         self.symbolID = try object.value(for: "symbolID")
-        self.name = try object.value(for: "name")
-        self.verticalRulerData = try object.value(for: "verticalRulerData")
-        self.objectID = try object.value(for: "objectID")
         self.includeBackgroundColorInInstance = try object.value(for: "includeBackgroundColorInInstance")
-        self.frame = try object.value(for: "frame")
-        self.layerListExpandedType = try object.value(for: "layerListExpandedType")
-        self.isFlippedVertical = try object.value(for: "isFlippedVertical")
-        self.resizingType = try object.value(for: "resizingType")
-        self.shouldBreakMaskChain = try object.value(for: "shouldBreakMaskChain")
-        self.exportOptions = try object.value(for: "exportOptions")
-        self.hasClickThrough = try object.value(for: "hasClickThrough")
-        self.isLocked = try object.value(for: "isLocked")
+        
+        try super.init(object: object)
     }
 }
 
-class MSTextLayer: Unmarshaling {
+class MSTextLayer: MSShapeLayer {
     
-    var name: String
-    var resizingConstraint: CGFloat
-    var nameIsFixed: CGFloat
-    var objectID: String
-    var isVisible: Bool
-    var frame: MSRect
-    var layerListExpandedType: CGFloat
     var style: MSStyle
-    var rotation: CGFloat
-    var isFlippedVertical: Bool
-    var resizingType: CGFloat
     var dontSynchroniseWithSymbol: CGFloat
-    var isFlippedHorizontal: Bool
     var glyphBounds: CGPoint
     var attributedString: NSAttributedString
-    var shouldBreakMaskChain: Bool
-    var originalObjectID: String
+    var originalObjectID: String?
     var automaticallyDrawOnUnderlyingPath: CGFloat
-    var exportOptions: MSExportOptions
     var lineSpacingBehaviour: CGFloat
     var textBehaviour: CGFloat
-    var isLocked: Bool
     var heightIsClipped: CGFloat
     
     required init(object: MarshaledObject) throws {
-        self.name = try object.value(for: "name")
-        self.resizingConstraint = try object.value(for: "resizingConstraint")
-        self.nameIsFixed = try object.value(for: "nameIsFixed")
-        self.objectID = try object.value(for: "objectID")
-        self.isVisible = try object.value(for: "isVisible")
-        self.frame = try object.value(for: "frame")
-        self.layerListExpandedType = try object.value(for: "layerListExpandedType")
         self.style = try object.value(for: "style")
-        self.rotation = try object.value(for: "rotation")
-        self.isFlippedVertical = try object.value(for: "isFlippedVertical")
-        self.resizingType = try object.value(for: "resizingType")
         self.dontSynchroniseWithSymbol = try object.value(for: "dontSynchroniseWithSymbol")
-        self.isFlippedHorizontal = try object.value(for: "isFlippedHorizontal")
         self.glyphBounds = try object.value(for: "glyphBounds")
         self.attributedString = try object.value(for: "attributedString")
-        self.shouldBreakMaskChain = try object.value(for: "shouldBreakMaskChain")
         self.originalObjectID = try object.value(for: "originalObjectID")
         self.automaticallyDrawOnUnderlyingPath = try object.value(for: "automaticallyDrawOnUnderlyingPath")
-        self.exportOptions = try object.value(for: "exportOptions")
         self.lineSpacingBehaviour = try object.value(for: "lineSpacingBehaviour")
         self.textBehaviour = try object.value(for: "textBehaviour")
-        self.isLocked = try object.value(for: "isLocked")
         self.heightIsClipped = try object.value(for: "heightIsClipped")
+        
+        try super.init(object: object)
     }
 }
 
 class MSTextStyle: Unmarshaling {
     
-    var color: NSColor
-    var NSKern: CGFloat
-    var paragraphStyle: NSParagraphStyle
-    var NSFont: NSFont
+    var color: NSColor?
+    var NSKern: CGFloat?
+    var paragraphStyle: NSParagraphStyle?
+    var font: NSFont?
     
     required init(object: MarshaledObject) throws {
         self.color = try object.value(for: "color")
         self.NSKern = try object.value(for: "NSKern")
         self.paragraphStyle = try object.value(for: "paragraphStyle")
-        self.NSFont = try object.value(for: "NSFont")
+        self.font = try object.value(for: "font")
     }
 }
 

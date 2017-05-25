@@ -56,7 +56,7 @@ let cmd = command(
     }
     else {
         guard templates.count > 0 else {
-            throw ValidationError.unreadableFile(path: file, argument: "-file")
+            throw ValidationError.noTemplates
         }
         for template in templates {
             guard template.isReadable else {
