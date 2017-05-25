@@ -1,0 +1,30 @@
+// This file is generated automatically, DO NOT EDIT
+
+import CoreGraphics
+import AppKit
+import Marshal
+
+{% for c in document.classes %}
+{% if c.parent %}
+class {{ c.name }}: {{ c.parent.name }} {
+{% else %}
+class {{ c.name }}: Unmarshaling {
+{% endif %}
+
+{% for attr in c.attributes %}
+    var {{ attr.name }}: {{ attr.swiftType }}
+{% endfor %}
+
+    required init(object: MarshaledObject) throws {
+{% for attr in c.attributes %}
+        self.{{ attr.name }} = try object.value(for: "{{ attr.name }}")
+{% endfor %}
+{% if c.parent %}
+
+        try super.init(object: object)
+{% endif %}
+    }
+}
+
+{% endfor %}
+

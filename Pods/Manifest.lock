@@ -1,0 +1,25 @@
+PODS:
+  - Commander (0.6.0)
+  - Marshal (1.2.4)
+  - PathKit (0.8.0)
+  - Stencil (0.8.0):
+    - PathKit (~> 0.8.0)
+  - StencilSwiftKit (1.0.1):
+    - Stencil (~> 0.8.0)
+
+DEPENDENCIES:
+  - Commander
+  - Marshal
+  - PathKit
+  - StencilSwiftKit (~> 1.0)
+
+SPEC CHECKSUMS:
+  Commander: fba7c96c9e787ecc8ebe0737be875e1e18ef47ff
+  Marshal: 8e04e6624e506921db7143b0bfd83caee03f32d6
+  PathKit: dcab05d701474011aae0e40cf892298a831f63d6
+  Stencil: 6669684db0262e6eb316ce233e7e02d6df0a6cd9
+  StencilSwiftKit: fb7366766d03db6011e132bf4a845cb6cf1f27d6
+
+PODFILE CHECKSUM: 1524a1480ef3d417c3ea93a5d012cff3373e76c0
+
+COCOAPODS: 1.2.0
