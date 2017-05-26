@@ -38,9 +38,11 @@ final class SketchTypeBuilder {
 final class SketchClass: NSObject {
     final class Attribute: NSObject {
         let name: String
+        let key: String
         var type: SketchType
-        init (name: String, type: SketchType) {
+        init (name: String, key: String, type: SketchType) {
             self.name = name
+            self.key = key
             self.type = type
         }
         var swiftType: String {
@@ -91,13 +93,13 @@ final class SketchClass: NSObject {
     
     func update(json: [String: Any], document: SketchTypeDocument) throws {
         for (key, value) in json {
-            guard let key = document.lookupAttribute(for: key) else { continue }
-            let attribute = lookup(attribute: key) ?? {
-                let newAttribute = Attribute(name: key, type: .unknown)
+            guard let attributeName = document.lookupAttribute(for: key) else { continue }
+            let attribute = lookup(attribute: attributeName) ?? {
+                let newAttribute = Attribute(name: attributeName, key: key, type: .unknown)
                 attributes.append(newAttribute)
                 return newAttribute
             }()
-            let new = try SketchType(any: value, document: document, hint: .key(key))
+            let new = try SketchType(any: value, document: document, hint: .key(attributeName))
             try attribute.type.update(new: new, document: document)
         }
         // Make sure that any attribute that is not in the payload is upgraded to optional

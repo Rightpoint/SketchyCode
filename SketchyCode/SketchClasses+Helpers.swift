@@ -46,7 +46,7 @@ extension NSColor: ValueType {
         guard let obj = object as? [String: Any] else {
             throw MarshalError.typeMismatch(expected: [String:Any].self, actual: type(of: object))
         }
-        let value: String = try obj.value(for: "value")
+        let value: String = try obj.value(for: "value") ?? obj.value(for: "color")
         if value.characters.first == "#" {
             return try parse(hex: value)
         }

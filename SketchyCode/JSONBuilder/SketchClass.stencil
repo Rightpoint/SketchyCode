@@ -21,7 +21,7 @@ class {{ c.name }}: Unmarshaling {
 
     required init(object: MarshaledObject) throws {
 {% for attr in c.attributes %}
-        self.{{ attr.name }} = try object.value(for: "{{ attr.name }}")
+        self.{{ attr.name }} = try object.value(for: "{{ attr.key }}")
 {% endfor %}
 {% if c.parent %}
 

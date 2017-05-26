@@ -7,7 +7,7 @@ import Marshal
 class MSArtboardGroup: ValueType {
     
     var resizesContent: CGFloat
-    var includeInCloudUpload: CGFloat
+    var includeInCloudUpload: Bool
     var backgroundColor: MSColor
     var nameIsFixed: CGFloat
     var isVisible: Bool
@@ -19,7 +19,7 @@ class MSArtboardGroup: ValueType {
     var isFlippedHorizontal: Bool
     var horizontalRulerData: MSRulerData
     var hasBackgroundColor: Bool
-    var includeBackgroundColorInExport: CGFloat
+    var includeBackgroundColorInExport: Bool
     var name: String
     var verticalRulerData: MSRulerData
     var objectID: String
@@ -361,7 +361,7 @@ class MSPage: Unmarshaling {
     var name: String
     var verticalRulerData: MSRulerData
     var resizingConstraint: CGFloat
-    var includeInCloudUpload: CGFloat
+    var includeInCloudUpload: Bool
     var objectID: String
     var isVisible: Bool
     var nameIsFixed: CGFloat
@@ -893,7 +893,7 @@ class MSSymbolInstance: MSShapeLayer {
 class MSSymbolMaster: MSArtboardGroup {
     
     var symbolID: String
-    var includeBackgroundColorInInstance: CGFloat
+    var includeBackgroundColorInInstance: Bool
     var originalObjectID: String?
     
     required init(object: MarshaledObject) throws {
@@ -949,9 +949,9 @@ class MSTextStyle: Unmarshaling {
     
     required init(object: MarshaledObject) throws {
         self.NSLigature = try object.value(for: "NSLigature")
-        self.font = try object.value(for: "font")
-        self.paragraphStyle = try object.value(for: "paragraphStyle")
-        self.color = try object.value(for: "color")
+        self.font = try object.value(for: "NSFont")
+        self.paragraphStyle = try object.value(for: "NSParagraphStyle")
+        self.color = try object.value(for: "NSColor")
         self.NSKern = try object.value(for: "NSKern")
         self.NSStrikethrough = try object.value(for: "NSStrikethrough")
         self.NSUnderline = try object.value(for: "NSUnderline")
@@ -959,4 +959,6 @@ class MSTextStyle: Unmarshaling {
     }
     
 }
+
+
 
