@@ -2,6 +2,15 @@ import BonMot
 
 enum TextStyle {
 {% for style in document.layerTextStyles.objects %}
-static var {{ style.name.variabled }}: StringStylePart
+    static var {{ style.name.variabled }}: StringStyle {
+        var style = StringStyle()
+{% if style.value.textStyle.color %}
+        style.color = {{ style.value.textStyle.color|colorLiteral }}
+{% endif %}
+{% if style.value.textStyle.font %}
+        style.font =  UIFont(name: "{{ style.value.textStyle.font.fontName }}", size: {{ style.value.textStyle.font.pointSize }})
+{% endif %}
+        return style
+    }
 {% endfor %}
 }

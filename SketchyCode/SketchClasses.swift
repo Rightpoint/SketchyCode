@@ -4,7 +4,7 @@ import CoreGraphics
 import AppKit
 import Marshal
 
-class MSArtboardGroup: ValueType {
+class MSArtboardGroup: NSObject, ValueType {
     
     var resizesContent: CGFloat
     var includeInCloudUpload: Bool
@@ -86,7 +86,7 @@ class MSArtboardGroup: ValueType {
     
 }
 
-class MSAssetCollection: Unmarshaling {
+class MSAssetCollection: NSObject, Unmarshaling {
     
     var gradients: [SketchUnknown]
     var colors: [MSColor]
@@ -126,7 +126,7 @@ class MSBitmapLayer: MSShapeLayer {
     
 }
 
-class MSColor: Unmarshaling {
+class MSColor: NSObject, Unmarshaling {
     
     var value: String
     
@@ -136,7 +136,7 @@ class MSColor: Unmarshaling {
     
 }
 
-class MSCurvePoint: Unmarshaling {
+class MSCurvePoint: NSObject, Unmarshaling {
     
     var hasCurveTo: Bool
     var curveFrom: CGPoint
@@ -158,7 +158,7 @@ class MSCurvePoint: Unmarshaling {
     
 }
 
-class MSDocumentData: Unmarshaling {
+class MSDocumentData: NSObject, Unmarshaling {
     
     var foreignSymbols: [SketchUnknown]
     var layerStyles: MSSharedStyleContainer
@@ -186,7 +186,7 @@ class MSDocumentData: Unmarshaling {
     
 }
 
-class MSExportFormat: Unmarshaling {
+class MSExportFormat: NSObject, Unmarshaling {
     
     var fileFormat: String
     var name: String
@@ -206,7 +206,7 @@ class MSExportFormat: Unmarshaling {
     
 }
 
-class MSExportOptions: Unmarshaling {
+class MSExportOptions: NSObject, Unmarshaling {
     
     var layerOptions: CGFloat
     var exportFormats: [MSExportFormat]
@@ -222,7 +222,7 @@ class MSExportOptions: Unmarshaling {
     
 }
 
-class MSGradient: Unmarshaling {
+class MSGradient: NSObject, Unmarshaling {
     
     var gradientType: CGFloat
     var from: CGPoint
@@ -242,7 +242,7 @@ class MSGradient: Unmarshaling {
     
 }
 
-class MSGradientStop: Unmarshaling {
+class MSGradientStop: NSObject, Unmarshaling {
     
     var color: MSColor
     var position: CGFloat
@@ -254,7 +254,7 @@ class MSGradientStop: Unmarshaling {
     
 }
 
-class MSGraphicsContextSettings: Unmarshaling {
+class MSGraphicsContextSettings: NSObject, Unmarshaling {
     
     var blendMode: CGFloat
     var opacity: CGFloat
@@ -266,7 +266,7 @@ class MSGraphicsContextSettings: Unmarshaling {
     
 }
 
-class MSImageCollection: Unmarshaling {
+class MSImageCollection: NSObject, Unmarshaling {
     
     var images: [SketchUnknown]
     
@@ -276,7 +276,7 @@ class MSImageCollection: Unmarshaling {
     
 }
 
-class MSImageData: Unmarshaling {
+class MSImageData: NSObject, Unmarshaling {
     
     var size: String
     var sha1: String
@@ -308,7 +308,7 @@ class MSLayerGroup: MSShapeLayer {
     
 }
 
-class MSLayoutGrid: Unmarshaling {
+class MSLayoutGrid: NSObject, Unmarshaling {
     
     var isEnabled: Bool
     var gutterWidth: CGFloat
@@ -356,7 +356,7 @@ class MSOvalShape: MSShapeLayer {
     
 }
 
-class MSPage: Unmarshaling {
+class MSPage: NSObject, Unmarshaling {
     
     var name: String
     var verticalRulerData: MSRulerData
@@ -404,7 +404,7 @@ class MSPage: Unmarshaling {
     
 }
 
-class MSRect: Unmarshaling {
+class MSRect: NSObject, Unmarshaling {
     
     var height: CGFloat
     var x: CGFloat
@@ -442,7 +442,7 @@ class MSRectangleShape: MSShapeLayer {
     
 }
 
-class MSRulerData: Unmarshaling {
+class MSRulerData: NSObject, Unmarshaling {
     
     var guides: [CGFloat]
     var base: CGFloat
@@ -480,7 +480,7 @@ class MSShapeGroup: MSShapeLayer {
     
 }
 
-class MSShapeLayer: ValueType {
+class MSShapeLayer: NSObject, ValueType {
     
     var resizingConstraint: CGFloat
     var nameIsFixed: CGFloat
@@ -578,7 +578,7 @@ class MSShapeLayer: ValueType {
     
 }
 
-class MSShapePath: Unmarshaling {
+class MSShapePath: NSObject, Unmarshaling {
     
     var pointRadiusBehaviour: CGFloat
     var isClosed: Bool
@@ -608,7 +608,7 @@ class MSShapePathLayer: MSShapeLayer {
     
 }
 
-class MSSharedStyle: Unmarshaling {
+class MSSharedStyle: NSObject, Unmarshaling {
     
     var value: MSStyle
     var objectID: String
@@ -622,7 +622,7 @@ class MSSharedStyle: Unmarshaling {
     
 }
 
-class MSSharedStyleContainer: Unmarshaling {
+class MSSharedStyleContainer: NSObject, Unmarshaling {
     
     var objects: [MSSharedStyle]
     
@@ -632,7 +632,7 @@ class MSSharedStyleContainer: Unmarshaling {
     
 }
 
-class MSSharedTextStyleContainer: Unmarshaling {
+class MSSharedTextStyleContainer: NSObject, Unmarshaling {
     
     var objects: [MSSharedStyle]
     
@@ -642,7 +642,7 @@ class MSSharedTextStyleContainer: Unmarshaling {
     
 }
 
-class MSSimpleGrid: Unmarshaling {
+class MSSimpleGrid: NSObject, Unmarshaling {
     
     var thickGridTimes: CGFloat
     var gridSize: CGFloat
@@ -656,7 +656,7 @@ class MSSimpleGrid: Unmarshaling {
     
 }
 
-class MSStyle: Unmarshaling {
+class MSStyle: NSObject, Unmarshaling {
     
     var fills: [MSStyleFill]
     var shadows: [MSStyleShadow]
@@ -692,7 +692,7 @@ class MSStyle: Unmarshaling {
     
 }
 
-class MSStyleBlur: Unmarshaling {
+class MSStyleBlur: NSObject, Unmarshaling {
     
     var isEnabled: Bool
     var center: CGPoint
@@ -710,7 +710,7 @@ class MSStyleBlur: Unmarshaling {
     
 }
 
-class MSStyleBorder: Unmarshaling {
+class MSStyleBorder: NSObject, Unmarshaling {
     
     var position: CGFloat
     var isEnabled: Bool
@@ -732,7 +732,7 @@ class MSStyleBorder: Unmarshaling {
     
 }
 
-class MSStyleBorderOptions: Unmarshaling {
+class MSStyleBorderOptions: NSObject, Unmarshaling {
     
     var lineCapStyle: CGFloat
     var dashPattern: [CGFloat]
@@ -748,7 +748,7 @@ class MSStyleBorderOptions: Unmarshaling {
     
 }
 
-class MSStyleColorControls: Unmarshaling {
+class MSStyleColorControls: NSObject, Unmarshaling {
     
     var contrast: CGFloat
     var saturation: CGFloat
@@ -766,7 +766,7 @@ class MSStyleColorControls: Unmarshaling {
     
 }
 
-class MSStyleFill: Unmarshaling {
+class MSStyleFill: NSObject, Unmarshaling {
     
     var color: MSColor
     var gradient: MSGradient
@@ -792,7 +792,7 @@ class MSStyleFill: Unmarshaling {
     
 }
 
-class MSStyleInnerShadow: Unmarshaling {
+class MSStyleInnerShadow: NSObject, Unmarshaling {
     
     var isEnabled: Bool
     var offsetY: CGFloat
@@ -814,7 +814,7 @@ class MSStyleInnerShadow: Unmarshaling {
     
 }
 
-class MSStyleReflection: Unmarshaling {
+class MSStyleReflection: NSObject, Unmarshaling {
     
     var distance: CGFloat
     var strength: CGFloat
@@ -828,7 +828,7 @@ class MSStyleReflection: Unmarshaling {
     
 }
 
-class MSStyleShadow: Unmarshaling {
+class MSStyleShadow: NSObject, Unmarshaling {
     
     var isEnabled: Bool
     var offsetY: CGFloat
@@ -850,7 +850,7 @@ class MSStyleShadow: Unmarshaling {
     
 }
 
-class MSSymbolContainer: Unmarshaling {
+class MSSymbolContainer: NSObject, Unmarshaling {
     
     var objects: [SketchUnknown]
     
@@ -936,7 +936,7 @@ class MSTextLayer: MSShapeLayer {
     
 }
 
-class MSTextStyle: Unmarshaling {
+class MSTextStyle: NSObject, Unmarshaling {
     
     var NSLigature: CGFloat?
     var font: NSFont?

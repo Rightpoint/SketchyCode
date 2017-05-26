@@ -9,9 +9,9 @@ import Marshal
 class {{ c.name }}: {{ c.parent.name }} {
 {% else %}
  {% if c.hasSubclasses %}
-class {{ c.name }}: ValueType {
+class {{ c.name }}: NSObject, ValueType {
  {% else %}
-class {{ c.name }}: Unmarshaling {
+class {{ c.name }}: NSObject, Unmarshaling {
  {% endif %}
 {% endif %}
 
