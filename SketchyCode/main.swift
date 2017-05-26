@@ -46,7 +46,7 @@ let cmd = command(
     Flag("generate-classes", flag: "v", description: "Generate Swift Classes (Development / Curiosity Only)"),
     Option<Path>("file", "", description: "Path to a Sketch file"),
     VariadicOption<Path>("templates", description: "Path to templates. File or Directory."),
-    Option<Path>("output", ".", description: "Path to output. File or Directory. Default is current path.")
+    Option<Path>("output", "", description: "Path to output. File or Directory. Default is current path.")
 ) { verbose, generateClasses, file, templates, output in
     guard file != "" && file.isReadable else {
         throw ValidationError.unreadableFile(path: file, argument: "-file")

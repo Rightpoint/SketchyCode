@@ -1,0 +1,7 @@
+import BonMot
+
+enum TextStyle {
+{% for style in document.layerTextStyles.objects %}
+static var {{ style.name.variabled }}: StringStylePart
+{% endfor %}
+}

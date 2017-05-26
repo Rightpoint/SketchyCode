@@ -45,13 +45,15 @@ class SketchyCode {
             let template = StencilSwiftTemplate(templateString: stencilString)
             let generated = try template.render(["document": document])
             
-            if outputPath == "-" {
+            if outputPath == "" {
                 print(generated)
             }
             else {
-                let newPath = templatePath.url.absoluteString.replacingOccurrences(of: ".stencil", with: ".swift", options: [.backwards], range: nil)
+                let newFile = templatePath.lastComponentWithoutExtension.appending(".swift")
+
+                let newURL = URL(fileURLWithPath: outputPath.string + "/" + newFile)
                 
-                try generated.data(using: .utf8)?.write(to: URL(fileURLWithPath: newPath))
+                try generated.data(using: .utf8)?.write(to: newURL)
             }
         }
     }

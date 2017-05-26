@@ -125,7 +125,13 @@ indirect enum SketchType: Equatable {
         
         var isBoolKeyHint: Bool {
             guard case .key(let keyHint) = self else { return false }
-            return keyHint.hasPrefix("is") || keyHint.hasPrefix("should") || keyHint.hasPrefix("has") || keyHint.hasPrefix("enable")
+            return (
+                keyHint.hasPrefix("is") ||
+                keyHint.hasPrefix("should") ||
+                keyHint.hasPrefix("has") ||
+                keyHint.hasPrefix("enable") ||
+                (keyHint.hasPrefix("include") && !keyHint.hasPrefix("included"))
+            )
         }
         
     }
@@ -427,18 +433,6 @@ private extension SketchTypeDocument {
                 }
             }
         }
-    }
-}
-
-// attributes was not exposed in the Stencil correctly, not sure why.
-// Expose what we actually need in NSCoding friendly types.
-extension SketchClass {
-    dynamic var attributeTypes: [String: String] {
-        var attributeTypes: [String: String] = [:]
-        for attribute in attributes {
-            attributeTypes[attribute.name] = attribute.type.swiftType
-        }
-        return attributeTypes
     }
 }
 
