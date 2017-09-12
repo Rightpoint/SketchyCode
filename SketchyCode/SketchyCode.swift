@@ -39,11 +39,43 @@ class SketchyCode {
         let document = try MSDocumentData(object: object)
 
         let stencilExtension = Extension()
-        stencilExtension.registerFilter("colorLiteral") { (value, array) -> Any? in
-            guard let color = value as? NSColor else {
-                throw SketchyError.notAColor(filter: "colorLiteral", value: value)
+        stencilExtension.registerStencilSwiftExtensions()
+        // FIXME: this should be in a macro
+        stencilExtension.registerFilter("printParagraphStyleConfiguration") { (value, array) -> Any? in
+            guard let paragraphStyle = value as? NSParagraphStyle else {
+                throw SketchyError.invalidArgument(expected: "NSParagraphStyle", filter: "configureParagraphStyle", value: value)
             }
-            return "#colorLiteral(red: \(color.redComponent), green: \(color.greenComponent), blue: \(color.blueComponent), alpha: \(color.alphaComponent))"
+            guard let variable = array.first as? String else {
+                throw SketchyError.invalidArgument(expected: "variable name", filter: "configureParagraphStyle", value: array.first ?? "nil")
+            }
+            let defaults = NSParagraphStyle.default()
+            var configuration = ""
+            func dumpConfiguration<T: Equatable>(key: String, value: (NSParagraphStyle) -> T) {
+                let newValue = value(paragraphStyle)
+                guard value(defaults) != newValue else {
+                    return
+                }
+                configuration.append("\(variable).\(key) = \(newValue)")
+            }
+            dumpConfiguration(key: "lineSpacing", value: { $0.lineSpacing })
+            dumpConfiguration(key: "paragraphSpacing", value: { $0.paragraphSpacing })
+            dumpConfiguration(key: "headIndent", value: { $0.headIndent })
+            dumpConfiguration(key: "tailIndent", value: { $0.tailIndent })
+            dumpConfiguration(key: "minimumLineHeight", value: { $0.minimumLineHeight })
+            dumpConfiguration(key: "maximumLineHeight", value: { $0.maximumLineHeight })
+            dumpConfiguration(key: "lineHeightMultiple", value: { $0.lineHeightMultiple })
+            dumpConfiguration(key: "paragraphSpacingBefore", value: { $0.paragraphSpacingBefore })
+            dumpConfiguration(key: "hyphenationFactor", value: { $0.hyphenationFactor })
+            dumpConfiguration(key: "defaultTabInterval", value: { $0.defaultTabInterval })
+            dumpConfiguration(key: "allowsDefaultTighteningForTruncation", value: { $0.allowsDefaultTighteningForTruncation })
+            dumpConfiguration(key: "tighteningFactorForTruncation", value: { $0.tighteningFactorForTruncation })
+            dumpConfiguration(key: "headerLevel", value: { $0.headerLevel })
+
+//            dumpConfiguration(key: "baseWritingDirection", value: { $0.baseWritingDirection }, isEnum: true)
+//            dumpConfiguration(key: "lineBreakMode", value: { $0.lineBreakMode }, isEnum: true)
+//            dumpConfiguration(key: "alignment", value: { $0.alignment }, isEnum: true)
+
+            return configuration
         }
 
         for templatePath in templatePaths {
@@ -69,12 +101,12 @@ class SketchyCode {
 
 
 enum SketchyError: Error, CustomStringConvertible {
-    case notAColor(filter: String, value: Any?)
+    case invalidArgument(expected: String, filter: String, value: Any?)
 
     public var description: String {
         switch self {
-        case .notAColor(let filter, let value):
-            return "Filter '\(filter)' can only support a color object, not \(value ?? "nil")"
+        case .invalidArgument(let expected, let filter, let value):
+            return "Filter '\(filter)' expected \(expected), not \(value ?? "nil")"
         }
     }
 }

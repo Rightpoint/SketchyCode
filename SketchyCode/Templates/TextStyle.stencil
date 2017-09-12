@@ -1,15 +1,26 @@
 import BonMot
 
+{% macro printColorLiteral arg %}#colorLiteral(red: {{ arg.redComponent }}, green: {{ arg.greenComponent }}, blue: {{ arg.blueComponent }}, alpha: {{ arg.alphaComponent }})"{% endmacro %}
+
+{% macro printUIFont arg %}UIFont(name: "{{ arg.fontName }}", size: {{ arg.pointSize }}){% endmacro %}
+
+
 enum TextStyle {
 {% for style in document.layerTextStyles.objects %}
     static var {{ style.name.variabled }}: StringStyle {
         var style = StringStyle()
 {% if style.value.textStyle.color %}
-        style.color = {{ style.value.textStyle.color|colorLiteral }}
+        style.color = {% call printColorLiteral style.value.textStyle.color %}
 {% endif %}
 {% if style.value.textStyle.font %}
-        style.font =  UIFont(name: "{{ style.value.textStyle.font.fontName }}", size: {{ style.value.textStyle.font.pointSize }})
+        style.font = {% call printUIFont style.value.textStyle.font %}
 {% endif %}
+{% if style.value.textStyle.paragraphStyle %}
+        let paragraphStyle = NSMutableParagraphStyle()
+        {{style.value.textStyle.paragraphStyle|printParagraphStyleConfiguration}}
+        style.paragraphStyle = paragraphStyle
+{% endif %}
+
         return style
     }
 {% endfor %}
