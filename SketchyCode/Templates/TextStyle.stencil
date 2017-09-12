@@ -15,11 +15,6 @@ enum TextStyle {
 {% if style.value.textStyle.font %}
         style.font = {% call printUIFont style.value.textStyle.font %}
 {% endif %}
-{% if style.value.textStyle.paragraphStyle %}
-        let paragraphStyle = NSMutableParagraphStyle()
-        {{style.value.textStyle.paragraphStyle|printParagraphStyleConfiguration}}
-        style.paragraphStyle = paragraphStyle
-{% endif %}
 
         return style
     }
