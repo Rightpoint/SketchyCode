@@ -6,20 +6,20 @@ import Marshal
 
 {% for c in document.classes %}
 {% if c.parent %}
-class {{ c.name }}: {{ c.parent.name }} {
+public class {{ c.name }}: {{ c.parent.name }} {
 {% else %}
  {% if c.hasSubclasses %}
-class {{ c.name }}: NSObject, ValueType {
+public class {{ c.name }}: NSObject, ValueType {
  {% else %}
-class {{ c.name }}: NSObject, Unmarshaling {
+public class {{ c.name }}: NSObject, Unmarshaling {
  {% endif %}
 {% endif %}
 
 {% for attr in c.attributes %}
-    var {{ attr.name }}: {{ attr.swiftType }}
+    public var {{ attr.name }}: {{ attr.swiftType }}
 {% endfor %}
 
-    required init(object: MarshaledObject) throws {
+    public required init(object: MarshaledObject) throws {
 {% for attr in c.attributes %}
         self.{{ attr.name }} = try object.value(for: "{{ attr.key }}")
 {% endfor %}
@@ -30,7 +30,7 @@ class {{ c.name }}: NSObject, Unmarshaling {
     }
 
 {% if c.hasSubclasses %}
-    static func value(from object: Any) throws -> Value {
+    public static func value(from object: Any) throws -> Value {
         guard let obj = object as? [String: Any] else {
             throw MarshalError.typeMismatch(expected: [String:Any].self, actual: type(of: object))
         }
@@ -49,7 +49,7 @@ class {{ c.name }}: NSObject, Unmarshaling {
         }
     }
  {% for s in c.subclasses %}
-    var {{ s.name.objcnessShapeAndLayerRemoved }}: {{ s.name }}? {
+    public var {{ s.name.objcnessShapeAndLayerRemoved }}: {{ s.name }}? {
         return self as? {{ s.name }}
     }
 

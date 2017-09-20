@@ -1,0 +1,11 @@
+CODE_SIGN_IDENTITY =
+EMBEDDED_CONTENT_CONTAINS_SWIFT = YES
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/Commander" "$PODS_CONFIGURATION_BUILD_DIR/Marshal" "$PODS_CONFIGURATION_BUILD_DIR/PathKit" "$PODS_CONFIGURATION_BUILD_DIR/Stencil" "$PODS_CONFIGURATION_BUILD_DIR/StencilSwiftKit"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/../Frameworks' '@loader_path/Frameworks'
+OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/Commander/Commander.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/Marshal/Marshal.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/PathKit/PathKit.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/Stencil/Stencil.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/StencilSwiftKit/StencilSwiftKit.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "Commander" -framework "Marshal" -framework "PathKit" -framework "Stencil" -framework "StencilSwiftKit"
+OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
+PODS_BUILD_DIR = $BUILD_DIR
+PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_ROOT = ${SRCROOT}/Pods

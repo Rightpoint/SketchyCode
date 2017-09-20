@@ -10,7 +10,7 @@ import Foundation
 
 import Marshal
 
-typealias SketchUnknown = Any
+public typealias SketchUnknown = Any
 extension CGFloat: ValueType {}
 extension CGPoint: Unmarshaling {
     public init(object: MarshaledObject) throws {
@@ -168,18 +168,30 @@ extension NSAttributedString: ValueType {
                     attributes["NSFont"] = font
                     subStringParts.removeValue(forKey: "NSFont")
                 }
-                if let kern: CGFloat = try subStringParts.value(for: "NSKern") {
-                    attributes["NSKern"] = kern
-                    subStringParts.removeValue(forKey: "NSKern")
-                }
                 if let color: NSColor = try subStringParts.value(for: "NSColor") {
                     attributes["NSColor"] = color
                     subStringParts.removeValue(forKey: "NSColor")
                 }
+                for intKey in ["NSStrikethrough", "NSLigature", "NSUnderline", "NSSuperScript"] {
+                    if let numericRepresentation: Int = try subStringParts.value(for: intKey) {
+                        attributes[intKey] = numericRepresentation
+                        subStringParts.removeValue(forKey: intKey)
+                    }
+                }
+                for floatKey in ["NSKern", "NSBaselineOffset"] {
+                    if let kern: CGFloat = try subStringParts.value(for: floatKey) {
+                        attributes[floatKey] = kern
+                        subStringParts.removeValue(forKey: floatKey)
+                    }
+                }
+
                 if let paragraphStyle: NSParagraphStyle = try subStringParts.value(for: "NSParagraphStyle") {
                     attributes["NSParagraphStyle"] = paragraphStyle
                     subStringParts.removeValue(forKey: "NSParagraphStyle")
                 }
+
+                // Not sure how to represent this in NSAttributedString
+                subStringParts.removeValue(forKey: "MSAttributedStringTextTransformAttribute")
 
                 // Double check that there are no keys we don't know about.
                 guard subStringParts.count == 0 else {
@@ -194,4 +206,3 @@ extension NSAttributedString: ValueType {
         }
     }
 }
-

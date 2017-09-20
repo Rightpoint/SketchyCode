@@ -1,5 +1,5 @@
 //
-//  SketchyCode.swift
+//  SketchyCodeCLI.swift
 //  SketchyCode
 //
 //  Created by Brian King on 5/19/17.
@@ -12,7 +12,9 @@ import Marshal
 import StencilSwiftKit
 import Stencil
 
-class SketchyCode {
+import SketchyCode
+
+class SketchyCodeCLI {
     static let version: String = "0.suspect"
     
     fileprivate let verbose: Bool
@@ -96,6 +98,7 @@ class SketchyCode {
                 try generated.data(using: .utf8)?.write(to: newURL)
             }
         }
+
     }
 }
 

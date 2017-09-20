@@ -84,8 +84,16 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/Commander/Commander.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Marshal/Marshal.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/PathKit/PathKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Stencil/Stencil.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/StencilSwiftKit/StencilSwiftKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/Commander/Commander.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Marshal/Marshal.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/PathKit/PathKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Stencil/Stencil.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/StencilSwiftKit/StencilSwiftKit.framework"
 fi

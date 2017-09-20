@@ -1,533 +1,1769 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		863E3E951ECFB1A7008AF9E5 /* SketchGenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863E3E941ECFB1A7008AF9E5 /* SketchGenTests.swift */; };
-		863E3EA01ECFB24C008AF9E5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863E3E9F1ECFB24C008AF9E5 /* main.swift */; };
-		863E3EA21ECFB42C008AF9E5 /* SketchyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863E3EA11ECFB42C008AF9E5 /* SketchyCode.swift */; };
-		863E3EA81ECFCFC4008AF9E5 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863E3EA71ECFCFC4008AF9E5 /* Command.swift */; };
-		863E3EAA1ECFD1B3008AF9E5 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863E3EA91ECFD1B3008AF9E5 /* Log.swift */; };
-		863E3EB51ECFEAF0008AF9E5 /* SketchTypeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863E3EB41ECFEAF0008AF9E5 /* SketchTypeBuilder.swift */; };
-		863E3EBA1ECFED54008AF9E5 /* SketchClass.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 863E3EB81ECFEBE6008AF9E5 /* SketchClass.stencil */; };
-		8672E0881ED774AE00A4D480 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8672E0871ED774AE00A4D480 /* String.swift */; };
-		86AC75161ED610D300981BE2 /* SketchClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863E3EAB1ECFD786008AF9E5 /* SketchClasses.swift */; };
-		86AC75181ED6622200981BE2 /* SketchClasses+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AC75171ED6622200981BE2 /* SketchClasses+Helpers.swift */; };
-		940BA686A771AB2D6A2ACD48 /* Pods_SketchyCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F57022D6CC792DD283CE341 /* Pods_SketchyCode.framework */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		863E3E911ECFB1A7008AF9E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 863E3E771ECFB1A7008AF9E5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 863E3E7E1ECFB1A7008AF9E5;
-			remoteInfo = SketchGen;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXFileReference section */
-		3D2130DC656501443F4EDD3A /* Pods-SketchGen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SketchGen.release.xcconfig"; path = "Pods/Target Support Files/Pods-SketchGen/Pods-SketchGen.release.xcconfig"; sourceTree = "<group>"; };
-		44915C0004CC0FA74EF8AD55 /* Pods-SketchGen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SketchGen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SketchGen/Pods-SketchGen.debug.xcconfig"; sourceTree = "<group>"; };
-		5E44735FCFC8D2ED51E6DCA1 /* Pods_SketchGen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SketchGen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		863E3E7F1ECFB1A7008AF9E5 /* SketchyCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SketchyCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		863E3E8B1ECFB1A7008AF9E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		863E3E901ECFB1A7008AF9E5 /* SketchyCodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SketchyCodeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		863E3E941ECFB1A7008AF9E5 /* SketchGenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchGenTests.swift; sourceTree = "<group>"; };
-		863E3E961ECFB1A7008AF9E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		863E3E9F1ECFB24C008AF9E5 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		863E3EA11ECFB42C008AF9E5 /* SketchyCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchyCode.swift; sourceTree = "<group>"; };
-		863E3EA71ECFCFC4008AF9E5 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
-		863E3EA91ECFD1B3008AF9E5 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
-		863E3EAB1ECFD786008AF9E5 /* SketchClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchClasses.swift; sourceTree = "<group>"; };
-		863E3EB41ECFEAF0008AF9E5 /* SketchTypeBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchTypeBuilder.swift; sourceTree = "<group>"; };
-		863E3EB81ECFEBE6008AF9E5 /* SketchClass.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SketchClass.stencil; sourceTree = "<group>"; };
-		8672E0871ED774AE00A4D480 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		86A907881ED6780B00ECECE9 /* TextStyle.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = TextStyle.stencil; sourceTree = "<group>"; };
-		86AC75171ED6622200981BE2 /* SketchClasses+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SketchClasses+Helpers.swift"; sourceTree = "<group>"; };
-		8F57022D6CC792DD283CE341 /* Pods_SketchyCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SketchyCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1B612193179ACEFAAA5C48D /* Pods-SketchyCode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SketchyCode.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SketchyCode/Pods-SketchyCode.debug.xcconfig"; sourceTree = "<group>"; };
-		D51799568B333AB48B63723E /* Pods-SketchyCode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SketchyCode.release.xcconfig"; path = "Pods/Target Support Files/Pods-SketchyCode/Pods-SketchyCode.release.xcconfig"; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		863E3E7C1ECFB1A7008AF9E5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				940BA686A771AB2D6A2ACD48 /* Pods_SketchyCode.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		863E3E8D1ECFB1A7008AF9E5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		1E6F6FE320EA9E4801C75D32 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				44915C0004CC0FA74EF8AD55 /* Pods-SketchGen.debug.xcconfig */,
-				3D2130DC656501443F4EDD3A /* Pods-SketchGen.release.xcconfig */,
-				A1B612193179ACEFAAA5C48D /* Pods-SketchyCode.debug.xcconfig */,
-				D51799568B333AB48B63723E /* Pods-SketchyCode.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		319DDD944F465BF648C27F14 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5E44735FCFC8D2ED51E6DCA1 /* Pods_SketchGen.framework */,
-				8F57022D6CC792DD283CE341 /* Pods_SketchyCode.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		863E3E761ECFB1A7008AF9E5 = {
-			isa = PBXGroup;
-			children = (
-				863E3E811ECFB1A7008AF9E5 /* SketchyCode */,
-				863E3E931ECFB1A7008AF9E5 /* SketchGenTests */,
-				863E3E801ECFB1A7008AF9E5 /* Products */,
-				1E6F6FE320EA9E4801C75D32 /* Pods */,
-				319DDD944F465BF648C27F14 /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		863E3E801ECFB1A7008AF9E5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				863E3E7F1ECFB1A7008AF9E5 /* SketchyCode.app */,
-				863E3E901ECFB1A7008AF9E5 /* SketchyCodeTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		863E3E811ECFB1A7008AF9E5 /* SketchyCode */ = {
-			isa = PBXGroup;
-			children = (
-				863E3EB11ECFEA97008AF9E5 /* JSONBuilder */,
-				86A907871ED677DC00ECECE9 /* Templates */,
-				863E3EA61ECFCFC4008AF9E5 /* Utils */,
-				863E3E8B1ECFB1A7008AF9E5 /* Info.plist */,
-				863E3E9F1ECFB24C008AF9E5 /* main.swift */,
-				863E3EA11ECFB42C008AF9E5 /* SketchyCode.swift */,
-				863E3EAB1ECFD786008AF9E5 /* SketchClasses.swift */,
-				86AC75171ED6622200981BE2 /* SketchClasses+Helpers.swift */,
-			);
-			path = SketchyCode;
-			sourceTree = "<group>";
-		};
-		863E3E931ECFB1A7008AF9E5 /* SketchGenTests */ = {
-			isa = PBXGroup;
-			children = (
-				863E3E941ECFB1A7008AF9E5 /* SketchGenTests.swift */,
-				863E3E961ECFB1A7008AF9E5 /* Info.plist */,
-			);
-			name = SketchGenTests;
-			path = SketchyCodeTests;
-			sourceTree = "<group>";
-		};
-		863E3EA61ECFCFC4008AF9E5 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				863E3EA71ECFCFC4008AF9E5 /* Command.swift */,
-				863E3EA91ECFD1B3008AF9E5 /* Log.swift */,
-				8672E0871ED774AE00A4D480 /* String.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		863E3EB11ECFEA97008AF9E5 /* JSONBuilder */ = {
-			isa = PBXGroup;
-			children = (
-				863E3EB41ECFEAF0008AF9E5 /* SketchTypeBuilder.swift */,
-				863E3EB81ECFEBE6008AF9E5 /* SketchClass.stencil */,
-			);
-			path = JSONBuilder;
-			sourceTree = "<group>";
-		};
-		86A907871ED677DC00ECECE9 /* Templates */ = {
-			isa = PBXGroup;
-			children = (
-				86A907881ED6780B00ECECE9 /* TextStyle.stencil */,
-			);
-			path = Templates;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		863E3E7E1ECFB1A7008AF9E5 /* SketchyCode */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 863E3E991ECFB1A7008AF9E5 /* Build configuration list for PBXNativeTarget "SketchyCode" */;
-			buildPhases = (
-				804D0238434A6D542132B2D0 /* [CP] Check Pods Manifest.lock */,
-				863E3E7B1ECFB1A7008AF9E5 /* Sources */,
-				863E3E7C1ECFB1A7008AF9E5 /* Frameworks */,
-				863E3E7D1ECFB1A7008AF9E5 /* Resources */,
-				2355747DAD50F77FB28D5D3E /* [CP] Embed Pods Frameworks */,
-				F43EE122ED059BD803B58CF0 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SketchyCode;
-			productName = SketchGen;
-			productReference = 863E3E7F1ECFB1A7008AF9E5 /* SketchyCode.app */;
-			productType = "com.apple.product-type.application";
-		};
-		863E3E8F1ECFB1A7008AF9E5 /* SketchyCodeTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 863E3E9C1ECFB1A7008AF9E5 /* Build configuration list for PBXNativeTarget "SketchyCodeTests" */;
-			buildPhases = (
-				863E3E8C1ECFB1A7008AF9E5 /* Sources */,
-				863E3E8D1ECFB1A7008AF9E5 /* Frameworks */,
-				863E3E8E1ECFB1A7008AF9E5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				863E3E921ECFB1A7008AF9E5 /* PBXTargetDependency */,
-			);
-			name = SketchyCodeTests;
-			productName = SketchGenTests;
-			productReference = 863E3E901ECFB1A7008AF9E5 /* SketchyCodeTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		863E3E771ECFB1A7008AF9E5 /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = "Brian King";
-				TargetAttributes = {
-					863E3E7E1ECFB1A7008AF9E5 = {
-						CreatedOnToolsVersion = 8.3.2;
-						ProvisioningStyle = Automatic;
-					};
-					863E3E8F1ECFB1A7008AF9E5 = {
-						CreatedOnToolsVersion = 8.3.2;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 863E3E7E1ECFB1A7008AF9E5;
-					};
-				};
-			};
-			buildConfigurationList = 863E3E7A1ECFB1A7008AF9E5 /* Build configuration list for PBXProject "SketchyCode" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-				Base,
-			);
-			mainGroup = 863E3E761ECFB1A7008AF9E5;
-			productRefGroup = 863E3E801ECFB1A7008AF9E5 /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				863E3E7E1ECFB1A7008AF9E5 /* SketchyCode */,
-				863E3E8F1ECFB1A7008AF9E5 /* SketchyCodeTests */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		863E3E7D1ECFB1A7008AF9E5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				863E3EBA1ECFED54008AF9E5 /* SketchClass.stencil in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		863E3E8E1ECFB1A7008AF9E5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		2355747DAD50F77FB28D5D3E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SketchyCode/Pods-SketchyCode-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		804D0238434A6D542132B2D0 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		F43EE122ED059BD803B58CF0 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SketchyCode/Pods-SketchyCode-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		863E3E7B1ECFB1A7008AF9E5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				86AC75181ED6622200981BE2 /* SketchClasses+Helpers.swift in Sources */,
-				863E3EA21ECFB42C008AF9E5 /* SketchyCode.swift in Sources */,
-				863E3EAA1ECFD1B3008AF9E5 /* Log.swift in Sources */,
-				863E3EA01ECFB24C008AF9E5 /* main.swift in Sources */,
-				863E3EB51ECFEAF0008AF9E5 /* SketchTypeBuilder.swift in Sources */,
-				86AC75161ED610D300981BE2 /* SketchClasses.swift in Sources */,
-				8672E0881ED774AE00A4D480 /* String.swift in Sources */,
-				863E3EA81ECFCFC4008AF9E5 /* Command.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		863E3E8C1ECFB1A7008AF9E5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				863E3E951ECFB1A7008AF9E5 /* SketchGenTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		863E3E921ECFB1A7008AF9E5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 863E3E7E1ECFB1A7008AF9E5 /* SketchyCode */;
-			targetProxy = 863E3E911ECFB1A7008AF9E5 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin XCBuildConfiguration section */
-		863E3E971ECFB1A7008AF9E5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Debug;
-		};
-		863E3E981ECFB1A7008AF9E5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-			};
-			name = Release;
-		};
-		863E3E9A1ECFB1A7008AF9E5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A1B612193179ACEFAAA5C48D /* Pods-SketchyCode.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = SketchyCode/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raizlabs.SketchGen;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		863E3E9B1ECFB1A7008AF9E5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D51799568B333AB48B63723E /* Pods-SketchyCode.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = SketchyCode/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raizlabs.SketchGen;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		863E3E9D1ECFB1A7008AF9E5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = SketchyCodeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raizlabs.SketchGenTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SketchyCode.app/Contents/MacOS/SketchyCode";
-			};
-			name = Debug;
-		};
-		863E3E9E1ECFB1A7008AF9E5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = SketchyCodeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raizlabs.SketchGenTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SketchyCode.app/Contents/MacOS/SketchyCode";
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		863E3E7A1ECFB1A7008AF9E5 /* Build configuration list for PBXProject "SketchyCode" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				863E3E971ECFB1A7008AF9E5 /* Debug */,
-				863E3E981ECFB1A7008AF9E5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		863E3E991ECFB1A7008AF9E5 /* Build configuration list for PBXNativeTarget "SketchyCode" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				863E3E9A1ECFB1A7008AF9E5 /* Debug */,
-				863E3E9B1ECFB1A7008AF9E5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		863E3E9C1ECFB1A7008AF9E5 /* Build configuration list for PBXNativeTarget "SketchyCodeTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				863E3E9D1ECFB1A7008AF9E5 /* Debug */,
-				863E3E9E1ECFB1A7008AF9E5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = 863E3E771ECFB1A7008AF9E5 /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>0A239D3D3CA65E56B61D3F1E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-SketchyCodeTests.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-SketchyCodeTests/Pods-SketchyCodeTests.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>129DB951E812080A85DB7311</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>[CP] Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>1BFA016D3B7DCCB17BF4377B</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>[CP] Embed Pods Frameworks</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-SketchyCodeTests/Pods-SketchyCodeTests-frameworks.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>1E6F6FE320EA9E4801C75D32</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A1B612193179ACEFAAA5C48D</string>
+				<string>D51799568B333AB48B63723E</string>
+				<string>6C44A7CBA3D8FCF53ABA6740</string>
+				<string>8A48A8E9CF31C448E0960876</string>
+				<string>0A239D3D3CA65E56B61D3F1E</string>
+				<string>3E276813DE39E7961ACE74ED</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2355747DAD50F77FB28D5D3E</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>[CP] Embed Pods Frameworks</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-SketchyCodeCLI/Pods-SketchyCodeCLI-frameworks.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>319DDD944F465BF648C27F14</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>862EBEE21F71E5850086E52C</string>
+				<string>5E44735FCFC8D2ED51E6DCA1</string>
+				<string>8F57022D6CC792DD283CE341</string>
+				<string>494DBC26DE170D3998EEE3D4</string>
+				<string>4FCCB180C3D8921AD451F66E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>34FD4DA99FF99A17CCBF1F72</key>
+		<dict>
+			<key>fileRef</key>
+			<string>8F57022D6CC792DD283CE341</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3E276813DE39E7961ACE74ED</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-SketchyCodeTests.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-SketchyCodeTests/Pods-SketchyCodeTests.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>494DBC26DE170D3998EEE3D4</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Pods_SketchyCodeCLI.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>4FCCB180C3D8921AD451F66E</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Pods_SketchyCodeTests.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>5E44735FCFC8D2ED51E6DCA1</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Pods_SketchGen.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>6C44A7CBA3D8FCF53ABA6740</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-SketchyCodeCLI.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-SketchyCodeCLI/Pods-SketchyCodeCLI.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>804D0238434A6D542132B2D0</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>[CP] Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>8627AC3C1F6B10A800CD1FF2</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>Transformation.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBE831F71D9260086E52C</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.json</string>
+			<key>path</key>
+			<string>InputSketch.dump.json</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBE851F71D9620086E52C</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>InputSketchHelper.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBE881F71DFAE0086E52C</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>862EBEE01F71E4CB0086E52C</string>
+				<string>862EBEDF1F71E4CB0086E52C</string>
+				<string>862EBEE11F71E4CB0086E52C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>862EBE891F71DFAE0086E52C</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>34FD4DA99FF99A17CCBF1F72</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>862EBE8A1F71DFAE0086E52C</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>862EBEDE1F71E4340086E52C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>862EBE8B1F71DFAE0086E52C</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>862EBE8C1F71DFAE0086E52C</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>862EBEA41F71DFAE0086E52C</string>
+			<key>buildPhases</key>
+			<array>
+				<string>129DB951E812080A85DB7311</string>
+				<string>862EBE881F71DFAE0086E52C</string>
+				<string>862EBE891F71DFAE0086E52C</string>
+				<string>862EBE8A1F71DFAE0086E52C</string>
+				<string>862EBE8B1F71DFAE0086E52C</string>
+				<string>C46391A47072C7BB470BE5A6</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>SketchyCode</string>
+			<key>productName</key>
+			<string>SketchyCode</string>
+			<key>productReference</key>
+			<string>862EBE8D1F71DFAE0086E52C</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>862EBE8D1F71DFAE0086E52C</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>SketchyCode.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>862EBE911F71DFAE0086E52C</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>862EBEDB1F71E2A00086E52C</string>
+				<string>862EBE9D1F71DFAE0086E52C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>862EBE921F71DFAE0086E52C</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>862EBE961F71DFAE0086E52C</string>
+				<string>BAC2ACE3E6264A59451F26D5</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>862EBE931F71DFAE0086E52C</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>862EBEDC1F71E2A40086E52C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>862EBE941F71DFAE0086E52C</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>862EBEA81F71DFAE0086E52C</string>
+			<key>buildPhases</key>
+			<array>
+				<string>B22A38A77AD8EEBC1D9C2F04</string>
+				<string>862EBE911F71DFAE0086E52C</string>
+				<string>862EBE921F71DFAE0086E52C</string>
+				<string>862EBE931F71DFAE0086E52C</string>
+				<string>1BFA016D3B7DCCB17BF4377B</string>
+				<string>C0EE2091DA27BB527C25C24E</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>862EBE981F71DFAE0086E52C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>SketchyCodeTests</string>
+			<key>productName</key>
+			<string>SketchyCodeTests</string>
+			<key>productReference</key>
+			<string>862EBE951F71DFAE0086E52C</string>
+			<key>productType</key>
+			<string>com.apple.product-type.bundle.unit-test</string>
+		</dict>
+		<key>862EBE951F71DFAE0086E52C</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.cfbundle</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>SketchyCodeTests.xctest</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>862EBE961F71DFAE0086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>862EBE8D1F71DFAE0086E52C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>862EBE971F71DFAE0086E52C</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>863E3E771ECFB1A7008AF9E5</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>862EBE8C1F71DFAE0086E52C</string>
+			<key>remoteInfo</key>
+			<string>SketchyCode</string>
+		</dict>
+		<key>862EBE981F71DFAE0086E52C</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>target</key>
+			<string>862EBE8C1F71DFAE0086E52C</string>
+			<key>targetProxy</key>
+			<string>862EBE971F71DFAE0086E52C</string>
+		</dict>
+		<key>862EBE9B1F71DFAE0086E52C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>862EBE831F71D9260086E52C</string>
+				<string>862EBE851F71D9620086E52C</string>
+				<string>862EBE9C1F71DFAE0086E52C</string>
+				<string>862EBE9E1F71DFAE0086E52C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>SketchyCodeTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBE9C1F71DFAE0086E52C</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SketchyCodeTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBE9D1F71DFAE0086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>862EBE9C1F71DFAE0086E52C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>862EBE9E1F71DFAE0086E52C</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBEA01F71DFAE0086E52C</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>863E3E771ECFB1A7008AF9E5</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>862EBE8C1F71DFAE0086E52C</string>
+			<key>remoteInfo</key>
+			<string>SketchyCode</string>
+		</dict>
+		<key>862EBEA11F71DFAE0086E52C</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>target</key>
+			<string>862EBE8C1F71DFAE0086E52C</string>
+			<key>targetProxy</key>
+			<string>862EBEA01F71DFAE0086E52C</string>
+		</dict>
+		<key>862EBEA21F71DFAE0086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>862EBE8D1F71DFAE0086E52C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>862EBEA31F71DFAE0086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>862EBE8D1F71DFAE0086E52C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>CodeSignOnCopy</string>
+					<string>RemoveHeadersOnCopy</string>
+				</array>
+			</dict>
+		</dict>
+		<key>862EBEA41F71DFAE0086E52C</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>862EBEA51F71DFAE0086E52C</string>
+				<string>862EBEA61F71DFAE0086E52C</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>862EBEA51F71DFAE0086E52C</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>A1B612193179ACEFAAA5C48D</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>COMBINE_HIDPI_IMAGES</key>
+				<string>YES</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>FRAMEWORK_VERSION</key>
+				<string>A</string>
+				<key>INFOPLIST_FILE</key>
+				<string>SketchyCode/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/../Frameworks @loader_path/Frameworks</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.bk.SketchyCode</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>862EBEA61F71DFAE0086E52C</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>D51799568B333AB48B63723E</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>COMBINE_HIDPI_IMAGES</key>
+				<string>YES</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>FRAMEWORK_VERSION</key>
+				<string>A</string>
+				<key>INFOPLIST_FILE</key>
+				<string>SketchyCode/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/../Frameworks @loader_path/Frameworks</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.bk.SketchyCode</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>862EBEA71F71DFAE0086E52C</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>dstPath</key>
+			<string></string>
+			<key>dstSubfolderSpec</key>
+			<string>10</string>
+			<key>files</key>
+			<array>
+				<string>862EBEA31F71DFAE0086E52C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXCopyFilesBuildPhase</string>
+			<key>name</key>
+			<string>Embed Frameworks</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>862EBEA81F71DFAE0086E52C</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>862EBEA91F71DFAE0086E52C</string>
+				<string>862EBEAA1F71DFAE0086E52C</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>862EBEA91F71DFAE0086E52C</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>0A239D3D3CA65E56B61D3F1E</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
+				<string>YES</string>
+				<key>COMBINE_HIDPI_IMAGES</key>
+				<string>YES</string>
+				<key>DEVELOPMENT_TEAM</key>
+				<string>PVB49FM6EC</string>
+				<key>INFOPLIST_FILE</key>
+				<string>SketchyCodeTests/Info.plist</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.bk.SketchyCodeTests</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>862EBEAA1F71DFAE0086E52C</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>3E276813DE39E7961ACE74ED</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
+				<string>YES</string>
+				<key>COMBINE_HIDPI_IMAGES</key>
+				<string>YES</string>
+				<key>DEVELOPMENT_TEAM</key>
+				<string>PVB49FM6EC</string>
+				<key>INFOPLIST_FILE</key>
+				<string>SketchyCodeTests/Info.plist</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.bk.SketchyCodeTests</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>862EBEAB1F71E0CB0086E52C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>862EBECB1F71E1250086E52C</string>
+				<string>862EBECC1F71E1250086E52C</string>
+				<string>862EBECD1F71E1250086E52C</string>
+				<string>862EBEBC1F71E0FF0086E52C</string>
+				<string>862EBEBF1F71E0FF0086E52C</string>
+				<string>862EBEC11F71E0FF0086E52C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>CLI</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBEBC1F71E0FF0086E52C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>862EBEBD1F71E0FF0086E52C</string>
+				<string>862EBEBE1F71E0FF0086E52C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>JSONBuilder</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBEBD1F71E0FF0086E52C</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>path</key>
+			<string>SketchClass.stencil</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBEBE1F71E0FF0086E52C</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SketchTypeBuilder.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBEBF1F71E0FF0086E52C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>862EBEC01F71E0FF0086E52C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Templates</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBEC01F71E0FF0086E52C</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>path</key>
+			<string>TextStyle.stencil</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBEC11F71E0FF0086E52C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>862EBEC21F71E0FF0086E52C</string>
+				<string>862EBEC31F71E0FF0086E52C</string>
+				<string>862EBEC41F71E0FF0086E52C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Utils</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBEC21F71E0FF0086E52C</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>Command.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBEC31F71E0FF0086E52C</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>Log.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBEC41F71E0FF0086E52C</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>String.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBECB1F71E1250086E52C</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>main.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBECC1F71E1250086E52C</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBECD1F71E1250086E52C</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SketchyCodeCLI.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBED11F71E1410086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>862EBECB1F71E1250086E52C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>862EBED21F71E1410086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>862EBECD1F71E1250086E52C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>862EBED31F71E1410086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>862EBEBD1F71E0FF0086E52C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>862EBED41F71E1410086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>862EBEBE1F71E0FF0086E52C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>862EBED51F71E1410086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>862EBEC01F71E0FF0086E52C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>862EBED61F71E1410086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>862EBEC21F71E0FF0086E52C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>862EBED71F71E1410086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>862EBEC31F71E0FF0086E52C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>862EBED81F71E1410086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>862EBEC41F71E0FF0086E52C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>862EBED91F71E2030086E52C</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBEDB1F71E2A00086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>862EBE851F71D9620086E52C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>862EBEDC1F71E2A40086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>862EBE831F71D9260086E52C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>862EBEDD1F71E4340086E52C</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>SketchyCode.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>862EBEDE1F71E4340086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>862EBEDD1F71E4340086E52C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>862EBEDF1F71E4CB0086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>863E3EAB1ECFD786008AF9E5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>862EBEE01F71E4CB0086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>86AC75171ED6622200981BE2</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>862EBEE11F71E4CB0086E52C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>8627AC3C1F6B10A800CD1FF2</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>862EBEE21F71E5850086E52C</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Marshal.framework</string>
+			<key>path</key>
+			<string>../../Library/Developer/Xcode/DerivedData/SketchyCode-bcgajqqdxetbluaawggbpweiipjy/Build/Products/Debug/Marshal/Marshal.framework</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>863E3E761ECFB1A7008AF9E5</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>863E3E811ECFB1A7008AF9E5</string>
+				<string>862EBE9B1F71DFAE0086E52C</string>
+				<string>863E3E801ECFB1A7008AF9E5</string>
+				<string>1E6F6FE320EA9E4801C75D32</string>
+				<string>319DDD944F465BF648C27F14</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>863E3E771ECFB1A7008AF9E5</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>LastSwiftUpdateCheck</key>
+				<string>0830</string>
+				<key>LastUpgradeCheck</key>
+				<string>0830</string>
+				<key>ORGANIZATIONNAME</key>
+				<string>Brian King</string>
+				<key>TargetAttributes</key>
+				<dict>
+					<key>862EBE8C1F71DFAE0086E52C</key>
+					<dict>
+						<key>CreatedOnToolsVersion</key>
+						<string>8.3.2</string>
+						<key>ProvisioningStyle</key>
+						<string>Manual</string>
+					</dict>
+					<key>862EBE941F71DFAE0086E52C</key>
+					<dict>
+						<key>CreatedOnToolsVersion</key>
+						<string>8.3.2</string>
+						<key>DevelopmentTeam</key>
+						<string>PVB49FM6EC</string>
+						<key>ProvisioningStyle</key>
+						<string>Automatic</string>
+					</dict>
+					<key>863E3E7E1ECFB1A7008AF9E5</key>
+					<dict>
+						<key>CreatedOnToolsVersion</key>
+						<string>8.3.2</string>
+						<key>ProvisioningStyle</key>
+						<string>Automatic</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>863E3E7A1ECFB1A7008AF9E5</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+				<string>Base</string>
+			</array>
+			<key>mainGroup</key>
+			<string>863E3E761ECFB1A7008AF9E5</string>
+			<key>productRefGroup</key>
+			<string>863E3E801ECFB1A7008AF9E5</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>863E3E7E1ECFB1A7008AF9E5</string>
+				<string>862EBE8C1F71DFAE0086E52C</string>
+				<string>862EBE941F71DFAE0086E52C</string>
+			</array>
+		</dict>
+		<key>863E3E7A1ECFB1A7008AF9E5</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>863E3E971ECFB1A7008AF9E5</string>
+				<string>863E3E981ECFB1A7008AF9E5</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>863E3E7B1ECFB1A7008AF9E5</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>862EBED21F71E1410086E52C</string>
+				<string>862EBED81F71E1410086E52C</string>
+				<string>862EBED71F71E1410086E52C</string>
+				<string>862EBED11F71E1410086E52C</string>
+				<string>862EBED61F71E1410086E52C</string>
+				<string>862EBED41F71E1410086E52C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>863E3E7C1ECFB1A7008AF9E5</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>940BA686A771AB2D6A2ACD48</string>
+				<string>862EBEA21F71DFAE0086E52C</string>
+				<string>C0C2FF1DDFF9C80DBFD2DA10</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>863E3E7D1ECFB1A7008AF9E5</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>862EBED51F71E1410086E52C</string>
+				<string>862EBED31F71E1410086E52C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>863E3E7E1ECFB1A7008AF9E5</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>863E3E991ECFB1A7008AF9E5</string>
+			<key>buildPhases</key>
+			<array>
+				<string>804D0238434A6D542132B2D0</string>
+				<string>863E3E7B1ECFB1A7008AF9E5</string>
+				<string>863E3E7C1ECFB1A7008AF9E5</string>
+				<string>863E3E7D1ECFB1A7008AF9E5</string>
+				<string>2355747DAD50F77FB28D5D3E</string>
+				<string>F43EE122ED059BD803B58CF0</string>
+				<string>862EBEA71F71DFAE0086E52C</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>862EBEA11F71DFAE0086E52C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>SketchyCodeCLI</string>
+			<key>productName</key>
+			<string>SketchGen</string>
+			<key>productReference</key>
+			<string>863E3E7F1ECFB1A7008AF9E5</string>
+			<key>productType</key>
+			<string>com.apple.product-type.application</string>
+		</dict>
+		<key>863E3E7F1ECFB1A7008AF9E5</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.application</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>SketchyCodeCLI.app</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>863E3E801ECFB1A7008AF9E5</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>863E3E7F1ECFB1A7008AF9E5</string>
+				<string>862EBE8D1F71DFAE0086E52C</string>
+				<string>862EBE951F71DFAE0086E52C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>863E3E811ECFB1A7008AF9E5</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>862EBEDD1F71E4340086E52C</string>
+				<string>862EBED91F71E2030086E52C</string>
+				<string>862EBEAB1F71E0CB0086E52C</string>
+				<string>863E3EAB1ECFD786008AF9E5</string>
+				<string>86AC75171ED6622200981BE2</string>
+				<string>8627AC3C1F6B10A800CD1FF2</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>SketchyCode</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>863E3E971ECFB1A7008AF9E5</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_ANALYZER_NONNULL</key>
+				<string>YES</string>
+				<key>CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION</key>
+				<string>YES_AGGRESSIVE</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_DOCUMENTATION_COMMENTS</key>
+				<string>YES</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INFINITE_RECURSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_SUSPICIOUS_MOVE</key>
+				<string>YES</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>ENABLE_TESTABILITY</key>
+				<string>YES</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES_AGGRESSIVE</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>MACOSX_DEPLOYMENT_TARGET</key>
+				<string>10.12</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>SDKROOT</key>
+				<string>macosx</string>
+				<key>SWIFT_ACTIVE_COMPILATION_CONDITIONS</key>
+				<string>DEBUG</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-Onone</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>863E3E981ECFB1A7008AF9E5</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_ANALYZER_NONNULL</key>
+				<string>YES</string>
+				<key>CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION</key>
+				<string>YES_AGGRESSIVE</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_DOCUMENTATION_COMMENTS</key>
+				<string>YES</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INFINITE_RECURSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_SUSPICIOUS_MOVE</key>
+				<string>YES</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES_AGGRESSIVE</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>MACOSX_DEPLOYMENT_TARGET</key>
+				<string>10.12</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>SDKROOT</key>
+				<string>macosx</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-Owholemodule</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>863E3E991ECFB1A7008AF9E5</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>863E3E9A1ECFB1A7008AF9E5</string>
+				<string>863E3E9B1ECFB1A7008AF9E5</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>863E3E9A1ECFB1A7008AF9E5</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>6C44A7CBA3D8FCF53ABA6740</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
+				<string>YES</string>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>COMBINE_HIDPI_IMAGES</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>SketchyCode/CLI/Info.plist</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/../Frameworks</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.raizlabs.SketchGen</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>863E3E9B1ECFB1A7008AF9E5</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>8A48A8E9CF31C448E0960876</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
+				<string>YES</string>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>COMBINE_HIDPI_IMAGES</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>SketchyCode/CLI/Info.plist</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/../Frameworks</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.raizlabs.SketchGen</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>863E3EAB1ECFD786008AF9E5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SketchClasses.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>86AC75171ED6622200981BE2</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SketchClasses+Helpers.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8A48A8E9CF31C448E0960876</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-SketchyCodeCLI.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-SketchyCodeCLI/Pods-SketchyCodeCLI.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8F57022D6CC792DD283CE341</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Pods_SketchyCode.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>940BA686A771AB2D6A2ACD48</key>
+		<dict>
+			<key>fileRef</key>
+			<string>8F57022D6CC792DD283CE341</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A1B612193179ACEFAAA5C48D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-SketchyCode.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-SketchyCode/Pods-SketchyCode.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B22A38A77AD8EEBC1D9C2F04</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>[CP] Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>BAC2ACE3E6264A59451F26D5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4FCCB180C3D8921AD451F66E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C0C2FF1DDFF9C80DBFD2DA10</key>
+		<dict>
+			<key>fileRef</key>
+			<string>494DBC26DE170D3998EEE3D4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C0EE2091DA27BB527C25C24E</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>[CP] Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-SketchyCodeTests/Pods-SketchyCodeTests-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>C46391A47072C7BB470BE5A6</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>[CP] Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-SketchyCode/Pods-SketchyCode-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>D51799568B333AB48B63723E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-SketchyCode.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-SketchyCode/Pods-SketchyCode.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F43EE122ED059BD803B58CF0</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>[CP] Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-SketchyCodeCLI/Pods-SketchyCodeCLI-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>863E3E771ECFB1A7008AF9E5</string>
+</dict>
+</plist>

@@ -9,6 +9,7 @@
 import Foundation
 import PathKit
 import StencilSwiftKit
+import Stencil
 
 /// This is some exploratory code to create usable swift objects from sketchtool JSON.
 /// These generated swift objects will be responsible for actually importing the Sketch 
@@ -29,7 +30,10 @@ final class SketchTypeBuilder {
         guard let stencilString = String(data: data, encoding: String.Encoding.utf8) else {
             throw ParserError.canNotLoadClassStencil
         }
-        let template = StencilSwiftTemplate(templateString: stencilString)
+        let stencilExtension = Extension()
+        stencilExtension.registerStencilSwiftExtensions()
+
+        let template = StencilSwiftTemplate(templateString: stencilString, environment: Environment(extensions: [stencilExtension]), name: nil)
         let generated = try template.render(["document": document])
         return generated
     }
@@ -47,6 +51,9 @@ final class SketchClass: NSObject {
         }
         var swiftType: String {
             return type.swiftType
+        }
+        var sketchClass: SketchClass? {
+            return type.sketchClass
         }
     }
 
@@ -244,6 +251,21 @@ indirect enum SketchType: Equatable {
             return "SketchUnknown"
         }
     }
+
+    var sketchClass: SketchClass? {
+        switch self {
+        case .builtin:
+            return nil
+        case .class(let sketchClass):
+            return sketchClass
+        case .array(let type):
+            return type.sketchClass
+        case .optional(let type):
+            return type.sketchClass
+        case .unknown:
+            return nil
+        }
+    }
 }
 
 final class SketchTypeDocument: NSObject {
@@ -254,6 +276,10 @@ final class SketchTypeDocument: NSObject {
         return byName.sorted { lhs, rhs in
             return lhs.key < rhs.key
         }.map() { $0.value }
+    }
+
+    var sketchDocumentRoot: SketchClass {
+        return byName["MSDocumentData"]!
     }
     
     // This is a collection of classes that are provided by the system and should not
@@ -277,10 +303,15 @@ final class SketchTypeDocument: NSObject {
         "MSLayerGroup": "MSShapeLayer",
         "MSTextLayer": "MSShapeLayer",
         "MSSymbolInstance": "MSShapeLayer",
+        "MSStarShape": "MSShapeLayer",
+        "MSPolygonShape": "MSShapeLayer",
+        "MSTriangleShape": "MSShapeLayer",
         "MSBitmapLayer": "MSShapeLayer",
-        "MSSymbolMaster": "MSArtboardGroup"
+        "MSArtboardGroup": "MSShapeLayer",
+        "MSSliceLayer": "MSShapeLayer",
+        "MSSymbolMaster": "MSShapeLayer"
     ]
-    
+
     // MSShapeLayer is not counted because it's an abstract baseclass and never shows up in the
     // JSON so counting MSShapeLayer properties breaks the property consolidation.
     let skipClassWhenConsolidatingAttributes: [String] = ["MSShapeLayer"]

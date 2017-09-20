@@ -64,9 +64,9 @@ let cmd = command(
             }
         }
 
-        let sketchyCode = SketchyCode(verbose: verbose, sketchPath: file, templatePaths: templates, outputPath: output)
+        let sketchyCode = SketchyCodeCLI(verbose: verbose, sketchPath: file, templatePaths: templates, outputPath: output)
         try sketchyCode.process()
     }
 }
-cmd.run(SketchyCode.version)
+cmd.run(SketchyCodeCLI.version)
 

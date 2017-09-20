@@ -4,149 +4,99 @@ import CoreGraphics
 import AppKit
 import Marshal
 
-class MSArtboardGroup: NSObject, ValueType {
-    
-    var resizesContent: CGFloat
-    var includeInCloudUpload: Bool
-    var backgroundColor: MSColor
-    var nameIsFixed: CGFloat
-    var isVisible: Bool
-    var grid: MSSimpleGrid?
-    var resizingConstraint: CGFloat
-    var style: MSStyle
-    var rotation: CGFloat
-    var layers: [MSShapeLayer]
-    var isFlippedHorizontal: Bool
-    var horizontalRulerData: MSRulerData
-    var hasBackgroundColor: Bool
-    var includeBackgroundColorInExport: Bool
-    var name: String
-    var verticalRulerData: MSRulerData
-    var objectID: String
-    var frame: MSRect
-    var layerListExpandedType: CGFloat
-    var isFlippedVertical: Bool
-    var resizingType: CGFloat
-    var shouldBreakMaskChain: Bool
-    var exportOptions: MSExportOptions
-    var hasClickThrough: Bool
-    var isLocked: Bool
-    var userInfo: [String: Any]?
-    var layout: MSLayoutGrid?
-    
-    required init(object: MarshaledObject) throws {
+public class MSArtboardGroup: MSShapeLayer {
+
+    public var resizesContent: CGFloat
+    public var includeInCloudUpload: Bool
+    public var backgroundColor: MSColor
+    public var style: MSStyle
+    public var layers: [MSShapeLayer]
+    public var horizontalRulerData: MSRulerData
+    public var hasBackgroundColor: Bool
+    public var includeBackgroundColorInExport: Bool
+    public var verticalRulerData: MSRulerData
+    public var hasClickThrough: Bool
+    public var grid: MSSimpleGrid?
+    public var layout: MSLayoutGrid?
+
+    public required init(object: MarshaledObject) throws {
         self.resizesContent = try object.value(for: "resizesContent")
         self.includeInCloudUpload = try object.value(for: "includeInCloudUpload")
         self.backgroundColor = try object.value(for: "backgroundColor")
-        self.nameIsFixed = try object.value(for: "nameIsFixed")
-        self.isVisible = try object.value(for: "isVisible")
-        self.grid = try object.value(for: "grid")
-        self.resizingConstraint = try object.value(for: "resizingConstraint")
         self.style = try object.value(for: "style")
-        self.rotation = try object.value(for: "rotation")
         self.layers = try object.value(for: "layers")
-        self.isFlippedHorizontal = try object.value(for: "isFlippedHorizontal")
         self.horizontalRulerData = try object.value(for: "horizontalRulerData")
         self.hasBackgroundColor = try object.value(for: "hasBackgroundColor")
         self.includeBackgroundColorInExport = try object.value(for: "includeBackgroundColorInExport")
-        self.name = try object.value(for: "name")
         self.verticalRulerData = try object.value(for: "verticalRulerData")
-        self.objectID = try object.value(for: "objectID")
-        self.frame = try object.value(for: "frame")
-        self.layerListExpandedType = try object.value(for: "layerListExpandedType")
-        self.isFlippedVertical = try object.value(for: "isFlippedVertical")
-        self.resizingType = try object.value(for: "resizingType")
-        self.shouldBreakMaskChain = try object.value(for: "shouldBreakMaskChain")
-        self.exportOptions = try object.value(for: "exportOptions")
         self.hasClickThrough = try object.value(for: "hasClickThrough")
-        self.isLocked = try object.value(for: "isLocked")
-        self.userInfo = try object.value(for: "userInfo")
+        self.grid = try object.value(for: "grid")
         self.layout = try object.value(for: "layout")
+
+        try super.init(object: object)
     }
-    
-    static func value(from object: Any) throws -> Value {
-        guard let obj = object as? [String: Any] else {
-            throw MarshalError.typeMismatch(expected: [String:Any].self, actual: type(of: object))
-        }
-        guard let classKey = obj["<class>"] as? String else {
-            throw MarshalError.nullValue(key: "<class>")
-        }
-        switch classKey {
-        case "MSArtboardGroup":
-            return try MSArtboardGroup(object: obj)
-        case "MSSymbolMaster":
-            return try MSSymbolMaster(object: obj)
-        default:
-            throw MarshalError.keyNotFound(key: classKey)
-        }
-    }
-    var symbolMaster: MSSymbolMaster? {
-        return self as? MSSymbolMaster
-    }
-    
+
 }
 
-class MSAssetCollection: NSObject, Unmarshaling {
-    
-    var gradients: [SketchUnknown]
-    var colors: [MSColor]
-    var images: [SketchUnknown]
-    var imageCollection: MSImageCollection
-    
-    required init(object: MarshaledObject) throws {
+public class MSAssetCollection: NSObject, Unmarshaling {
+
+    public var gradients: [SketchUnknown]
+    public var colors: [SketchUnknown]
+    public var images: [SketchUnknown]
+    public var imageCollection: MSImageCollection
+
+    public required init(object: MarshaledObject) throws {
         self.gradients = try object.value(for: "gradients")
         self.colors = try object.value(for: "colors")
         self.images = try object.value(for: "images")
         self.imageCollection = try object.value(for: "imageCollection")
     }
-    
+
 }
 
-class MSBitmapLayer: MSShapeLayer {
-    
-    var style: MSStyle
-    var clippingMask: CGPoint
-    var image: MSImageData
-    var nineSliceScale: CGSize
-    var fillReplacesImage: CGFloat
-    var nineSliceCenterRect: CGPoint
-    var userInfo: [String: Any]?
-    
-    required init(object: MarshaledObject) throws {
+public class MSBitmapLayer: MSShapeLayer {
+
+    public var style: MSStyle
+    public var clippingMask: CGPoint
+    public var image: MSImageData
+    public var nineSliceScale: CGSize
+    public var fillReplacesImage: CGFloat
+    public var nineSliceCenterRect: CGPoint
+
+    public required init(object: MarshaledObject) throws {
         self.style = try object.value(for: "style")
         self.clippingMask = try object.value(for: "clippingMask")
         self.image = try object.value(for: "image")
         self.nineSliceScale = try object.value(for: "nineSliceScale")
         self.fillReplacesImage = try object.value(for: "fillReplacesImage")
         self.nineSliceCenterRect = try object.value(for: "nineSliceCenterRect")
-        self.userInfo = try object.value(for: "userInfo")
-        
+
         try super.init(object: object)
     }
-    
+
 }
 
-class MSColor: NSObject, Unmarshaling {
-    
-    var value: String
-    
-    required init(object: MarshaledObject) throws {
+public class MSColor: NSObject, Unmarshaling {
+
+    public var value: String
+
+    public required init(object: MarshaledObject) throws {
         self.value = try object.value(for: "value")
     }
-    
+
 }
 
-class MSCurvePoint: NSObject, Unmarshaling {
-    
-    var hasCurveTo: Bool
-    var curveFrom: CGPoint
-    var curveTo: CGPoint
-    var curveMode: CGFloat
-    var hasCurveFrom: Bool
-    var cornerRadius: CGFloat
-    var point: CGPoint
-    
-    required init(object: MarshaledObject) throws {
+public class MSCurvePoint: NSObject, Unmarshaling {
+
+    public var hasCurveTo: Bool
+    public var curveFrom: CGPoint
+    public var curveTo: CGPoint
+    public var curveMode: CGFloat
+    public var hasCurveFrom: Bool
+    public var cornerRadius: CGFloat
+    public var point: CGPoint
+
+    public required init(object: MarshaledObject) throws {
         self.hasCurveTo = try object.value(for: "hasCurveTo")
         self.curveFrom = try object.value(for: "curveFrom")
         self.curveTo = try object.value(for: "curveTo")
@@ -155,23 +105,23 @@ class MSCurvePoint: NSObject, Unmarshaling {
         self.cornerRadius = try object.value(for: "cornerRadius")
         self.point = try object.value(for: "point")
     }
-    
+
 }
 
-class MSDocumentData: NSObject, Unmarshaling {
-    
-    var foreignSymbols: [SketchUnknown]
-    var layerStyles: MSSharedStyleContainer
-    var objectID: String
-    var currentPageIndex: CGFloat
-    var enableLayerInteraction: Bool
-    var layerSymbols: MSSymbolContainer
-    var assets: MSAssetCollection
-    var enableSliceInteraction: Bool
-    var layerTextStyles: MSSharedTextStyleContainer
-    var pages: [MSPage]
-    
-    required init(object: MarshaledObject) throws {
+public class MSDocumentData: NSObject, Unmarshaling {
+
+    public var foreignSymbols: [SketchUnknown]
+    public var layerStyles: MSSharedStyleContainer
+    public var objectID: String
+    public var currentPageIndex: CGFloat
+    public var enableLayerInteraction: Bool
+    public var layerSymbols: MSSymbolContainer
+    public var assets: MSAssetCollection
+    public var enableSliceInteraction: Bool
+    public var layerTextStyles: MSSharedTextStyleContainer
+    public var pages: [MSPage]
+
+    public required init(object: MarshaledObject) throws {
         self.foreignSymbols = try object.value(for: "foreignSymbols")
         self.layerStyles = try object.value(for: "layerStyles")
         self.objectID = try object.value(for: "objectID")
@@ -183,19 +133,19 @@ class MSDocumentData: NSObject, Unmarshaling {
         self.layerTextStyles = try object.value(for: "layerTextStyles")
         self.pages = try object.value(for: "pages")
     }
-    
+
 }
 
-class MSExportFormat: NSObject, Unmarshaling {
-    
-    var fileFormat: String
-    var name: String
-    var namingScheme: CGFloat
-    var visibleScaleType: CGFloat
-    var scale: CGFloat
-    var absoluteSize: CGFloat
-    
-    required init(object: MarshaledObject) throws {
+public class MSExportFormat: NSObject, Unmarshaling {
+
+    public var fileFormat: String
+    public var name: String
+    public var namingScheme: CGFloat
+    public var visibleScaleType: CGFloat
+    public var scale: CGFloat
+    public var absoluteSize: CGFloat
+
+    public required init(object: MarshaledObject) throws {
         self.fileFormat = try object.value(for: "fileFormat")
         self.name = try object.value(for: "name")
         self.namingScheme = try object.value(for: "namingScheme")
@@ -203,35 +153,35 @@ class MSExportFormat: NSObject, Unmarshaling {
         self.scale = try object.value(for: "scale")
         self.absoluteSize = try object.value(for: "absoluteSize")
     }
-    
+
 }
 
-class MSExportOptions: NSObject, Unmarshaling {
-    
-    var layerOptions: CGFloat
-    var exportFormats: [MSExportFormat]
-    var includedLayerIds: [SketchUnknown]
-    var shouldTrim: Bool
-    
-    required init(object: MarshaledObject) throws {
+public class MSExportOptions: NSObject, Unmarshaling {
+
+    public var layerOptions: CGFloat
+    public var exportFormats: [MSExportFormat]
+    public var includedLayerIds: [SketchUnknown]
+    public var shouldTrim: Bool
+
+    public required init(object: MarshaledObject) throws {
         self.layerOptions = try object.value(for: "layerOptions")
         self.exportFormats = try object.value(for: "exportFormats")
         self.includedLayerIds = try object.value(for: "includedLayerIds")
         self.shouldTrim = try object.value(for: "shouldTrim")
     }
-    
+
 }
 
-class MSGradient: NSObject, Unmarshaling {
-    
-    var gradientType: CGFloat
-    var from: CGPoint
-    var shouldSmoothenOpacity: Bool
-    var stops: [MSGradientStop]
-    var to: CGPoint
-    var elipseLength: CGFloat
-    
-    required init(object: MarshaledObject) throws {
+public class MSGradient: NSObject, Unmarshaling {
+
+    public var gradientType: CGFloat
+    public var from: CGPoint
+    public var shouldSmoothenOpacity: Bool
+    public var stops: [MSGradientStop]
+    public var to: CGPoint
+    public var elipseLength: CGFloat
+
+    public required init(object: MarshaledObject) throws {
         self.gradientType = try object.value(for: "gradientType")
         self.from = try object.value(for: "from")
         self.shouldSmoothenOpacity = try object.value(for: "shouldSmoothenOpacity")
@@ -239,91 +189,87 @@ class MSGradient: NSObject, Unmarshaling {
         self.to = try object.value(for: "to")
         self.elipseLength = try object.value(for: "elipseLength")
     }
-    
+
 }
 
-class MSGradientStop: NSObject, Unmarshaling {
-    
-    var color: MSColor
-    var position: CGFloat
-    
-    required init(object: MarshaledObject) throws {
+public class MSGradientStop: NSObject, Unmarshaling {
+
+    public var color: MSColor
+    public var position: CGFloat
+
+    public required init(object: MarshaledObject) throws {
         self.color = try object.value(for: "color")
         self.position = try object.value(for: "position")
     }
-    
+
 }
 
-class MSGraphicsContextSettings: NSObject, Unmarshaling {
-    
-    var blendMode: CGFloat
-    var opacity: CGFloat
-    
-    required init(object: MarshaledObject) throws {
+public class MSGraphicsContextSettings: NSObject, Unmarshaling {
+
+    public var blendMode: CGFloat
+    public var opacity: CGFloat
+
+    public required init(object: MarshaledObject) throws {
         self.blendMode = try object.value(for: "blendMode")
         self.opacity = try object.value(for: "opacity")
     }
-    
+
 }
 
-class MSImageCollection: NSObject, Unmarshaling {
-    
-    var images: [SketchUnknown]
-    
-    required init(object: MarshaledObject) throws {
+public class MSImageCollection: NSObject, Unmarshaling {
+
+    public var images: [SketchUnknown]
+
+    public required init(object: MarshaledObject) throws {
         self.images = try object.value(for: "images")
     }
-    
+
 }
 
-class MSImageData: NSObject, Unmarshaling {
-    
-    var size: String
-    var sha1: String
-    
-    required init(object: MarshaledObject) throws {
+public class MSImageData: NSObject, Unmarshaling {
+
+    public var size: String
+    public var sha1: String
+
+    public required init(object: MarshaledObject) throws {
         self.size = try object.value(for: "size")
         self.sha1 = try object.value(for: "sha1")
     }
-    
+
 }
 
-class MSLayerGroup: MSShapeLayer {
-    
-    var style: MSStyle
-    var layers: [MSShapeLayer]
-    var hasClickThrough: Bool
-    var userInfo: [String: Any]?
-    var originalObjectID: String?
-    
-    required init(object: MarshaledObject) throws {
+public class MSLayerGroup: MSShapeLayer {
+
+    public var style: MSStyle
+    public var layers: [MSShapeLayer]
+    public var hasClickThrough: Bool
+
+    public required init(object: MarshaledObject) throws {
         self.style = try object.value(for: "style")
         self.layers = try object.value(for: "layers")
         self.hasClickThrough = try object.value(for: "hasClickThrough")
-        self.userInfo = try object.value(for: "userInfo")
-        self.originalObjectID = try object.value(for: "originalObjectID")
-        
+
         try super.init(object: object)
     }
-    
+
 }
 
-class MSLayoutGrid: NSObject, Unmarshaling {
-    
-    var isEnabled: Bool
-    var gutterWidth: CGFloat
-    var horizontalOffset: CGFloat
-    var drawHorizontalLines: CGFloat
-    var drawVertical: CGFloat
-    var drawHorizontal: CGFloat
-    var totalWidth: CGFloat
-    var rowHeightMultiplication: CGFloat
-    var numberOfColumns: CGFloat
-    var gutterHeight: CGFloat
-    var guttersOutside: CGFloat
-    var columnWidth: CGFloat
-    
-    required init(object: MarshaledObject) throws {
+public class MSLayoutGrid: NSObject, Unmarshaling {
+
+    public var isEnabled: Bool
+    public var gutterWidth: CGFloat
+    public var horizontalOffset: CGFloat
+    public var drawHorizontalLines: CGFloat
+    public var drawVertical: CGFloat
+    public var drawHorizontal: CGFloat
+    public var totalWidth: CGFloat
+    public var rowHeightMultiplication: CGFloat
+    public var numberOfColumns: CGFloat
+    public var gutterHeight: CGFloat
+    public var guttersOutside: CGFloat
+    public var columnWidth: CGFloat
+
+    public required init(object: MarshaledObject) throws {
         self.isEnabled = try object.value(for: "isEnabled")
         self.gutterWidth = try object.value(for: "gutterWidth")
         self.horizontalOffset = try object.value(for: "horizontalOffset")
@@ -337,49 +283,49 @@ class MSLayoutGrid: NSObject, Unmarshaling {
         self.guttersOutside = try object.value(for: "guttersOutside")
         self.columnWidth = try object.value(for: "columnWidth")
     }
-    
+
 }
 
-class MSOvalShape: MSShapeLayer {
-    
-    var booleanOperation: CGFloat
-    var edited: CGFloat
-    var path: MSShapePath
-    
-    required init(object: MarshaledObject) throws {
+public class MSOvalShape: MSShapeLayer {
+
+    public var booleanOperation: CGFloat
+    public var edited: CGFloat
+    public var path: MSShapePath
+
+    public required init(object: MarshaledObject) throws {
         self.booleanOperation = try object.value(for: "booleanOperation")
         self.edited = try object.value(for: "edited")
         self.path = try object.value(for: "path")
-        
+
         try super.init(object: object)
     }
-    
+
 }
 
-class MSPage: NSObject, Unmarshaling {
-    
-    var name: String
-    var verticalRulerData: MSRulerData
-    var resizingConstraint: CGFloat
-    var includeInCloudUpload: Bool
-    var objectID: String
-    var isVisible: Bool
-    var nameIsFixed: CGFloat
-    var style: MSStyle
-    var frame: MSRect
-    var layerListExpandedType: CGFloat
-    var rotation: CGFloat
-    var isFlippedVertical: Bool
-    var resizingType: CGFloat
-    var layers: [MSArtboardGroup]
-    var isFlippedHorizontal: Bool
-    var shouldBreakMaskChain: Bool
-    var horizontalRulerData: MSRulerData
-    var exportOptions: MSExportOptions
-    var hasClickThrough: Bool
-    var isLocked: Bool
-    
-    required init(object: MarshaledObject) throws {
+public class MSPage: NSObject, Unmarshaling {
+
+    public var name: String
+    public var verticalRulerData: MSRulerData
+    public var resizingConstraint: CGFloat
+    public var includeInCloudUpload: Bool
+    public var objectID: String
+    public var isVisible: Bool
+    public var nameIsFixed: CGFloat
+    public var style: MSStyle
+    public var frame: MSRect
+    public var layerListExpandedType: CGFloat
+    public var rotation: CGFloat
+    public var isFlippedVertical: Bool
+    public var resizingType: CGFloat
+    public var layers: [MSShapeLayer]
+    public var isFlippedHorizontal: Bool
+    public var shouldBreakMaskChain: Bool
+    public var horizontalRulerData: MSRulerData
+    public var exportOptions: MSExportOptions
+    public var hasClickThrough: Bool
+    public var isLocked: Bool
+
+    public required init(object: MarshaledObject) throws {
         self.name = try object.value(for: "name")
         self.verticalRulerData = try object.value(for: "verticalRulerData")
         self.resizingConstraint = try object.value(for: "resizingConstraint")
@@ -401,120 +347,134 @@ class MSPage: NSObject, Unmarshaling {
         self.hasClickThrough = try object.value(for: "hasClickThrough")
         self.isLocked = try object.value(for: "isLocked")
     }
-    
+
 }
 
-class MSRect: NSObject, Unmarshaling {
-    
-    var height: CGFloat
-    var x: CGFloat
-    var y: CGFloat
-    var constrainProportions: CGFloat
-    var width: CGFloat
-    
-    required init(object: MarshaledObject) throws {
+public class MSPolygonShape: MSShapeLayer {
+
+    public var numberOfPoints: CGFloat
+    public var booleanOperation: CGFloat
+    public var edited: CGFloat
+    public var path: MSShapePath
+
+    public required init(object: MarshaledObject) throws {
+        self.numberOfPoints = try object.value(for: "numberOfPoints")
+        self.booleanOperation = try object.value(for: "booleanOperation")
+        self.edited = try object.value(for: "edited")
+        self.path = try object.value(for: "path")
+
+        try super.init(object: object)
+    }
+
+}
+
+public class MSRect: NSObject, Unmarshaling {
+
+    public var height: CGFloat
+    public var x: CGFloat
+    public var y: CGFloat
+    public var constrainProportions: CGFloat
+    public var width: CGFloat
+
+    public required init(object: MarshaledObject) throws {
         self.height = try object.value(for: "height")
         self.x = try object.value(for: "x")
         self.y = try object.value(for: "y")
         self.constrainProportions = try object.value(for: "constrainProportions")
         self.width = try object.value(for: "width")
     }
-    
+
 }
 
-class MSRectangleShape: MSShapeLayer {
-    
-    var fixedRadius: CGFloat
-    var hasConvertedToNewRoundCorners: Bool
-    var edited: CGFloat
-    var path: MSShapePath
-    var booleanOperation: CGFloat
-    
-    required init(object: MarshaledObject) throws {
+public class MSRectangleShape: MSShapeLayer {
+
+    public var fixedRadius: CGFloat
+    public var hasConvertedToNewRoundCorners: Bool
+    public var edited: CGFloat
+    public var path: MSShapePath
+    public var booleanOperation: CGFloat
+
+    public required init(object: MarshaledObject) throws {
         self.fixedRadius = try object.value(for: "fixedRadius")
         self.hasConvertedToNewRoundCorners = try object.value(for: "hasConvertedToNewRoundCorners")
         self.edited = try object.value(for: "edited")
         self.path = try object.value(for: "path")
         self.booleanOperation = try object.value(for: "booleanOperation")
-        
+
         try super.init(object: object)
     }
-    
+
 }
 
-class MSRulerData: NSObject, Unmarshaling {
-    
-    var guides: [CGFloat]
-    var base: CGFloat
-    
-    required init(object: MarshaledObject) throws {
+public class MSRulerData: NSObject, Unmarshaling {
+
+    public var guides: [SketchUnknown]
+    public var base: CGFloat
+
+    public required init(object: MarshaledObject) throws {
         self.guides = try object.value(for: "guides")
         self.base = try object.value(for: "base")
     }
-    
+
 }
 
-class MSShapeGroup: MSShapeLayer {
-    
-    var clippingMaskMode: CGFloat
-    var style: MSStyle
-    var layers: [MSShapeLayer]
-    var windingRule: CGFloat
-    var hasClippingMask: Bool
-    var hasClickThrough: Bool
-    var userInfo: [String: Any]?
-    var originalObjectID: String?
-    
-    required init(object: MarshaledObject) throws {
+public class MSShapeGroup: MSShapeLayer {
+
+    public var clippingMaskMode: CGFloat
+    public var style: MSStyle
+    public var layers: [MSShapeLayer]
+    public var windingRule: CGFloat
+    public var hasClippingMask: Bool
+    public var hasClickThrough: Bool
+
+    public required init(object: MarshaledObject) throws {
         self.clippingMaskMode = try object.value(for: "clippingMaskMode")
         self.style = try object.value(for: "style")
         self.layers = try object.value(for: "layers")
         self.windingRule = try object.value(for: "windingRule")
         self.hasClippingMask = try object.value(for: "hasClippingMask")
         self.hasClickThrough = try object.value(for: "hasClickThrough")
-        self.userInfo = try object.value(for: "userInfo")
-        self.originalObjectID = try object.value(for: "originalObjectID")
-        
+
         try super.init(object: object)
     }
-    
+
 }
 
-class MSShapeLayer: NSObject, ValueType {
-    
-    var resizingConstraint: CGFloat
-    var nameIsFixed: CGFloat
-    var isVisible: Bool
-    var rotation: CGFloat
-    var isFlippedHorizontal: Bool
-    var name: String
-    var objectID: String
-    var frame: MSRect
-    var layerListExpandedType: CGFloat
-    var isFlippedVertical: Bool
-    var resizingType: CGFloat
-    var shouldBreakMaskChain: Bool
-    var exportOptions: MSExportOptions
-    var isLocked: Bool
-    
-    required init(object: MarshaledObject) throws {
+public class MSShapeLayer: NSObject, ValueType {
+
+    public var resizingConstraint: CGFloat
+    public var nameIsFixed: CGFloat
+    public var isVisible: Bool
+    public var rotation: CGFloat
+    public var isFlippedHorizontal: Bool
+    public var objectID: String
+    public var frame: MSRect
+    public var layerListExpandedType: CGFloat
+    public var resizingType: CGFloat
+    public var shouldBreakMaskChain: Bool
+    public var exportOptions: MSExportOptions
+    public var isLocked: Bool
+    public var name: String
+    public var isFlippedVertical: Bool
+
+    public required init(object: MarshaledObject) throws {
         self.resizingConstraint = try object.value(for: "resizingConstraint")
         self.nameIsFixed = try object.value(for: "nameIsFixed")
         self.isVisible = try object.value(for: "isVisible")
         self.rotation = try object.value(for: "rotation")
         self.isFlippedHorizontal = try object.value(for: "isFlippedHorizontal")
-        self.name = try object.value(for: "name")
         self.objectID = try object.value(for: "objectID")
         self.frame = try object.value(for: "frame")
         self.layerListExpandedType = try object.value(for: "layerListExpandedType")
-        self.isFlippedVertical = try object.value(for: "isFlippedVertical")
         self.resizingType = try object.value(for: "resizingType")
         self.shouldBreakMaskChain = try object.value(for: "shouldBreakMaskChain")
         self.exportOptions = try object.value(for: "exportOptions")
         self.isLocked = try object.value(for: "isLocked")
+        self.name = try object.value(for: "name")
+        self.isFlippedVertical = try object.value(for: "isFlippedVertical")
     }
-    
-    static func value(from object: Any) throws -> Value {
+
+    public static func value(from object: Any) throws -> Value {
         guard let obj = object as? [String: Any] else {
             throw MarshalError.typeMismatch(expected: [String:Any].self, actual: type(of: object))
         }
@@ -526,157 +486,228 @@ class MSShapeLayer: NSObject, ValueType {
             return try MSShapeLayer(object: obj)
         case "MSOvalShape":
             return try MSOvalShape(object: obj)
+        case "MSStarShape":
+            return try MSStarShape(object: obj)
+        case "MSTriangleShape":
+            return try MSTriangleShape(object: obj)
+        case "MSArtboardGroup":
+            return try MSArtboardGroup(object: obj)
+        case "MSSliceLayer":
+            return try MSSliceLayer(object: obj)
         case "MSTextLayer":
             return try MSTextLayer(object: obj)
         case "MSShapePathLayer":
             return try MSShapePathLayer(object: obj)
         case "MSShapeGroup":
             return try MSShapeGroup(object: obj)
-        case "MSBitmapLayer":
-            return try MSBitmapLayer(object: obj)
         case "MSRectangleShape":
             return try MSRectangleShape(object: obj)
+        case "MSBitmapLayer":
+            return try MSBitmapLayer(object: obj)
+        case "MSSymbolMaster":
+            return try MSSymbolMaster(object: obj)
         case "MSLayerGroup":
             return try MSLayerGroup(object: obj)
         case "MSSymbolInstance":
             return try MSSymbolInstance(object: obj)
+        case "MSPolygonShape":
+            return try MSPolygonShape(object: obj)
         default:
             throw MarshalError.keyNotFound(key: classKey)
         }
     }
-    var oval: MSOvalShape? {
+    public var oval: MSOvalShape? {
         return self as? MSOvalShape
     }
-    
-    var text: MSTextLayer? {
+
+    public var star: MSStarShape? {
+        return self as? MSStarShape
+    }
+
+    public var triangle: MSTriangleShape? {
+        return self as? MSTriangleShape
+    }
+
+    public var artboardGroup: MSArtboardGroup? {
+        return self as? MSArtboardGroup
+    }
+
+    public var slice: MSSliceLayer? {
+        return self as? MSSliceLayer
+    }
+
+    public var text: MSTextLayer? {
         return self as? MSTextLayer
     }
-    
-    var shapePath: MSShapePathLayer? {
+
+    public var shapePath: MSShapePathLayer? {
         return self as? MSShapePathLayer
     }
-    
-    var shapeGroup: MSShapeGroup? {
+
+    public var shapeGroup: MSShapeGroup? {
         return self as? MSShapeGroup
     }
-    
-    var bitmap: MSBitmapLayer? {
-        return self as? MSBitmapLayer
-    }
-    
-    var rectangle: MSRectangleShape? {
+
+    public var rectangle: MSRectangleShape? {
         return self as? MSRectangleShape
     }
-    
-    var layerGroup: MSLayerGroup? {
+
+    public var bitmap: MSBitmapLayer? {
+        return self as? MSBitmapLayer
+    }
+
+    public var symbolMaster: MSSymbolMaster? {
+        return self as? MSSymbolMaster
+    }
+
+    public var layerGroup: MSLayerGroup? {
         return self as? MSLayerGroup
     }
-    
-    var symbolInstance: MSSymbolInstance? {
+
+    public var symbolInstance: MSSymbolInstance? {
         return self as? MSSymbolInstance
     }
-    
+
+    public var polygon: MSPolygonShape? {
+        return self as? MSPolygonShape
+    }
+
 }
 
-class MSShapePath: NSObject, Unmarshaling {
-    
-    var pointRadiusBehaviour: CGFloat
-    var isClosed: Bool
-    var points: [MSCurvePoint]
-    
-    required init(object: MarshaledObject) throws {
+public class MSShapePath: NSObject, Unmarshaling {
+
+    public var pointRadiusBehaviour: CGFloat
+    public var isClosed: Bool
+    public var points: [MSCurvePoint]
+
+    public required init(object: MarshaledObject) throws {
         self.pointRadiusBehaviour = try object.value(for: "pointRadiusBehaviour")
         self.isClosed = try object.value(for: "isClosed")
         self.points = try object.value(for: "points")
     }
-    
+
 }
 
-class MSShapePathLayer: MSShapeLayer {
-    
-    var booleanOperation: CGFloat
-    var edited: CGFloat
-    var path: MSShapePath
-    
-    required init(object: MarshaledObject) throws {
+public class MSShapePathLayer: MSShapeLayer {
+
+    public var booleanOperation: CGFloat
+    public var edited: CGFloat
+    public var path: MSShapePath
+
+    public required init(object: MarshaledObject) throws {
         self.booleanOperation = try object.value(for: "booleanOperation")
         self.edited = try object.value(for: "edited")
         self.path = try object.value(for: "path")
-        
+
         try super.init(object: object)
     }
-    
+
 }
 
-class MSSharedStyle: NSObject, Unmarshaling {
-    
-    var value: MSStyle
-    var objectID: String
-    var name: String?
-    
-    required init(object: MarshaledObject) throws {
+public class MSSharedStyle: NSObject, Unmarshaling {
+
+    public var name: String
+    public var value: MSStyle
+    public var objectID: String
+
+    public required init(object: MarshaledObject) throws {
+        self.name = try object.value(for: "name")
         self.value = try object.value(for: "value")
         self.objectID = try object.value(for: "objectID")
-        self.name = try object.value(for: "name")
     }
-    
+
 }
 
-class MSSharedStyleContainer: NSObject, Unmarshaling {
-    
-    var objects: [MSSharedStyle]
-    
-    required init(object: MarshaledObject) throws {
+public class MSSharedStyleContainer: NSObject, Unmarshaling {
+
+    public var objects: [SketchUnknown]
+
+    public required init(object: MarshaledObject) throws {
         self.objects = try object.value(for: "objects")
     }
-    
+
 }
 
-class MSSharedTextStyleContainer: NSObject, Unmarshaling {
-    
-    var objects: [MSSharedStyle]
-    
-    required init(object: MarshaledObject) throws {
+public class MSSharedTextStyleContainer: NSObject, Unmarshaling {
+
+    public var objects: [MSSharedStyle]
+
+    public required init(object: MarshaledObject) throws {
         self.objects = try object.value(for: "objects")
     }
-    
+
 }
 
-class MSSimpleGrid: NSObject, Unmarshaling {
-    
-    var thickGridTimes: CGFloat
-    var gridSize: CGFloat
-    var isEnabled: Bool
-    
-    required init(object: MarshaledObject) throws {
+public class MSSimpleGrid: NSObject, Unmarshaling {
+
+    public var thickGridTimes: CGFloat
+    public var gridSize: CGFloat
+    public var isEnabled: Bool
+
+    public required init(object: MarshaledObject) throws {
         self.thickGridTimes = try object.value(for: "thickGridTimes")
         self.gridSize = try object.value(for: "gridSize")
         self.isEnabled = try object.value(for: "isEnabled")
     }
-    
+
 }
 
-class MSStyle: NSObject, Unmarshaling {
-    
-    var fills: [MSStyleFill]
-    var shadows: [MSStyleShadow]
-    var reflection: MSStyleReflection
-    var miterLimit: CGFloat
-    var startDecorationType: CGFloat
-    var borderOptions: MSStyleBorderOptions
-    var innerShadows: [MSStyleInnerShadow]
-    var contextSettings: MSGraphicsContextSettings
-    var endDecorationType: CGFloat
-    var sharedObjectID: String?
-    var borders: [MSStyleBorder]
-    var colorControls: MSStyleColorControls
-    var blur: MSStyleBlur
-    var textStyle: MSTextStyle?
-    
-    required init(object: MarshaledObject) throws {
-        self.fills = try object.value(for: "fills")
+public class MSSliceLayer: MSShapeLayer {
+
+    public var backgroundColor: MSColor
+    public var hasBackgroundColor: Bool
+
+    public required init(object: MarshaledObject) throws {
+        self.backgroundColor = try object.value(for: "backgroundColor")
+        self.hasBackgroundColor = try object.value(for: "hasBackgroundColor")
+
+        try super.init(object: object)
+    }
+
+}
+
+public class MSStarShape: MSShapeLayer {
+
+    public var numberOfPoints: CGFloat
+    public var booleanOperation: CGFloat
+    public var edited: CGFloat
+    public var path: MSShapePath
+    public var radius: CGFloat
+
+    public required init(object: MarshaledObject) throws {
+        self.numberOfPoints = try object.value(for: "numberOfPoints")
+        self.booleanOperation = try object.value(for: "booleanOperation")
+        self.edited = try object.value(for: "edited")
+        self.path = try object.value(for: "path")
+        self.radius = try object.value(for: "radius")
+
+        try super.init(object: object)
+    }
+
+}
+
+public class MSStyle: NSObject, Unmarshaling {
+
+    public var textStyle: MSTextStyle?
+    public var shadows: [MSStyleShadow]
+    public var reflection: MSStyleReflection
+    public var fills: [MSStyleFill]
+    public var miterLimit: CGFloat
+    public var startDecorationType: CGFloat
+    public var borderOptions: MSStyleBorderOptions
+    public var innerShadows: [MSStyleInnerShadow]
+    public var contextSettings: MSGraphicsContextSettings
+    public var endDecorationType: CGFloat
+    public var sharedObjectID: String?
+    public var borders: [MSStyleBorder]
+    public var colorControls: MSStyleColorControls
+    public var blur: MSStyleBlur
+
+    public required init(object: MarshaledObject) throws {
+        self.textStyle = try object.value(for: "textStyle")
         self.shadows = try object.value(for: "shadows")
         self.reflection = try object.value(for: "reflection")
+        self.fills = try object.value(for: "fills")
         self.miterLimit = try object.value(for: "miterLimit")
         self.startDecorationType = try object.value(for: "startDecorationType")
         self.borderOptions = try object.value(for: "borderOptions")
@@ -687,40 +718,39 @@ class MSStyle: NSObject, Unmarshaling {
         self.borders = try object.value(for: "borders")
         self.colorControls = try object.value(for: "colorControls")
         self.blur = try object.value(for: "blur")
-        self.textStyle = try object.value(for: "textStyle")
     }
-    
+
 }
 
-class MSStyleBlur: NSObject, Unmarshaling {
-    
-    var isEnabled: Bool
-    var center: CGPoint
-    var radius: CGFloat
-    var type: CGFloat
-    var motionAngle: CGFloat
-    
-    required init(object: MarshaledObject) throws {
+public class MSStyleBlur: NSObject, Unmarshaling {
+
+    public var isEnabled: Bool
+    public var center: CGPoint
+    public var radius: CGFloat
+    public var type: CGFloat
+    public var motionAngle: CGFloat
+
+    public required init(object: MarshaledObject) throws {
         self.isEnabled = try object.value(for: "isEnabled")
         self.center = try object.value(for: "center")
         self.radius = try object.value(for: "radius")
         self.type = try object.value(for: "type")
         self.motionAngle = try object.value(for: "motionAngle")
     }
-    
+
 }
 
-class MSStyleBorder: NSObject, Unmarshaling {
-    
-    var position: CGFloat
-    var isEnabled: Bool
-    var gradient: MSGradient
-    var fillType: CGFloat
-    var thickness: CGFloat
-    var contextSettings: MSGraphicsContextSettings
-    var color: MSColor
-    
-    required init(object: MarshaledObject) throws {
+public class MSStyleBorder: NSObject, Unmarshaling {
+
+    public var position: CGFloat
+    public var isEnabled: Bool
+    public var gradient: MSGradient
+    public var fillType: CGFloat
+    public var thickness: CGFloat
+    public var contextSettings: MSGraphicsContextSettings
+    public var color: MSColor
+
+    public required init(object: MarshaledObject) throws {
         self.position = try object.value(for: "position")
         self.isEnabled = try object.value(for: "isEnabled")
         self.gradient = try object.value(for: "gradient")
@@ -729,80 +759,82 @@ class MSStyleBorder: NSObject, Unmarshaling {
         self.contextSettings = try object.value(for: "contextSettings")
         self.color = try object.value(for: "color")
     }
-    
+
 }
 
-class MSStyleBorderOptions: NSObject, Unmarshaling {
-    
-    var lineCapStyle: CGFloat
-    var dashPattern: [CGFloat]
-    var lineJoinStyle: CGFloat
-    var isEnabled: Bool
-    
-    required init(object: MarshaledObject) throws {
+public class MSStyleBorderOptions: NSObject, Unmarshaling {
+
+    public var lineCapStyle: CGFloat
+    public var dashPattern: [CGFloat]
+    public var lineJoinStyle: CGFloat
+    public var isEnabled: Bool
+
+    public required init(object: MarshaledObject) throws {
         self.lineCapStyle = try object.value(for: "lineCapStyle")
         self.dashPattern = try object.value(for: "dashPattern")
         self.lineJoinStyle = try object.value(for: "lineJoinStyle")
         self.isEnabled = try object.value(for: "isEnabled")
     }
-    
+
 }
 
-class MSStyleColorControls: NSObject, Unmarshaling {
-    
-    var contrast: CGFloat
-    var saturation: CGFloat
-    var hue: CGFloat
-    var brightness: CGFloat
-    var isEnabled: Bool
-    
-    required init(object: MarshaledObject) throws {
+public class MSStyleColorControls: NSObject, Unmarshaling {
+
+    public var contrast: CGFloat
+    public var saturation: CGFloat
+    public var hue: CGFloat
+    public var brightness: CGFloat
+    public var isEnabled: Bool
+
+    public required init(object: MarshaledObject) throws {
         self.contrast = try object.value(for: "contrast")
         self.saturation = try object.value(for: "saturation")
         self.hue = try object.value(for: "hue")
         self.brightness = try object.value(for: "brightness")
         self.isEnabled = try object.value(for: "isEnabled")
     }
-    
+
 }
 
-class MSStyleFill: NSObject, Unmarshaling {
-    
-    var color: MSColor
-    var gradient: MSGradient
-    var fillType: CGFloat
-    var noiseIntensity: CGFloat
-    var patternFillType: CGFloat
-    var noiseIndex: CGFloat
-    var patternTileScale: CGFloat
-    var contextSettings: MSGraphicsContextSettings
-    var isEnabled: Bool
-    
-    required init(object: MarshaledObject) throws {
-        self.color = try object.value(for: "color")
+public class MSStyleFill: NSObject, Unmarshaling {
+
+    public var isEnabled: Bool
+    public var gradient: MSGradient
+    public var image: MSImageData?
+    public var fillType: CGFloat
+    public var noiseIntensity: CGFloat
+    public var noiseIndex: CGFloat
+    public var patternFillType: CGFloat
+    public var patternTileScale: CGFloat
+    public var contextSettings: MSGraphicsContextSettings
+    public var color: MSColor
+
+    public required init(object: MarshaledObject) throws {
+        self.isEnabled = try object.value(for: "isEnabled")
         self.gradient = try object.value(for: "gradient")
+        self.image = try object.value(for: "image")
         self.fillType = try object.value(for: "fillType")
         self.noiseIntensity = try object.value(for: "noiseIntensity")
-        self.patternFillType = try object.value(for: "patternFillType")
         self.noiseIndex = try object.value(for: "noiseIndex")
+        self.patternFillType = try object.value(for: "patternFillType")
         self.patternTileScale = try object.value(for: "patternTileScale")
         self.contextSettings = try object.value(for: "contextSettings")
-        self.isEnabled = try object.value(for: "isEnabled")
+        self.color = try object.value(for: "color")
     }
-    
+
 }
 
-class MSStyleInnerShadow: NSObject, Unmarshaling {
-    
-    var isEnabled: Bool
-    var offsetY: CGFloat
-    var blurRadius: CGFloat
-    var offsetX: CGFloat
-    var spread: CGFloat
-    var contextSettings: MSGraphicsContextSettings
-    var color: MSColor
-    
-    required init(object: MarshaledObject) throws {
+public class MSStyleInnerShadow: NSObject, Unmarshaling {
+
+    public var isEnabled: Bool
+    public var offsetY: CGFloat
+    public var blurRadius: CGFloat
+    public var offsetX: CGFloat
+    public var spread: CGFloat
+    public var contextSettings: MSGraphicsContextSettings
+    public var color: MSColor
+
+    public required init(object: MarshaledObject) throws {
         self.isEnabled = try object.value(for: "isEnabled")
         self.offsetY = try object.value(for: "offsetY")
         self.blurRadius = try object.value(for: "blurRadius")
@@ -811,34 +843,34 @@ class MSStyleInnerShadow: NSObject, Unmarshaling {
         self.contextSettings = try object.value(for: "contextSettings")
         self.color = try object.value(for: "color")
     }
-    
+
 }
 
-class MSStyleReflection: NSObject, Unmarshaling {
-    
-    var distance: CGFloat
-    var strength: CGFloat
-    var isEnabled: Bool
-    
-    required init(object: MarshaledObject) throws {
+public class MSStyleReflection: NSObject, Unmarshaling {
+
+    public var distance: CGFloat
+    public var strength: CGFloat
+    public var isEnabled: Bool
+
+    public required init(object: MarshaledObject) throws {
         self.distance = try object.value(for: "distance")
         self.strength = try object.value(for: "strength")
         self.isEnabled = try object.value(for: "isEnabled")
     }
-    
+
 }
 
-class MSStyleShadow: NSObject, Unmarshaling {
-    
-    var isEnabled: Bool
-    var offsetY: CGFloat
-    var blurRadius: CGFloat
-    var offsetX: CGFloat
-    var spread: CGFloat
-    var contextSettings: MSGraphicsContextSettings
-    var color: MSColor
-    
-    required init(object: MarshaledObject) throws {
+public class MSStyleShadow: NSObject, Unmarshaling {
+
+    public var isEnabled: Bool
+    public var offsetY: CGFloat
+    public var blurRadius: CGFloat
+    public var offsetX: CGFloat
+    public var spread: CGFloat
+    public var contextSettings: MSGraphicsContextSettings
+    public var color: MSColor
+
+    public required init(object: MarshaledObject) throws {
         self.isEnabled = try object.value(for: "isEnabled")
         self.offsetY = try object.value(for: "offsetY")
         self.blurRadius = try object.value(for: "blurRadius")
@@ -847,33 +879,31 @@ class MSStyleShadow: NSObject, Unmarshaling {
         self.contextSettings = try object.value(for: "contextSettings")
         self.color = try object.value(for: "color")
     }
-    
+
 }
 
-class MSSymbolContainer: NSObject, Unmarshaling {
-    
-    var objects: [SketchUnknown]
-    
-    required init(object: MarshaledObject) throws {
+public class MSSymbolContainer: NSObject, Unmarshaling {
+
+    public var objects: [SketchUnknown]
+
+    public required init(object: MarshaledObject) throws {
         self.objects = try object.value(for: "objects")
     }
-    
+
 }
 
-class MSSymbolInstance: MSShapeLayer {
-    
-    var symbolID: String
-    var masterInfluenceEdgeMinXPadding: CGFloat
-    var masterInfluenceEdgeMinYPadding: CGFloat
-    var verticalSpacing: CGFloat
-    var style: MSStyle
-    var horizontalSpacing: CGFloat
-    var masterInfluenceEdgeMaxXPadding: CGFloat
-    var masterInfluenceEdgeMaxYPadding: CGFloat
-    var overrides: [String: Any]?
-    var userInfo: [String: Any]?
-    
-    required init(object: MarshaledObject) throws {
+public class MSSymbolInstance: MSShapeLayer {
+
+    public var symbolID: String
+    public var masterInfluenceEdgeMinXPadding: CGFloat
+    public var masterInfluenceEdgeMinYPadding: CGFloat
+    public var verticalSpacing: CGFloat
+    public var style: MSStyle
+    public var horizontalSpacing: CGFloat
+    public var masterInfluenceEdgeMaxXPadding: CGFloat
+    public var masterInfluenceEdgeMaxYPadding: CGFloat
+
+    public required init(object: MarshaledObject) throws {
         self.symbolID = try object.value(for: "symbolID")
         self.masterInfluenceEdgeMinXPadding = try object.value(for: "masterInfluenceEdgeMinXPadding")
         self.masterInfluenceEdgeMinYPadding = try object.value(for: "masterInfluenceEdgeMinYPadding")
@@ -882,44 +912,58 @@ class MSSymbolInstance: MSShapeLayer {
         self.horizontalSpacing = try object.value(for: "horizontalSpacing")
         self.masterInfluenceEdgeMaxXPadding = try object.value(for: "masterInfluenceEdgeMaxXPadding")
         self.masterInfluenceEdgeMaxYPadding = try object.value(for: "masterInfluenceEdgeMaxYPadding")
-        self.overrides = try object.value(for: "overrides")
-        self.userInfo = try object.value(for: "userInfo")
-        
+
         try super.init(object: object)
     }
-    
+
 }
 
-class MSSymbolMaster: MSArtboardGroup {
-    
-    var symbolID: String
-    var includeBackgroundColorInInstance: Bool
-    var originalObjectID: String?
-    
-    required init(object: MarshaledObject) throws {
+public class MSSymbolMaster: MSShapeLayer {
+
+    public var resizesContent: CGFloat
+    public var includeInCloudUpload: Bool
+    public var backgroundColor: MSColor
+    public var style: MSStyle
+    public var layers: [MSShapeLayer]
+    public var horizontalRulerData: MSRulerData
+    public var hasBackgroundColor: Bool
+    public var includeBackgroundColorInExport: Bool
+    public var symbolID: String
+    public var verticalRulerData: MSRulerData
+    public var includeBackgroundColorInInstance: Bool
+    public var hasClickThrough: Bool
+
+    public required init(object: MarshaledObject) throws {
+        self.resizesContent = try object.value(for: "resizesContent")
+        self.includeInCloudUpload = try object.value(for: "includeInCloudUpload")
+        self.backgroundColor = try object.value(for: "backgroundColor")
+        self.style = try object.value(for: "style")
+        self.layers = try object.value(for: "layers")
+        self.horizontalRulerData = try object.value(for: "horizontalRulerData")
+        self.hasBackgroundColor = try object.value(for: "hasBackgroundColor")
+        self.includeBackgroundColorInExport = try object.value(for: "includeBackgroundColorInExport")
         self.symbolID = try object.value(for: "symbolID")
+        self.verticalRulerData = try object.value(for: "verticalRulerData")
         self.includeBackgroundColorInInstance = try object.value(for: "includeBackgroundColorInInstance")
-        self.originalObjectID = try object.value(for: "originalObjectID")
-        
+        self.hasClickThrough = try object.value(for: "hasClickThrough")
+
         try super.init(object: object)
     }
-    
+
 }
 
-class MSTextLayer: MSShapeLayer {
-    
-    var style: MSStyle
-    var dontSynchroniseWithSymbol: CGFloat
-    var glyphBounds: CGPoint
-    var attributedString: NSAttributedString
-    var automaticallyDrawOnUnderlyingPath: CGFloat
-    var lineSpacingBehaviour: CGFloat
-    var textBehaviour: CGFloat
-    var heightIsClipped: CGFloat
-    var userInfo: [String: Any]?
-    var originalObjectID: String?
-    
-    required init(object: MarshaledObject) throws {
+public class MSTextLayer: MSShapeLayer {
+
+    public var style: MSStyle
+    public var dontSynchroniseWithSymbol: CGFloat
+    public var glyphBounds: CGPoint
+    public var attributedString: NSAttributedString
+    public var automaticallyDrawOnUnderlyingPath: CGFloat
+    public var lineSpacingBehaviour: CGFloat
+    public var textBehaviour: CGFloat
+    public var heightIsClipped: CGFloat
+
+    public required init(object: MarshaledObject) throws {
         self.style = try object.value(for: "style")
         self.dontSynchroniseWithSymbol = try object.value(for: "dontSynchroniseWithSymbol")
         self.glyphBounds = try object.value(for: "glyphBounds")
@@ -928,37 +972,52 @@ class MSTextLayer: MSShapeLayer {
         self.lineSpacingBehaviour = try object.value(for: "lineSpacingBehaviour")
         self.textBehaviour = try object.value(for: "textBehaviour")
         self.heightIsClipped = try object.value(for: "heightIsClipped")
-        self.userInfo = try object.value(for: "userInfo")
-        self.originalObjectID = try object.value(for: "originalObjectID")
+
+        try super.init(object: object)
+    }
+
+}
+
+public class MSTextStyle: NSObject, Unmarshaling {
+
+    public var color: NSColor?
+    public var font: NSFont?
+    public var paragraphStyle: NSParagraphStyle?
+    public var NSLigature: CGFloat?
+    public var MSAttributedStringTextTransformAttribute: CGFloat?
+    public var NSStrikethrough: CGFloat?
+    public var NSUnderline: CGFloat?
+    public var NSKern: CGFloat?
+    public var NSSuperScript: CGFloat?
+
+    public required init(object: MarshaledObject) throws {
+        self.color = try object.value(for: "NSColor")
+        self.font = try object.value(for: "NSFont")
+        self.paragraphStyle = try object.value(for: "NSParagraphStyle")
+        self.NSLigature = try object.value(for: "NSLigature")
+        self.MSAttributedStringTextTransformAttribute = try object.value(for: "MSAttributedStringTextTransformAttribute")
+        self.NSStrikethrough = try object.value(for: "NSStrikethrough")
+        self.NSUnderline = try object.value(for: "NSUnderline")
+        self.NSKern = try object.value(for: "NSKern")
+        self.NSSuperScript = try object.value(for: "NSSuperScript")
+    }
+    
+}
+
+public class MSTriangleShape: MSShapeLayer {
+    
+    public var booleanOperation: CGFloat
+    public var edited: CGFloat
+    public var path: MSShapePath
+    public var isEquilateral: Bool
+    
+    public required init(object: MarshaledObject) throws {
+        self.booleanOperation = try object.value(for: "booleanOperation")
+        self.edited = try object.value(for: "edited")
+        self.path = try object.value(for: "path")
+        self.isEquilateral = try object.value(for: "isEquilateral")
         
         try super.init(object: object)
     }
     
 }
-
-class MSTextStyle: NSObject, Unmarshaling {
-    
-    var NSLigature: CGFloat?
-    var font: NSFont?
-    var paragraphStyle: NSParagraphStyle?
-    var color: NSColor?
-    var NSKern: CGFloat?
-    var NSStrikethrough: CGFloat?
-    var NSUnderline: CGFloat?
-    var MSAttributedStringTextTransformAttribute: CGFloat?
-    
-    required init(object: MarshaledObject) throws {
-        self.NSLigature = try object.value(for: "NSLigature")
-        self.font = try object.value(for: "NSFont")
-        self.paragraphStyle = try object.value(for: "NSParagraphStyle")
-        self.color = try object.value(for: "NSColor")
-        self.NSKern = try object.value(for: "NSKern")
-        self.NSStrikethrough = try object.value(for: "NSStrikethrough")
-        self.NSUnderline = try object.value(for: "NSUnderline")
-        self.MSAttributedStringTextTransformAttribute = try object.value(for: "MSAttributedStringTextTransformAttribute")
-    }
-    
-}
-
-
-
