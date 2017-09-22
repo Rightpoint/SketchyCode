@@ -206,3 +206,4 @@ extension NSAttributedString: ValueType {
         }
     }
 }
+

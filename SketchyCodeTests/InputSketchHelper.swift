@@ -34,19 +34,24 @@ class InputSketchHelper {
         self.document = document
     }
 
-    func page(withName name: String) -> MSPage? {
-        return document.pages.first(where: { $0.name == name })
+    convenience init() throws {
+        do {
+            self.init(document: try MSDocumentData(object: InputSketchHelper.JSON))
+        } catch {
+            print(error)
+            throw error
+        }
     }
 
-    var shape: MSPage? { return page(withName: "Shape") }
-    var layout: MSPage? { return page(withName: "Layout") }
-    var fill: MSPage? { return page(withName: "Fill") }
-    var border: MSPage? { return page(withName: "Border") }
-    var shadow: MSPage? { return page(withName: "Shadow") }
-    var combine: MSPage? { return page(withName: "Combine") }
-    var transform: MSPage? { return page(withName: "Transform") }
-    var text: MSPage? { return page(withName: "Text") }
-    var images: MSPage? { return page(withName: "Images") }
-    var artboard: MSPage? { return page(withName: "Artboard") }
-    var symbols: MSPage? { return page(withName: "Symbols") }
+    var shape: MSPage? { return document.page(withName: "Shape") }
+    var layout: MSPage? { return document.page(withName: "Layout") }
+    var fill: MSPage? { return document.page(withName: "Fill") }
+    var border: MSPage? { return document.page(withName: "Border") }
+    var shadow: MSPage? { return document.page(withName: "Shadow") }
+    var combine: MSPage? { return document.page(withName: "Combine") }
+    var transform: MSPage? { return document.page(withName: "Transform") }
+    var text: MSPage? { return document.page(withName: "Text") }
+    var images: MSPage? { return document.page(withName: "Images") }
+    var artboard: MSPage? { return document.page(withName: "Artboard") }
+    var symbols: MSPage? { return document.page(withName: "Symbols") }
 }
