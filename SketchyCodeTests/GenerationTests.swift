@@ -9,43 +9,31 @@
 import XCTest
 @testable import SketchyCode
 
-
-protocol Declaration {
-    var provides: Object { get }
-}
-
 class GenerationTests: XCTestCase {
     func testCommand() throws {
-        let heading = Object(ofType: "UILabel")
-        let label = Object(ofType: "UILabel")
-        let color = Object(ofType: "UIColor")
 
-//        let global = GlobalDeclarationContext()
-//        let view = global.makeObject(ofType: "UIView")
-//        let cls = global.makeClass(representing: view)
-//
-//        let label = cls.makeObject(ofType: "UILabel")
-//        let heading = cls.makeObject(ofType: "UILabel")
-//        cls.addExpressions([
-//            CommandGenerator(provides: view, .string("UIView()")),
-//            CommandGenerator(.object(view), .string("backgroundColor = "), .object(color))
-//        ])
+        let global = GlobalDeclarationContext()
 
-//        let property = VariableDeclaration(
-//            object: view,
-//            generators: [
-//                CommandGenerator(provides: view, .string("UIView()")),
-//                CommandGenerator(.object(view), .string("backgroundColor = "), .object(color))
-//            ])
-//        global.addChild(property)
-//        global.addReference(DeclarationReference(value: "view", object: view))
-//
-//        let writer = Writer()
-//        try global.generate(writer: writer)
-//        print(writer.content)
+        // Types should be un-named until generation.
+        let customView = global.makeClass(ofType: "MyView", inheriting: "UIView")
 
-//        graph.addContext(.view) { selfVariable in
-//            selfVariable.format("\(selfVariable).backgroundColor = \(colorVariable)"
+        let label = customView.makeVariable(ofType: "UILabel")
+        let heading = customView.makeVariable(ofType: "UILabel")
+
+        customView.add(contentsOf: [
+            AssignmentExpression(to: label.value, .string("UILabel()")),
+            AssignmentExpression(to: heading.value, .string("UILabel()")),
+            SimpleExpression(.object(label.value), .string("text = \"label\"")),
+            SimpleExpression(.object(heading.value), .string("text = \"heading\"")),
+            SimpleExpression(.object(customView.representingSelf), .string("addSubview"), .p(heading.value)),
+            SimpleExpression(.object(customView.representingSelf), .string("addSubview"), .p(label.value))
+        ])
+
+        // TODO: Implement Layout Strategy passes that make the above compile.
+
+        let writer = Writer()
+        try global.generate(writer: writer)
+        print(writer.content)
     }
 }
 

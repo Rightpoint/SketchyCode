@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		34FD4DA99FF99A17CCBF1F72 /* Pods_SketchyCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F57022D6CC792DD283CE341 /* Pods_SketchyCode.framework */; };
+		86066DA81F85B16E00130A65 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86066DA71F85B16E00130A65 /* Expression.swift */; };
 		8629C3251F73363D000877D2 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C3241F73363D000877D2 /* Debug.swift */; };
 		8629C3271F73370D000877D2 /* Enableable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C3261F73370D000877D2 /* Enableable.swift */; };
 		8629C3291F7339ED000877D2 /* Styled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C3281F7339ED000877D2 /* Styled.swift */; };
@@ -31,6 +32,8 @@
 		862EBEEC1F72AF090086E52C /* SketchClasses+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862EBEEA1F72AF090086E52C /* SketchClasses+Generated.swift */; };
 		862EBEEE1F72AF410086E52C /* LayerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862EBEED1F72AF410086E52C /* LayerContainer.swift */; };
 		862EBEF01F72AFBF0086E52C /* PathContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862EBEEF1F72AFBF0086E52C /* PathContainer.swift */; };
+		8631B3ED1F8709540029BF90 /* Declaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8631B3EC1F8709540029BF90 /* Declaration.swift */; };
+		8631B3EF1F8713C40029BF90 /* NamingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8631B3EE1F8713C40029BF90 /* NamingStrategy.swift */; };
 		86D9E8BC1F843C0D008A6D70 /* GenerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9E8BB1F843C0D008A6D70 /* GenerationTests.swift */; };
 		86D9E8BF1F848BC1008A6D70 /* ObjectGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9E8BE1F848BC1008A6D70 /* ObjectGraph.swift */; };
 		86D9E8C11F848BD8008A6D70 /* Writer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9E8C01F848BD8008A6D70 /* Writer.swift */; };
@@ -79,6 +82,7 @@
 		4FCCB180C3D8921AD451F66E /* Pods_SketchyCodeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SketchyCodeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E44735FCFC8D2ED51E6DCA1 /* Pods_SketchGen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SketchGen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C44A7CBA3D8FCF53ABA6740 /* Pods-SketchyCodeCLI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SketchyCodeCLI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SketchyCodeCLI/Pods-SketchyCodeCLI.debug.xcconfig"; sourceTree = "<group>"; };
+		86066DA71F85B16E00130A65 /* Expression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
 		8629C3241F73363D000877D2 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		8629C3261F73370D000877D2 /* Enableable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enableable.swift; sourceTree = "<group>"; };
 		8629C3281F7339ED000877D2 /* Styled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styled.swift; sourceTree = "<group>"; };
@@ -105,6 +109,8 @@
 		862EBEEA1F72AF090086E52C /* SketchClasses+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SketchClasses+Generated.swift"; sourceTree = "<group>"; };
 		862EBEED1F72AF410086E52C /* LayerContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerContainer.swift; sourceTree = "<group>"; };
 		862EBEEF1F72AFBF0086E52C /* PathContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathContainer.swift; sourceTree = "<group>"; };
+		8631B3EC1F8709540029BF90 /* Declaration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Declaration.swift; sourceTree = "<group>"; };
+		8631B3EE1F8713C40029BF90 /* NamingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamingStrategy.swift; sourceTree = "<group>"; };
 		863E3E7F1ECFB1A7008AF9E5 /* SketchyCodeCLI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SketchyCodeCLI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86D9E8BB1F843C0D008A6D70 /* GenerationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenerationTests.swift; sourceTree = "<group>"; };
 		86D9E8BE1F848BC1008A6D70 /* ObjectGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectGraph.swift; sourceTree = "<group>"; };
@@ -277,9 +283,12 @@
 			isa = PBXGroup;
 			children = (
 				86D9E8BE1F848BC1008A6D70 /* ObjectGraph.swift */,
+				8631B3EC1F8709540029BF90 /* Declaration.swift */,
 				86D9E8C21F848C06008A6D70 /* DeclarationContext.swift */,
 				86D9E8C41F848C38008A6D70 /* Generators.swift */,
+				86066DA71F85B16E00130A65 /* Expression.swift */,
 				86D9E8C01F848BD8008A6D70 /* Writer.swift */,
+				8631B3EE1F8713C40029BF90 /* NamingStrategy.swift */,
 			);
 			path = Generation;
 			sourceTree = "<group>";
@@ -567,11 +576,14 @@
 				862EBEEB1F72AF090086E52C /* SketchClasses+Helpers.swift in Sources */,
 				86D9E8C51F848C38008A6D70 /* Generators.swift in Sources */,
 				86D9E8BF1F848BC1008A6D70 /* ObjectGraph.swift in Sources */,
+				8631B3ED1F8709540029BF90 /* Declaration.swift in Sources */,
 				862EBEEC1F72AF090086E52C /* SketchClasses+Generated.swift in Sources */,
 				86D9E8C11F848BD8008A6D70 /* Writer.swift in Sources */,
 				8629C3291F7339ED000877D2 /* Styled.swift in Sources */,
 				8629C3271F73370D000877D2 /* Enableable.swift in Sources */,
 				862EBEEE1F72AF410086E52C /* LayerContainer.swift in Sources */,
+				8631B3EF1F8713C40029BF90 /* NamingStrategy.swift in Sources */,
+				86066DA81F85B16E00130A65 /* Expression.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

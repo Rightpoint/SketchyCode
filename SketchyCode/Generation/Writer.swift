@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 class Writer {
     var content: String = ""
     var level: Int = 0
@@ -19,15 +20,27 @@ class Writer {
         level -= 1
     }
 
+    func block(appending: String = "", work: () throws -> Void) throws {
+        append(line: "{")
+        try indent(work: work)
+        append(line: "}\(appending)")
+    }
+
+    var addIndentation: Bool {
+        return content.count == 0 || content.last == "\n"
+    }
+
     func append(line: String, addNewline: Bool = true) {
-        var indented = ""
-        for _ in 0..<level {
-            indented.append(indentation)
+        var value = ""
+        if addIndentation {
+            for _ in 0..<level {
+                value.append(indentation)
+            }
         }
-        indented.append(line)
+        value.append(line)
         if addNewline {
-            indented.append("\n")
+            value.append("\n")
         }
-        content.append(indented)
+        content.append(value)
     }
 }
