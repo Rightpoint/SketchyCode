@@ -9,37 +9,43 @@
 import Foundation
 
 // Calling this an expression is a bit of an exaggeration. This takes place of
-// statements and expressions, and performs minimal modeling of the expression.
-// Everything that can be is modeled by a string, except objects that are managed
-// by the generation process are modeled here.
+// statements and expressions, and performs minimal modeling by design. The goal
+// is to provide a loose modeling that defers variable naming and allows the
+// generators to probe dependencies and move expressions for organizational
+// purposes.
 
 protocol Expression {
-    var dependent: [Object] { get }
+    var dependent: [VariableRef] { get }
 }
 
+// SyntaxPart is a simple DSL to build expressions.
 enum SyntaxPart {
-    case string(String)
-    case object(Object)
-    case p(Object)
+    case s(String)
+    case o(VariableRef)
+    // wrap an object in `()`
+    case p(VariableRef)
 }
 
+// PartExpression protocol is a utility protocol
 protocol PartExpression: Expression, Generator {
     var parts: [SyntaxPart] { get }
 }
 
 extension PartExpression {
-
-    var dependent: [Object] {
+    var dependent: [VariableRef] {
         return parts.flatMap {
-            if case .object(let object) = $0 {
-                return object
+            if case .o(let variable) = $0 {
+                return variable
             }
             return nil
         }
     }
 }
 
-extension DeclarationContext {
+// This is really the default function for a `PartExpression`s `Generate`
+// conformance, but broken out since one does not simply invoke default
+// implementations.
+extension Scope {
     func generate(parts: [SyntaxPart], writer: Writer) throws {
         let line = try parts
             .enumerated()
@@ -52,15 +58,14 @@ extension DeclarationContext {
 }
 
 extension SyntaxPart {
-
-    func generate(in context: DeclarationContext, isFirstToken: Bool) throws -> String {
+    func generate(in context: Scope, isFirstToken: Bool) throws -> String {
         switch self {
-        case .object(let object):
-            return try object.generate(in: context, isFirstToken: isFirstToken)
-        case .string(let string):
+        case .o(let object):
+            return try context.name(for: object, isLeadingVariable: isFirstToken)
+        case .s(let string):
             return string
         case .p(let object):
-            let obj = try SyntaxPart.object(object).generate(in: context, isFirstToken: false)
+            let obj = try SyntaxPart.o(object).generate(in: context, isFirstToken: false)
             return "(\(obj))"
         }
     }
@@ -72,21 +77,21 @@ struct SimpleExpression: PartExpression {
         self.parts = parts
     }
 
-    func generate(in context: DeclarationContext, writer: Writer) throws {
+    func generate(in context: Scope, writer: Writer) throws {
         try context.generate(parts: parts, writer: writer)
     }
 }
 
 struct AssignmentExpression: PartExpression {
-    let to: Object
+    let to: VariableRef
     let parts: [SyntaxPart]
-    init(to: Object, _ parts: SyntaxPart...) {
+    init(to: VariableRef, _ parts: SyntaxPart...) {
         self.to = to
         self.parts = parts
     }
 
-    func generate(in context: DeclarationContext, writer: Writer) throws {
-        let toName = try to.generate(in: context, isFirstToken: false)
+    func generate(in context: Scope, writer: Writer) throws {
+        let toName = try context.name(for: to, isLeadingVariable: false)
         writer.append(line: "\(toName) = ", addNewline: false)
         try context.generate(parts: parts, writer: writer)
     }

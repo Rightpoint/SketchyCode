@@ -9,5 +9,5 @@
 import Foundation
 
 protocol Generator {
-    func generate(in context: DeclarationContext, writer: Writer) throws
+    func generate(in context: Scope, writer: Writer) throws
 }

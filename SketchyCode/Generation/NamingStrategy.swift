@@ -8,12 +8,15 @@
 
 import Foundation
 
-let namingStrategy: NamingStrategy = CounterNamingStrategy()
-
+// A naming strategy is resposible for creating names for declarations.
 protocol NamingStrategy {
-    func name(for declaration: Declaration) -> String
+    func name(for variable: VariableRef) -> String
 }
 
+// It's not clear where this wants to live, so it's global and dangerous for now.
+var namingStrategy: NamingStrategy!
+
+// A bad naming strategy.
 class CounterNamingStrategy: NamingStrategy {
     var counter: Int = 0
     var names: [UUID: String] = [:]
@@ -28,12 +31,7 @@ class CounterNamingStrategy: NamingStrategy {
         return name
     }
 
-    func name(for declaration: Declaration) -> String {
-        switch declaration {
-        case .variable(let object):
-            return name(for: object.uuid, type: object.type.simpleName)
-        case .type(let objectType):
-            return objectType.name
-        }
+    func name(for variable: VariableRef) -> String {
+        return name(for: variable.uuid, type: variable.type.simpleName)
     }
 }

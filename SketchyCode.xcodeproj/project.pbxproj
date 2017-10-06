@@ -32,12 +32,12 @@
 		862EBEEC1F72AF090086E52C /* SketchClasses+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862EBEEA1F72AF090086E52C /* SketchClasses+Generated.swift */; };
 		862EBEEE1F72AF410086E52C /* LayerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862EBEED1F72AF410086E52C /* LayerContainer.swift */; };
 		862EBEF01F72AFBF0086E52C /* PathContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862EBEEF1F72AFBF0086E52C /* PathContainer.swift */; };
-		8631B3ED1F8709540029BF90 /* Declaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8631B3EC1F8709540029BF90 /* Declaration.swift */; };
 		8631B3EF1F8713C40029BF90 /* NamingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8631B3EE1F8713C40029BF90 /* NamingStrategy.swift */; };
+		8631B3F11F87B6B10029BF90 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8631B3F01F87B6B10029BF90 /* Utils.swift */; };
 		86D9E8BC1F843C0D008A6D70 /* GenerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9E8BB1F843C0D008A6D70 /* GenerationTests.swift */; };
 		86D9E8BF1F848BC1008A6D70 /* ObjectGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9E8BE1F848BC1008A6D70 /* ObjectGraph.swift */; };
 		86D9E8C11F848BD8008A6D70 /* Writer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9E8C01F848BD8008A6D70 /* Writer.swift */; };
-		86D9E8C31F848C06008A6D70 /* DeclarationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9E8C21F848C06008A6D70 /* DeclarationContext.swift */; };
+		86D9E8C31F848C06008A6D70 /* Scope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9E8C21F848C06008A6D70 /* Scope.swift */; };
 		86D9E8C51F848C38008A6D70 /* Generators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9E8C41F848C38008A6D70 /* Generators.swift */; };
 		940BA686A771AB2D6A2ACD48 /* Pods_SketchyCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F57022D6CC792DD283CE341 /* Pods_SketchyCode.framework */; };
 		BAC2ACE3E6264A59451F26D5 /* Pods_SketchyCodeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FCCB180C3D8921AD451F66E /* Pods_SketchyCodeTests.framework */; };
@@ -109,13 +109,13 @@
 		862EBEEA1F72AF090086E52C /* SketchClasses+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SketchClasses+Generated.swift"; sourceTree = "<group>"; };
 		862EBEED1F72AF410086E52C /* LayerContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerContainer.swift; sourceTree = "<group>"; };
 		862EBEEF1F72AFBF0086E52C /* PathContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathContainer.swift; sourceTree = "<group>"; };
-		8631B3EC1F8709540029BF90 /* Declaration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Declaration.swift; sourceTree = "<group>"; };
 		8631B3EE1F8713C40029BF90 /* NamingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamingStrategy.swift; sourceTree = "<group>"; };
+		8631B3F01F87B6B10029BF90 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		863E3E7F1ECFB1A7008AF9E5 /* SketchyCodeCLI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SketchyCodeCLI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86D9E8BB1F843C0D008A6D70 /* GenerationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenerationTests.swift; sourceTree = "<group>"; };
 		86D9E8BE1F848BC1008A6D70 /* ObjectGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectGraph.swift; sourceTree = "<group>"; };
 		86D9E8C01F848BD8008A6D70 /* Writer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Writer.swift; sourceTree = "<group>"; };
-		86D9E8C21F848C06008A6D70 /* DeclarationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeclarationContext.swift; sourceTree = "<group>"; };
+		86D9E8C21F848C06008A6D70 /* Scope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scope.swift; sourceTree = "<group>"; };
 		86D9E8C41F848C38008A6D70 /* Generators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generators.swift; sourceTree = "<group>"; };
 		8A48A8E9CF31C448E0960876 /* Pods-SketchyCodeCLI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SketchyCodeCLI.release.xcconfig"; path = "Pods/Target Support Files/Pods-SketchyCodeCLI/Pods-SketchyCodeCLI.release.xcconfig"; sourceTree = "<group>"; };
 		8F57022D6CC792DD283CE341 /* Pods_SketchyCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SketchyCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -272,6 +272,7 @@
 			children = (
 				862EBEAB1F71E0CB0086E52C /* CLI */,
 				862EBEE71F72AEEE0086E52C /* SketchClasses */,
+				8631B3F01F87B6B10029BF90 /* Utils.swift */,
 				86D9E8BD1F848BAD008A6D70 /* Generation */,
 				862EBEDD1F71E4340086E52C /* SketchyCode.h */,
 				862EBED91F71E2030086E52C /* Info.plist */,
@@ -283,8 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				86D9E8BE1F848BC1008A6D70 /* ObjectGraph.swift */,
-				8631B3EC1F8709540029BF90 /* Declaration.swift */,
-				86D9E8C21F848C06008A6D70 /* DeclarationContext.swift */,
+				86D9E8C21F848C06008A6D70 /* Scope.swift */,
 				86D9E8C41F848C38008A6D70 /* Generators.swift */,
 				86066DA71F85B16E00130A65 /* Expression.swift */,
 				86D9E8C01F848BD8008A6D70 /* Writer.swift */,
@@ -570,13 +570,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86D9E8C31F848C06008A6D70 /* DeclarationContext.swift in Sources */,
+				86D9E8C31F848C06008A6D70 /* Scope.swift in Sources */,
 				862EBEF01F72AFBF0086E52C /* PathContainer.swift in Sources */,
 				8629C3251F73363D000877D2 /* Debug.swift in Sources */,
 				862EBEEB1F72AF090086E52C /* SketchClasses+Helpers.swift in Sources */,
 				86D9E8C51F848C38008A6D70 /* Generators.swift in Sources */,
+				8631B3F11F87B6B10029BF90 /* Utils.swift in Sources */,
 				86D9E8BF1F848BC1008A6D70 /* ObjectGraph.swift in Sources */,
-				8631B3ED1F8709540029BF90 /* Declaration.swift in Sources */,
 				862EBEEC1F72AF090086E52C /* SketchClasses+Generated.swift in Sources */,
 				86D9E8C11F848BD8008A6D70 /* Writer.swift in Sources */,
 				8629C3291F7339ED000877D2 /* Styled.swift in Sources */,

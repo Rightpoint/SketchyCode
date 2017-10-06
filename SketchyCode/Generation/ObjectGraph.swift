@@ -8,12 +8,12 @@
 
 import Foundation
 
+// ObjectType specifies the type name to use
 struct ObjectType {
-    let name: String
+    var name: String
 
     var simpleName: String {
-        // prune namespace and camel case
-        return name
+        return name.objcnessRemoved().variabled
     }
     var isOptional: Bool {
         return name.hasSuffix("?")
@@ -26,34 +26,21 @@ extension ObjectType: Equatable {
     }
 }
 
-
-struct Object {
+// Reference to a variable managed by code generation. Variables do not have names
+// just a uniqueness identifier and a type.
+struct VariableRef {
     let uuid = UUID()
-    let type: ObjectType
+    var type: ObjectType
 }
 
-extension Object {
+extension VariableRef {
     init(ofType name: String) {
         self.init(type: ObjectType(name: name))
     }
-
-    func generate(in context: DeclarationContext, isFirstToken: Bool) throws -> String {
-        let declaration = try context.declaration(for: self)
-        let name = namingStrategy.name(for: declaration)
-        if isFirstToken {
-            if context.containingRepresentation == declaration {
-                return ""
-            } else {
-                return name.appending(".")
-            }
-        } else {
-            return name
-        }
-    }
 }
 
-extension Object: Equatable {
-    static func ==(lhs: Object, rhs: Object) -> Bool {
+extension VariableRef: Equatable {
+    static func ==(lhs: VariableRef, rhs: VariableRef) -> Bool {
         return lhs.uuid == rhs.uuid && lhs.type == rhs.type
     }
 }

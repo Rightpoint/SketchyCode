@@ -8,11 +8,11 @@
 
 import Foundation
 
-
-class Writer {
+// Writer is responsible for managing the structure of the generated output.
+final class Writer {
+    static var indentation: String = "    "
     var content: String = ""
     var level: Int = 0
-    var indentation: String = "    "
 
     func indent(work: () throws -> Void) throws {
         level += 1
@@ -34,7 +34,7 @@ class Writer {
         var value = ""
         if addIndentation {
             for _ in 0..<level {
-                value.append(indentation)
+                value.append(Writer.indentation)
             }
         }
         value.append(line)
