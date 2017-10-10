@@ -39,7 +39,7 @@ class GenerationTests: XCTestCase {
     func testImplicitSelfBehavior() throws {
         let (view, label, _) = makeSimpleDeclarations()
         view.add(contentsOf: [
-            SimpleExpression(.o(view.selfRef), .s("addSubview"), .p(label.value)),
+            SimpleExpression(.v(view.selfRef), .s("addSubview"), .p(label.value)),
             SimpleExpression(.s("print"), .p(view.selfRef))
             ])
         let expected =
@@ -57,15 +57,61 @@ class GenerationTests: XCTestCase {
         XCTAssert(try generate() == expected)
     }
 
+    // Ensure that a variable added to an initialization closure does have
+    // access to the global scope
+    func testInitializationClosureAccessContaining() throws {
+        let (_, label, _) = makeSimpleDeclarations()
+        let globalString = global.makeVariable(ofType: TypeRef(name: "String"))
+        label.initialization.add(contentsOf: [
+            SimpleExpression(.v(label.value), .s("text = "), .debug(.v(globalString.value)))
+            ])
+        // Horrible code generation!
+        let expected =
+        """
+        // Automatically generated. Do Not Edit!
+        class MyView: UIView {
+            let label0: UILabelview1.label0.text = ring2
+            let label3: UILabel
+        }
+        let view1: MyView
+        let ring2: String
+
+        """
+        XCTAssert(try generate() == expected)
+    }
+
+    // Ensure that a variable added to an initialization closure does not have
+    // access to self
+    func testInitializationClosureNoSelf() throws {
+        let (_, label, _) = makeSimpleDeclarations()
+        label.initialization.add(contentsOf: [
+            SimpleExpression(.v(label.value), .s("text = \"label\""))
+            ])
+        // Horrible code generation! This should throw, but the class implicit
+        // self is global so the variable is found.
+        let expected =
+        """
+        // Automatically generated. Do Not Edit!
+        class MyView: UIView {
+            let label0: UILabelview1.label0.text = "label"
+            let label2: UILabel
+        }
+        let view1: MyView
+
+        """
+        XCTAssert(try generate() == expected)
+
+//        XCTAssertThrowsError(try generate())
+    }
 
     func testContainedVariableLookup() throws {
         let (view, label, heading) = makeSimpleDeclarations()
 
         let configuration: [Generator] = [
-            SimpleExpression(.o(view.selfRef), .s("addSubview"), .p(heading.value)),
-            SimpleExpression(.o(view.selfRef), .s("addSubview"), .p(label.value)),
-            SimpleExpression(.o(heading.value), .s("text = \"testing\"")),
-            SimpleExpression(.o(label.value), .s("text = \"label\""))
+            SimpleExpression(.v(view.selfRef), .s("addSubview"), .p(heading.value)),
+            SimpleExpression(.v(view.selfRef), .s("addSubview"), .p(label.value)),
+            SimpleExpression(.v(heading.value), .s("text = \"testing\"")),
+            SimpleExpression(.v(label.value), .s("text = \"label\""))
         ]
         // Add the same configuration to two different scopes and ensure the variable lookup is correct.
         view.add(contentsOf: configuration)
@@ -90,5 +136,30 @@ class GenerationTests: XCTestCase {
         """
         XCTAssert(try generate() == expected)
     }
-}
 
+    func testNestedVariableLookup() throws {
+        let (view, _, _) = makeSimpleDeclarations()
+        let bg = view.makeVariable(ofType: TypeRef(name: "UIView"))
+
+        let bgView = global.makeClass(ofType: TypeRef(name: "BKBackgroundView"), for: bg)
+        let image = bgView.makeVariable(ofType: TypeRef(name: "UIImageView"))
+
+        global.add(SimpleExpression(.v(image.value), .s("image = UIImage(named: \"test\")")))
+        let expected =
+        """
+        // Automatically generated. Do Not Edit!
+        class MyView: UIView {
+            let label0: UILabel
+            let label1: UILabel
+            let backgroundView2: BKBackgroundView
+        }
+        class BKBackgroundView: UIView {
+            let imageView3: UIImageView
+        }
+        let view4: MyView
+        view4.backgroundView2.imageView3.image = UIImage(named: "test")
+
+        """
+        XCTAssert(try generate() == expected)
+    }
+}

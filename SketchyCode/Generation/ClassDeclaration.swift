@@ -10,6 +10,10 @@ import Foundation
 
 class ClassDeclaration: Scope {
     let inheriting: String?
+
+    // This selfRef was a shortcut to simplify self transformations. It should be
+    // removed and modeled more explicitly once expression transformations are
+    // more evolved.
     let selfRef: VariableRef
     init(selfRef: VariableRef, inheriting: String? = nil) {
         self.inheriting = inheriting
@@ -37,15 +41,6 @@ class ClassDeclaration: Scope {
 }
 
 extension Scope {
-    func containingClassDeclaration() -> ClassDeclaration? {
-        if let classDecl = self as? ClassDeclaration {
-            return classDecl
-        } else if let parent = parent {
-            return parent.containingClassDeclaration()
-        } else {
-            return nil
-        }
-    }
 
     func makeClass(ofType type: TypeRef, for variable: VariableDeclaration) -> ClassDeclaration {
         let newDefinition = VariableRef(uuid: variable.value.uuid, type: type)

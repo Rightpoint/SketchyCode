@@ -19,11 +19,13 @@ protocol Expression {
 }
 
 // SyntaxPart is a simple DSL to build expressions.
-enum SyntaxPart {
+indirect enum SyntaxPart {
     case s(String)
-    case o(VariableRef)
+    case v(VariableRef)
     // wrap an object in `()`
     case p(VariableRef)
+    // Debug helper
+    case debug(SyntaxPart)
 }
 
 // PartExpression protocol is a utility protocol
@@ -34,7 +36,7 @@ protocol PartExpression: Expression, Generator {
 extension PartExpression {
     var dependent: [VariableRef] {
         return parts.flatMap {
-            if case .o(let variable) = $0 {
+            if case .v(let variable) = $0 {
                 return variable
             }
             return nil
@@ -60,13 +62,15 @@ extension Scope {
 extension SyntaxPart {
     func generate(in context: Scope, isFirstToken: Bool) throws -> String {
         switch self {
-        case .o(let object):
+        case .v(let object):
             return try context.name(for: object, isLeadingVariable: isFirstToken)
         case .s(let string):
             return string
         case .p(let object):
-            let obj = try SyntaxPart.o(object).generate(in: context, isFirstToken: false)
+            let obj = try SyntaxPart.v(object).generate(in: context, isFirstToken: false)
             return "(\(obj))"
+        case .debug(let part):
+            return try part.generate(in:context, isFirstToken:isFirstToken)
         }
     }
 }

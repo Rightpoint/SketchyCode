@@ -10,9 +10,10 @@ import Foundation
 
 class ClosureDeclaration: Scope {
 
-    init(generators: [Generator]) {
+    init(parent: Scope? = nil, generators: [Generator] = []) {
         super.init()
-        children = generators
+        self.parent = parent
+        self.children = generators
     }
 
     var hasContent: Bool {

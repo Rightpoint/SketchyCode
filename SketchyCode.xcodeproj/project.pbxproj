@@ -37,6 +37,7 @@
 		867F448D1F8C5B8200B793E3 /* ClassDeclaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867F448C1F8C5B8200B793E3 /* ClassDeclaration.swift */; };
 		867F448F1F8C5BBB00B793E3 /* VariableDeclaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867F448E1F8C5BBB00B793E3 /* VariableDeclaration.swift */; };
 		867F44911F8C5C3F00B793E3 /* ClosureDeclaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867F44901F8C5C3F00B793E3 /* ClosureDeclaration.swift */; };
+		867F44951F8CF58D00B793E3 /* GlobalScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867F44941F8CF58D00B793E3 /* GlobalScope.swift */; };
 		86D9E8BC1F843C0D008A6D70 /* GenerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9E8BB1F843C0D008A6D70 /* GenerationTests.swift */; };
 		86D9E8BF1F848BC1008A6D70 /* ObjectGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9E8BE1F848BC1008A6D70 /* ObjectGraph.swift */; };
 		86D9E8C11F848BD8008A6D70 /* Writer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9E8C01F848BD8008A6D70 /* Writer.swift */; };
@@ -118,6 +119,7 @@
 		867F448C1F8C5B8200B793E3 /* ClassDeclaration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassDeclaration.swift; sourceTree = "<group>"; };
 		867F448E1F8C5BBB00B793E3 /* VariableDeclaration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableDeclaration.swift; sourceTree = "<group>"; };
 		867F44901F8C5C3F00B793E3 /* ClosureDeclaration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosureDeclaration.swift; sourceTree = "<group>"; };
+		867F44941F8CF58D00B793E3 /* GlobalScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalScope.swift; sourceTree = "<group>"; };
 		86D9E8BB1F843C0D008A6D70 /* GenerationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenerationTests.swift; sourceTree = "<group>"; };
 		86D9E8BE1F848BC1008A6D70 /* ObjectGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectGraph.swift; sourceTree = "<group>"; };
 		86D9E8C01F848BD8008A6D70 /* Writer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Writer.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 			children = (
 				86D9E8BE1F848BC1008A6D70 /* ObjectGraph.swift */,
 				86D9E8C21F848C06008A6D70 /* Scope.swift */,
+				867F44941F8CF58D00B793E3 /* GlobalScope.swift */,
 				867F448C1F8C5B8200B793E3 /* ClassDeclaration.swift */,
 				867F448E1F8C5BBB00B793E3 /* VariableDeclaration.swift */,
 				867F44901F8C5C3F00B793E3 /* ClosureDeclaration.swift */,
@@ -588,6 +591,7 @@
 				867F44911F8C5C3F00B793E3 /* ClosureDeclaration.swift in Sources */,
 				86D9E8C51F848C38008A6D70 /* Generators.swift in Sources */,
 				8631B3F11F87B6B10029BF90 /* Utils.swift in Sources */,
+				867F44951F8CF58D00B793E3 /* GlobalScope.swift in Sources */,
 				86D9E8BF1F848BC1008A6D70 /* ObjectGraph.swift in Sources */,
 				862EBEEC1F72AF090086E52C /* SketchClasses+Generated.swift in Sources */,
 				86D9E8C11F848BD8008A6D70 /* Writer.swift in Sources */,

@@ -27,11 +27,14 @@ class Scope: Generator {
                 if variable == variableDeclaration.value {
                     return preceeding + [variable]
                 } else if let classDeclaration = lookup(typeName: variableDeclaration.value.type.name) {
-                    return classDeclaration.path(for: variable, preceeding: preceeding + [variableDeclaration.value])
+                    let classPath = classDeclaration.path(for: variable, preceeding: preceeding + [variableDeclaration.value])
+                    if classPath.count > 0 {
+                        return classPath
+                    }
                 }
             }
         }
-        return preceeding
+        return []
     }
 }
 
@@ -43,14 +46,22 @@ extension Scope {
     }
 
     func name(for variable: VariableRef, isLeadingVariable: Bool) throws -> String {
-        let path = self.path(for: variable)
-        if path.count == 0 {
-            struct UnregisteredVariableRefError: Error {
-                let variable: VariableRef
+        var path: [VariableRef] = self.path(for: variable)
+        var nextScope = self.parent
+        while path.count == 0 {
+            if let scope = nextScope {
+                path = scope.path(for: variable)
+                nextScope = scope.parent
+            } else {
+                struct UnregisteredVariableRefError: Error {
+                    let variable: VariableRef
+                }
+                throw UnregisteredVariableRefError(variable: variable)
             }
-            throw UnregisteredVariableRefError(variable: variable)
         }
-        let isSelfRef: Bool = containingClassDeclaration()?.selfRef == variable
+        assert(path.last == variable)
+        let classDeclaration: ClassDeclaration? = lookupContainer(where: { _ in true })
+        let isSelfRef: Bool = classDeclaration?.selfRef == variable
         var variableNames: [String] = []
         for (index, variable) in path.enumerated() {
             let name = namingStrategy.name(for: variable)
@@ -91,19 +102,34 @@ extension Scope {
             return try parentConext().nonTypeContext()
         }
     }
-
-    func lookup(typeName: String) -> ClassDeclaration? {
-        for child in children.flatMap({ $0 as? ClassDeclaration }) {
-            if child.selfRef.type.name == typeName {
-                return child
-            }
+    // This method has a horrible name, but I can't quite encapsulate the semantics.
+    // This may be a naming issue, or I may have the exact semantics wrong.
+    func lookupScope<T: Scope>(check: (T) -> Bool) -> T? {
+        let childrenOfT = children.flatMap({ $0 as? T })
+        if let result = childrenOfT.first(where: check) {
+            return result
         }
         if let parent = parent {
-            return parent.lookup(typeName: typeName)
+            return parent.lookupScope(check: check)
         }
         return nil
     }
 
+    func lookupContainer<T: Scope>(where check: (T) -> Bool) -> T? {
+        if let selfOfT = self as? T, check(selfOfT) {
+            return selfOfT
+        } else if let parent = parent {
+            return parent.lookupContainer(where: check)
+        } else {
+            return nil
+        }
+    }
+
+    func lookup(typeName: String) -> ClassDeclaration? {
+        return lookupScope(check: { $0.selfRef.type.name == typeName})
+    }
+
+    
     func add(_ generator: Generator) {
         children.append(generator)
         if let declaration = generator as? Scope {
@@ -114,23 +140,6 @@ extension Scope {
     func add(contentsOf generators: [Generator]) {
         for generator in generators {
             add(generator)
-        }
-    }
-}
-
-// The global declaration context is low value top level declaration context.
-class GlobalScope: Scope {
-    override func generate(in context: Scope, writer: Writer) throws {
-        writer.append(line: "// Automatically generated. Do Not Edit!")
-        try children.forEach {
-            if $0 is ClassDeclaration {
-                try $0.generate(in: self, writer: writer)
-            }
-        }
-        try children.forEach {
-            if !($0 is ClassDeclaration) {
-                try $0.generate(in: self, writer: writer)
-            }
         }
     }
 }
