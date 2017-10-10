@@ -9,8 +9,8 @@ if there is interest in taking the idea further.
 
 There are a few practical uses for generating code from Sketch, like
 synchronizing text styles and color paletes. There are also a few experimental
-ideas, like generating UIView subclasses, and replacing Interface Builder. The
-last two are probably terrible ideas, but fun they are fun to explore.
+ideas, like generating UIView subclasses, and replacing Interface Builder. These
+aspirations are described in further detail in [Phase Two](PhaseTwo.md).
 
 # Does it work?
 As a PoC, here is a template that will generate a
