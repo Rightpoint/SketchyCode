@@ -33,13 +33,21 @@ class Scope: Generator {
         }
         return preceeding
     }
+}
+
+
+extension Scope {
+
+    func generate(writer: Writer) throws {
+        try generate(in: self, writer: writer)
+    }
 
     func name(for variable: VariableRef, isLeadingVariable: Bool) throws -> String {
-        struct UnregisteredVariableRefError: Error {
-            let variable: VariableRef
-        }
         let path = self.path(for: variable)
         if path.count == 0 {
+            struct UnregisteredVariableRefError: Error {
+                let variable: VariableRef
+            }
             throw UnregisteredVariableRefError(variable: variable)
         }
         let isSelfRef: Bool = containingClassDeclaration()?.selfRef == variable
@@ -62,10 +70,7 @@ class Scope: Generator {
         }
         return name
     }
-}
 
-
-extension Scope {
     func parentConext() throws -> Scope {
         struct MissingParentContext: Error {
             let declarationContext: Scope
@@ -113,35 +118,10 @@ extension Scope {
     }
 }
 
-extension Scope {
-    func generate(writer: Writer) throws {
-        try generate(in: self, writer: writer)
-    }
-}
-
-extension Scope {
-    func makeVariable(ofType type: TypeRef) -> VariableDeclaration {
-        let variable = VariableDeclaration(type: type, initializers: [])
-        add(variable)
-        return variable
-    }
-
-    func makeClass(ofType type: TypeRef, for variable: VariableDeclaration) -> ClassDeclaration {
-        let newDefinition = VariableRef(uuid: variable.value.uuid, type: type)
-        let cls = ClassDeclaration(
-            selfRef: newDefinition,
-            inheriting: variable.value.type.name)
-        variable.value = newDefinition
-        add(cls)
-        return cls
-    }
-}
-
 // The global declaration context is low value top level declaration context.
 class GlobalScope: Scope {
     override func generate(in context: Scope, writer: Writer) throws {
         writer.append(line: "// Automatically generated. Do Not Edit!")
-
         try children.forEach {
             if $0 is ClassDeclaration {
                 try $0.generate(in: self, writer: writer)
@@ -150,88 +130,6 @@ class GlobalScope: Scope {
         try children.forEach {
             if !($0 is ClassDeclaration) {
                 try $0.generate(in: self, writer: writer)
-            }
-        }
-    }
-}
-
-class ClassDeclaration: Scope {
-    let inheriting: String?
-    let selfRef: VariableRef
-    init(selfRef: VariableRef, inheriting: String? = nil) {
-        self.inheriting = inheriting
-        self.selfRef = selfRef
-        super.init()
-    }
-
-    override func generate(in context: Scope, writer: Writer) throws {
-        if let inheriting = inheriting {
-            writer.append(line: "class \(selfRef.type.name): \(inheriting) ", addNewline: false)
-        } else {
-            writer.append(line: "class \(selfRef.type.name) ", addNewline: false)
-        }
-        try writer.block() {
-            try super.generate(in: self, writer: writer)
-        }
-    }
-
-    override func path(for variable: VariableRef, preceeding: [VariableRef] = []) -> [VariableRef] {
-        if selfRef == variable {
-            return preceeding + [selfRef]
-        }
-        return super.path(for: variable, preceeding: preceeding)
-    }
-}
-
-extension Scope {
-    func containingClassDeclaration() -> ClassDeclaration? {
-        if let classDecl = self as? ClassDeclaration {
-            return classDecl
-        } else if let parent = parent {
-            return parent.containingClassDeclaration()
-        } else {
-            return nil
-        }
-    }
-}
-
-class VariableDeclaration: Generator {
-    var value: VariableRef
-    var initialization: ClosureDeclaration
-    init(type: TypeRef, initializers: [Generator]) {
-        self.value = VariableRef(uuid: UUID(), type: type)
-        self.initialization = ClosureDeclaration(generators: initializers)
-    }
-
-    func generate(in context: Scope, writer: Writer) throws {
-        let name = try context.name(for: value, isLeadingVariable: false)
-        writer.append(line: "let \(name): \(value.type.name)", addNewline: false)
-
-        if initialization.hasContent {
-            try initialization.generate(in: try context.nonTypeContext(), writer: writer)
-        } else {
-            writer.append(line: "")
-        }
-    }
-}
-
-class ClosureDeclaration: Scope {
-
-    init(generators: [Generator]) {
-        super.init()
-        children = generators
-    }
-
-    var hasContent: Bool {
-        return children.count > 0
-    }
-
-    override func generate(in context: Scope, writer: Writer) throws {
-        if children.count == 1 {
-            try children[0].generate(in: self, writer: writer)
-        } else {
-            try writer.block(appending: "()") {
-                try children.forEach { try $0.generate(in: self, writer: writer) }
             }
         }
     }
