@@ -20,10 +20,12 @@ class GenerationTests: XCTestCase {
     }
 
     func makeSimpleDeclarations() -> (view: ClassDeclaration, label: VariableDeclaration, heading: VariableDeclaration) {
-        let view = global.makeVariable(ofType: "UIView")
-        let customView = global.makeClass(ofType: "MyView", inheriting: "UIView", for: view)
-        let label = customView.makeVariable(ofType: "UILabel")
-        let heading = customView.makeVariable(ofType: "UILabel")
+        let labelType = TypeRef(name: "UILabel")
+        let viewType = TypeRef(name: "UIView")
+        let view = global.makeVariable(ofType: viewType)
+        let customView = global.makeClass(ofType: TypeRef(name: "MyView"), for: view)
+        let label = customView.makeVariable(ofType: labelType)
+        let heading = customView.makeVariable(ofType: labelType)
         return (view: customView, label: label, heading: heading)
     }
 

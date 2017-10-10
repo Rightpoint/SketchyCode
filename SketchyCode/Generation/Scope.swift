@@ -40,8 +40,6 @@ class Scope: Generator {
         }
         let path = self.path(for: variable)
         if path.count == 0 {
-            let path = self.path(for: variable)
-
             throw UnregisteredVariableRefError(variable: variable)
         }
         let isSelfRef: Bool = containingClassDeclaration()?.selfRef == variable
@@ -122,17 +120,18 @@ extension Scope {
 }
 
 extension Scope {
-    func makeVariable(ofType typeName: String) -> VariableDeclaration {
-        let variable = VariableDeclaration(type: ObjectType(name: typeName), initializers: [])
+    func makeVariable(ofType type: TypeRef) -> VariableDeclaration {
+        let variable = VariableDeclaration(type: type, initializers: [])
         add(variable)
         return variable
     }
 
-    func makeClass(ofType type: String, inheriting: String? = nil, for variable: VariableDeclaration) -> ClassDeclaration {
-        variable.value.type.name = type
+    func makeClass(ofType type: TypeRef, for variable: VariableDeclaration) -> ClassDeclaration {
+        let newDefinition = VariableRef(uuid: variable.value.uuid, type: type)
         let cls = ClassDeclaration(
-            selfRef: variable.value,
-            inheriting: inheriting)
+            selfRef: newDefinition,
+            inheriting: variable.value.type.name)
+        variable.value = newDefinition
         add(cls)
         return cls
     }
@@ -199,8 +198,8 @@ extension Scope {
 class VariableDeclaration: Generator {
     var value: VariableRef
     var initialization: ClosureDeclaration
-    init(type: ObjectType, initializers: [Generator]) {
-        self.value = VariableRef(type: type)
+    init(type: TypeRef, initializers: [Generator]) {
+        self.value = VariableRef(uuid: UUID(), type: type)
         self.initialization = ClosureDeclaration(generators: initializers)
     }
 

@@ -8,9 +8,9 @@
 
 import Foundation
 
-// ObjectType specifies the type name to use
-struct ObjectType {
-    var name: String
+// TypeRef specifies the type name to use
+struct TypeRef {
+    let name: String
 
     var simpleName: String {
         return name.objcnessRemoved().variabled
@@ -20,8 +20,8 @@ struct ObjectType {
     }
 }
 
-extension ObjectType: Equatable {
-    static func ==(lhs: ObjectType, rhs: ObjectType) -> Bool {
+extension TypeRef: Equatable {
+    static func ==(lhs: TypeRef, rhs: TypeRef) -> Bool {
         return lhs.name == rhs.name
     }
 }
@@ -29,13 +29,13 @@ extension ObjectType: Equatable {
 // Reference to a variable managed by code generation. Variables do not have names
 // just a uniqueness identifier and a type.
 struct VariableRef {
-    let uuid = UUID()
-    var type: ObjectType
+    let uuid: UUID
+    let type: TypeRef
 }
 
 extension VariableRef {
     init(ofType name: String) {
-        self.init(type: ObjectType(name: name))
+        self.init(uuid: UUID(), type: TypeRef(name: name))
     }
 }
 
