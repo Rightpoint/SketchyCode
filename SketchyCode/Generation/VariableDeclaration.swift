@@ -11,12 +11,15 @@ import Foundation
 class VariableDeclaration: Generator {
     var value: VariableRef
     var initialization: ClosureDeclaration
-    init(type: TypeRef, initialization: ClosureDeclaration) {
+    init(type: TypeRef, initialization: ClosureDeclaration? = nil) {
         self.value = VariableRef(uuid: UUID(), type: type)
-        self.initialization = initialization
+        self.initialization = initialization ?? ClosureDeclaration(parent: nil, generators: [])
     }
 
     func generate(in context: Scope, writer: Writer) throws {
+        if let classDeclaration = context as? ClassDeclaration, classDeclaration.selfDeclaration.value == self.value {
+            return
+        }
         let name = try context.name(for: value, isLeadingVariable: false)
         writer.append(line: "let \(name): \(value.type.name)", addNewline: false)
 

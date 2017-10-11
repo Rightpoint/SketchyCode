@@ -16,17 +16,20 @@ class Scope: Generator {
     func generate(in context: Scope, writer: Writer) throws {
         try children.forEach { try $0.generate(in: self, writer: writer) }
     }
+}
+
+
+extension Scope {
 
     // Given a variable reference, look for a path to that variable from the
     // specified context.
     func path(for variable: VariableRef, preceeding: [VariableRef] = []) -> [VariableRef] {
-        // This looks like a good candidate for a walker pattern. It also looks
-        // like it will be slow.
         for child in children {
             if let variableDeclaration = child as? VariableDeclaration {
                 if variable == variableDeclaration.value {
                     return preceeding + [variable]
                 } else if let classDeclaration = lookup(typeName: variableDeclaration.value.type.name) {
+                    guard self !== classDeclaration else { continue }
                     let classPath = classDeclaration.path(for: variable, preceeding: preceeding + [variableDeclaration.value])
                     if classPath.count > 0 {
                         return classPath
@@ -36,10 +39,6 @@ class Scope: Generator {
         }
         return []
     }
-}
-
-
-extension Scope {
 
     func generate(writer: Writer) throws {
         try generate(in: self, writer: writer)
@@ -56,12 +55,13 @@ extension Scope {
                 struct UnregisteredVariableRefError: Error {
                     let variable: VariableRef
                 }
+                _ = self.path(for: variable)
                 throw UnregisteredVariableRefError(variable: variable)
             }
         }
         assert(path.last == variable)
         let classDeclaration: ClassDeclaration? = lookupContainer(where: { _ in true })
-        let isSelfRef: Bool = classDeclaration?.selfRef == variable
+        let isSelfRef: Bool = classDeclaration?.isSelf(ref: variable) ?? false
         var variableNames: [String] = []
         for (index, variable) in path.enumerated() {
             let name = namingStrategy.name(for: variable)
@@ -126,7 +126,7 @@ extension Scope {
     }
 
     func lookup(typeName: String) -> ClassDeclaration? {
-        return lookupScope(check: { $0.selfRef.type.name == typeName})
+        return lookupScope(check: { $0.typeRef.name == typeName})
     }
 
     

@@ -20,6 +20,17 @@ struct TypeRef {
     }
 }
 
+extension TypeRef: ExpressibleByStringLiteral {
+
+    init(stringLiteral value: StringLiteralType) {
+        self.init(name: value)
+    }
+
+    init(unicodeScalarLiteral value: UnicodeScalarLiteralType) {
+        self.init(name: value)
+    }
+}
+
 extension TypeRef: Equatable {
     static func ==(lhs: TypeRef, rhs: TypeRef) -> Bool {
         return lhs.name == rhs.name
