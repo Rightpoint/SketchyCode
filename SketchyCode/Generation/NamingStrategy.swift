@@ -13,9 +13,6 @@ protocol NamingStrategy {
     func name(for variable: VariableRef) -> String
 }
 
-// It's not clear where this wants to live, so it's global and dangerous for now.
-var namingStrategy: NamingStrategy!
-
 // A bad naming strategy.
 class CounterNamingStrategy: NamingStrategy {
     var counter: Int = 0

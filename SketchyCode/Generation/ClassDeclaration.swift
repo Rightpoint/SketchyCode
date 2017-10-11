@@ -19,14 +19,14 @@ class ClassDeclaration: Scope {
         add(selfDeclaration)
     }
 
-    override func generate(in scope: Scope, writer: Writer) throws {
+    override func generate(in scope: Scope, context: GeneratorContext) throws {
         if let inheriting = inheriting {
-            writer.append(line: "class \(typeRef.name): \(inheriting.name) ", addNewline: false)
+            context.writer.append(line: "class \(typeRef.name): \(inheriting.name) ", addNewline: false)
         } else {
-            writer.append(line: "class \(typeRef.name) ", addNewline: false)
+            context.writer.append(line: "class \(typeRef.name) ", addNewline: false)
         }
-        try writer.block() {
-            try super.generate(in: self, writer: writer)
+        try context.writer.block() {
+            try super.generate(in: self, context: context)
         }
     }
 }

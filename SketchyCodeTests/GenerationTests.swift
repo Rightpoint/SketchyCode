@@ -14,16 +14,11 @@ import XCTest
 class GenerationTests: XCTestCase {
     let global = GlobalScope()
 
-    override func setUp() {
-        super.setUp()
-        namingStrategy = CounterNamingStrategy()
-    }
-
     func generate() throws -> String {
-        let writer = Writer()
-        try global.generate(writer: writer)
-        print(writer.content)
-        return writer.content
+        let context = GeneratorContext(namingStrategy: CounterNamingStrategy(), options: [])
+        try global.generate(context: context)
+        print(context.writer.content)
+        return context.writer.content
     }
 
     func testImplicitSelfBehavior() throws {
@@ -32,8 +27,8 @@ class GenerationTests: XCTestCase {
         let label = subview.makeVariable(ofType: "UILabel")
 
         global.add(contentsOf: [
-            SimpleExpression(.v(view.value), .s("addSubview"), .p(label.value)),
-            SimpleExpression(.s("print"), .p(view.value))])
+            BasicExpression(.v(view.value), .s("addSubview"), .p(label.value)),
+            BasicExpression(.s("print"), .p(view.value))])
 
 
         global.moveExpressions(for: view, to: subview)
@@ -78,7 +73,7 @@ class GenerationTests: XCTestCase {
         let label = subview.makeVariable(ofType: "UILabel")
         let globalString = global.makeVariable(ofType: TypeRef(name: "String"))
         let block = BlockExpression(children: [
-            SimpleExpression(.v(label.value), .s("text = "), .debug(.v(globalString.value)))
+            BasicExpression(.v(label.value), .s("text = "), .debug(.v(globalString.value)))
         ])
         label.initialization = AssignmentExpression(to: label.value, expression: block)
 
@@ -105,10 +100,10 @@ class GenerationTests: XCTestCase {
         let heading = subview.makeVariable(ofType: "UILabel")
 
         global.add(contentsOf: [
-            SimpleExpression(.v(view.value), .s("addSubview"), .p(heading.value)),
-            SimpleExpression(.v(view.value), .s("addSubview"), .p(label.value)),
-            SimpleExpression(.v(heading.value), .s("text = \"testing\"")),
-            SimpleExpression(.v(label.value), .s("text = \"label\""))
+            BasicExpression(.v(view.value), .s("addSubview"), .p(heading.value)),
+            BasicExpression(.v(view.value), .s("addSubview"), .p(label.value)),
+            BasicExpression(.v(heading.value), .s("text = \"testing\"")),
+            BasicExpression(.v(label.value), .s("text = \"label\""))
             ])
         let expected =
         """
@@ -138,7 +133,7 @@ class GenerationTests: XCTestCase {
             label1.text = "testing"
             label0.text = "label"
         }
-        let view2: MyView
+        let view3: MyView
 
         """
         XCTAssert(try generate() == expected2)
@@ -152,7 +147,7 @@ class GenerationTests: XCTestCase {
         let bgView = global.makeClass(ofType: TypeRef(name: "BKBackgroundView"), for: bg)
         let image = bgView.makeVariable(ofType: TypeRef(name: "UIImageView"))
 
-        global.add(SimpleExpression(.v(image.value), .s("image = UIImage(named: \"test\")")))
+        global.add(BasicExpression(.v(image.value), .s("image = UIImage(named: \"test\")")))
         let expected =
         """
         // Automatically generated. Do Not Edit!

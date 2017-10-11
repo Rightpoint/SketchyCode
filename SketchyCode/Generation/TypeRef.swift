@@ -1,5 +1,5 @@
 //
-//  ObjectGraph.swift
+//  TypeRef.swift
 //  SketchyCode
 //
 //  Created by Brian King on 10/3/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-// TypeRef specifies the type name to use
+// TypeRef specifies the type to use
 struct TypeRef {
     let name: String
 
@@ -36,23 +36,3 @@ extension TypeRef: Equatable {
         return lhs.name == rhs.name
     }
 }
-
-// Reference to a variable managed by code generation. Variables do not have names
-// just a uniqueness identifier and a type.
-struct VariableRef {
-    let uuid: UUID
-    let type: TypeRef
-}
-
-extension VariableRef {
-    init(ofType name: String) {
-        self.init(uuid: UUID(), type: TypeRef(name: name))
-    }
-}
-
-extension VariableRef: Equatable {
-    static func ==(lhs: VariableRef, rhs: VariableRef) -> Bool {
-        return lhs.uuid == rhs.uuid && lhs.type == rhs.type
-    }
-}
-

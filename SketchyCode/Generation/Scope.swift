@@ -13,8 +13,8 @@ class Scope: Generator {
     weak var parent: Scope?
     var children: [Generator] = []
 
-    func generate(in scope: Scope, writer: Writer) throws {
-        try children.forEach { try $0.generate(in: self, writer: writer) }
+    func generate(in scope: Scope, context: GeneratorContext) throws {
+        try children.forEach { try $0.generate(in: self, context: context) }
     }
 }
 
@@ -40,46 +40,8 @@ extension Scope {
         return []
     }
 
-    func generate(writer: Writer) throws {
-        try generate(in: self, writer: writer)
-    }
-
-    func name(for variable: VariableRef, isLeadingVariable: Bool) throws -> String {
-        var path: [VariableRef] = self.path(for: variable)
-        var nextScope = self.parent
-        while path.count == 0 {
-            if let scope = nextScope {
-                path = scope.path(for: variable)
-                nextScope = scope.parent
-            } else {
-                struct UnregisteredVariableRefError: Error {
-                    let variable: VariableRef
-                }
-                _ = self.path(for: variable)
-                throw UnregisteredVariableRefError(variable: variable)
-            }
-        }
-        assert(path.last == variable)
-        let classDeclaration: ClassDeclaration? = lookupContainer(where: { _ in true })
-        let isSelfRef: Bool = classDeclaration?.isSelf(ref: variable) ?? false
-        var variableNames: [String] = []
-        for (index, variable) in path.enumerated() {
-            let name = namingStrategy.name(for: variable)
-            if isSelfRef {
-                if isLeadingVariable && index == 0 {
-                    continue
-                } else {
-                    variableNames.append("self")
-                }
-            } else {
-                variableNames.append(name)
-            }
-        }
-        var name = variableNames.joined(separator: ".")
-        if isLeadingVariable && !isSelfRef {
-            name.append(".")
-        }
-        return name
+    func generate(context: GeneratorContext) throws {
+        try generate(in: self, context: context)
     }
 
     func parentConext() throws -> Scope {
