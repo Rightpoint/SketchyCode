@@ -16,15 +16,15 @@ class VariableDeclaration: Generator {
         self.initialization = initialization
     }
 
-    func generate(in context: Scope, writer: Writer) throws {
-        if let classDeclaration = context as? ClassDeclaration, classDeclaration.selfDeclaration.value == self.value {
+    func generate(in scope: Scope, writer: Writer) throws {
+        if let classDeclaration = scope as? ClassDeclaration, classDeclaration.selfDeclaration.value == self.value {
             return
         }
-        let name = try context.name(for: value, isLeadingVariable: false)
+        let name = try scope.name(for: value, isLeadingVariable: false)
 
         if let initialization = initialization {
             writer.append(line: "let \(name): \(value.type.name) = ", addNewline: false)
-            try initialization.generate(in: try context.nonTypeContext(), writer: writer)
+            try initialization.generate(in: try scope.nonTypeScope(), writer: writer)
         } else {
             writer.append(line: "let \(name): \(value.type.name)")
         }

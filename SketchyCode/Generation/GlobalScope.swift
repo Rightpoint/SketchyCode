@@ -9,7 +9,7 @@
 import Foundation
 
 class GlobalScope: Scope {
-    override func generate(in context: Scope, writer: Writer) throws {
+    override func generate(in scope: Scope, writer: Writer) throws {
         writer.append(line: "// Automatically generated. Do Not Edit!")
         try children.forEach {
             if $0 is ClassDeclaration {

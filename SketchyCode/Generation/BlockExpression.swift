@@ -30,9 +30,9 @@ class BlockExpression: Expression {
         return BlockExpression(children: transformed)
     }
 
-    func generate(in context: Scope, writer: Writer) throws {
+    func generate(in scope: Scope, writer: Writer) throws {
         try writer.block(appending: "()") {
-            try children.forEach { try $0.generate(in: context, writer: writer) }
+            try children.forEach { try $0.generate(in: scope, writer: writer) }
         }
     }
 }

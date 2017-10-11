@@ -13,7 +13,7 @@ class Scope: Generator {
     weak var parent: Scope?
     var children: [Generator] = []
 
-    func generate(in context: Scope, writer: Writer) throws {
+    func generate(in scope: Scope, writer: Writer) throws {
         try children.forEach { try $0.generate(in: self, writer: writer) }
     }
 }
@@ -22,7 +22,7 @@ class Scope: Generator {
 extension Scope {
 
     // Given a variable reference, look for a path to that variable from the
-    // specified context.
+    // specified scope.
     func path(for variable: VariableRef, preceeding: [VariableRef] = []) -> [VariableRef] {
         for child in children {
             if let variableDeclaration = child as? VariableDeclaration {
@@ -83,23 +83,23 @@ extension Scope {
     }
 
     func parentConext() throws -> Scope {
-        struct MissingParentContext: Error {
-            let declarationContext: Scope
+        struct MissingParentScope: Error {
+            let declarationScope: Scope
         }
 
         guard let parent = parent else {
-            throw MissingParentContext(declarationContext: self)
+            throw MissingParentScope(declarationScope: self)
         }
         return parent
     }
 
     // Determine enclosing scope that is not a type. This is used to remove self
     // from scope when generating property assignment closures
-    func nonTypeContext() throws -> Scope {
+    func nonTypeScope() throws -> Scope {
         if self as? ClassDeclaration == nil {
             return self
         } else {
-            return try parentConext().nonTypeContext()
+            return try parentConext().nonTypeScope()
         }
     }
     // This method has a horrible name, but I can't quite encapsulate the semantics.

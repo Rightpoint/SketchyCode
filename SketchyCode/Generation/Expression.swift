@@ -57,17 +57,17 @@ extension Scope {
 }
 
 extension SyntaxPart {
-    func generate(in context: Scope, isFirstToken: Bool) throws -> String {
+    func generate(in scope: Scope, isFirstToken: Bool) throws -> String {
         switch self {
         case .v(let object):
-            return try context.name(for: object, isLeadingVariable: isFirstToken)
+            return try scope.name(for: object, isLeadingVariable: isFirstToken)
         case .s(let string):
             return string
         case .p(let object):
-            let obj = try SyntaxPart.v(object).generate(in: context, isFirstToken: false)
+            let obj = try SyntaxPart.v(object).generate(in: scope, isFirstToken: false)
             return "(\(obj))"
         case .debug(let part):
-            return try part.generate(in:context, isFirstToken:isFirstToken)
+            return try part.generate(in:scope, isFirstToken:isFirstToken)
         }
     }
 }
@@ -99,8 +99,8 @@ extension SyntaxPart {
 struct SimpleExpression: PartExpression {
     let parts: [SyntaxPart]
 
-    func generate(in context: Scope, writer: Writer) throws {
-        try context.generate(parts: parts, writer: writer)
+    func generate(in scope: Scope, writer: Writer) throws {
+        try scope.generate(parts: parts, writer: writer)
     }
 
     func transform(variable from: VariableRef, to: VariableRef) -> Expression {
@@ -113,8 +113,8 @@ struct AssignmentExpression: Expression {
     let to: VariableRef
     let expression: Expression
 
-    func generate(in context: Scope, writer: Writer) throws {
-        try expression.generate(in: context, writer: writer)
+    func generate(in scope: Scope, writer: Writer) throws {
+        try expression.generate(in: scope, writer: writer)
     }
 
     func transform(variable from: VariableRef, to: VariableRef) -> Expression {

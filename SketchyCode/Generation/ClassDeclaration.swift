@@ -19,7 +19,7 @@ class ClassDeclaration: Scope {
         add(selfDeclaration)
     }
 
-    override func generate(in context: Scope, writer: Writer) throws {
+    override func generate(in scope: Scope, writer: Writer) throws {
         if let inheriting = inheriting {
             writer.append(line: "class \(typeRef.name): \(inheriting.name) ", addNewline: false)
         } else {
