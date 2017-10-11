@@ -71,14 +71,11 @@ extension Scope {
         var movedExpressions: [Expression] = []
         for (index, child) in children.enumerated().reversed() {
             guard let expression = child as? Expression else { continue }
-            if cls.contains(anyOf: expression.dependent) ||
-                expression.dependent.contains(variable.value) {
-                children.remove(at: index)
-                let transferred = expression.transform(
-                    variable: variable.value,
-                    to: cls.selfDeclaration.value)
-                movedExpressions.insert(transferred, at: 0)
-            }
+            children.remove(at: index)
+            let transferred = expression.transform(
+                variable: variable.value,
+                to: cls.selfDeclaration.value)
+            movedExpressions.insert(transferred, at: 0)
         }
         cls.add(contentsOf: movedExpressions)
     }

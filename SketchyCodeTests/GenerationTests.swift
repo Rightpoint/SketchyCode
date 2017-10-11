@@ -33,8 +33,8 @@ class GenerationTests: XCTestCase {
 
         global.add(contentsOf: [
             SimpleExpression(.v(view.value), .s("addSubview"), .p(label.value)),
-            SimpleExpression(.s("print"), .p(view.value))
-            ])
+            SimpleExpression(.s("print"), .p(view.value))])
+
 
         global.moveExpressions(for: view, to: subview)
 
@@ -52,6 +52,24 @@ class GenerationTests: XCTestCase {
         XCTAssert(try generate() == expected)
     }
 
+    func testInitialization() throws {
+        let view = global.makeVariable(ofType: "UIView")
+        let subview = global.makeClass(ofType: "MyView", for: view)
+        let label = subview.makeVariable(ofType: "UILabel")
+        label.initialization = AssignmentExpression(to: label.value, expression: .s("UILabel()"))
+
+        let expected =
+        """
+        // Automatically generated. Do Not Edit!
+        class MyView: UIView {
+            let label0: UILabel = UILabel()
+        }
+        let view1: MyView
+
+        """
+        XCTAssert(try generate() == expected)
+    }
+
     // Ensure that a variable added to an initialization closure does have
     // access to the global scope
     func testInitializationClosureAccessContaining() throws {
@@ -59,46 +77,25 @@ class GenerationTests: XCTestCase {
         let subview = global.makeClass(ofType: "MyView", for: view)
         let label = subview.makeVariable(ofType: "UILabel")
         let globalString = global.makeVariable(ofType: TypeRef(name: "String"))
-        label.initialization.add(contentsOf: [
+        let block = BlockExpression(children: [
             SimpleExpression(.v(label.value), .s("text = "), .debug(.v(globalString.value)))
-            ])
+        ])
+        label.initialization = AssignmentExpression(to: label.value, expression: block)
+
         // Horrible code generation!
         let expected =
         """
         // Automatically generated. Do Not Edit!
         class MyView: UIView {
-            let label0: UILabelview1.label0.text = ring2
+            let label0: UILabel = {
+                view1.label0.text = ring2
+            }()
         }
         let view1: MyView
         let ring2: String
 
         """
         XCTAssert(try generate() == expected)
-    }
-
-    // Ensure that a variable added to an initialization closure does not have
-    // access to self
-    func testInitializationClosureNoSelf() throws {
-        let view = global.makeVariable(ofType: "UIView")
-        let subview = global.makeClass(ofType: "MyView", for: view)
-        let label = subview.makeVariable(ofType: "UILabel")
-        label.initialization.add(contentsOf: [
-            SimpleExpression(.v(label.value), .s("text = \"label\""))
-            ])
-        // Horrible code generation! This should throw, but the class implicit
-        // self is global so the variable is found.
-        let expected =
-        """
-        // Automatically generated. Do Not Edit!
-        class MyView: UIView {
-            let label0: UILabelview1.label0.text = "label"
-        }
-        let view1: MyView
-
-        """
-        XCTAssert(try generate() == expected)
-
-//        XCTAssertThrowsError(try generate())
     }
 
     func testContainedVariableLookup() throws {

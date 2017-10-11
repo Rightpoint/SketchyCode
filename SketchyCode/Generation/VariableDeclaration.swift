@@ -10,10 +10,10 @@ import Foundation
 
 class VariableDeclaration: Generator {
     var value: VariableRef
-    var initialization: ClosureDeclaration
-    init(type: TypeRef, initialization: ClosureDeclaration? = nil) {
+    var initialization: AssignmentExpression?
+    init(type: TypeRef, initialization: AssignmentExpression? = nil) {
         self.value = VariableRef(uuid: UUID(), type: type)
-        self.initialization = initialization ?? ClosureDeclaration(parent: nil, generators: [])
+        self.initialization = initialization
     }
 
     func generate(in context: Scope, writer: Writer) throws {
@@ -21,12 +21,12 @@ class VariableDeclaration: Generator {
             return
         }
         let name = try context.name(for: value, isLeadingVariable: false)
-        writer.append(line: "let \(name): \(value.type.name)", addNewline: false)
 
-        if initialization.hasContent {
+        if let initialization = initialization {
+            writer.append(line: "let \(name): \(value.type.name) = ", addNewline: false)
             try initialization.generate(in: try context.nonTypeContext(), writer: writer)
         } else {
-            writer.append(line: "")
+            writer.append(line: "let \(name): \(value.type.name)")
         }
     }
 }
@@ -34,15 +34,7 @@ class VariableDeclaration: Generator {
 extension Scope {
 
     func makeVariable(ofType type: TypeRef) -> VariableDeclaration {
-        let initialization: ClosureDeclaration
-        // The parent context for an initialization closure should skip the class
-        // declaration since they don't have access to the implicit self.
-        if self is ClassDeclaration {
-            initialization = ClosureDeclaration(parent: parent, generators: [])
-        } else {
-            initialization = ClosureDeclaration(parent: self, generators: [])
-        }
-        let variable = VariableDeclaration(type: type, initialization: initialization)
+        let variable = VariableDeclaration(type: type)
         add(variable)
         return variable
     }

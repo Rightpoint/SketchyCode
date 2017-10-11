@@ -15,16 +15,14 @@ import Foundation
 // purposes.
 
 protocol Expression: Generator {
-    var dependent: [VariableRef] { get }
-
     func transform(variable: VariableRef, to toVariable: VariableRef) -> Expression
 }
 
-// SyntaxPart is a simple DSL to build expressions.
+// SyntaxPart is a simple DSL to build "expressions".
 indirect enum SyntaxPart {
     case s(String)
     case v(VariableRef)
-    // wrap an object in `()`
+    // wrap a variable in `()`
     case p(VariableRef)
     // Debug helper
     case debug(SyntaxPart)
@@ -44,24 +42,17 @@ protocol PartExpression: Expression {
     var parts: [SyntaxPart] { get }
 }
 
-extension PartExpression {
-    var dependent: [VariableRef] {
-        return parts.flatMap { $0.variableRef }
-    }
-}
-
 // This is really the default function for a `PartExpression`s `Generate`
 // conformance, but broken out since one does not simply invoke default
 // implementations.
 extension Scope {
     func generate(parts: [SyntaxPart], writer: Writer) throws {
-        let line = try parts
+        writer.append(line: try parts
             .enumerated()
             .map { (index, part) -> String in
                 return try part.generate(in: self, isFirstToken: index == 0)
             }
-            .joined()
-        writer.append(line: line)
+            .joined())
     }
 }
 
@@ -117,20 +108,19 @@ struct SimpleExpression: PartExpression {
     }
 }
 
-struct AssignmentExpression: PartExpression {
+// An assignment expression is attached to a variable declaration.
+struct AssignmentExpression: Expression {
     let to: VariableRef
-    let parts: [SyntaxPart]
+    let expression: Expression
 
     func generate(in context: Scope, writer: Writer) throws {
-        let toName = try context.name(for: to, isLeadingVariable: false)
-        writer.append(line: "\(toName) = ", addNewline: false)
-        try context.generate(parts: parts, writer: writer)
+        try expression.generate(in: context, writer: writer)
     }
 
     func transform(variable from: VariableRef, to: VariableRef) -> Expression {
         return AssignmentExpression(
             to: to.transform(from: from, to: to),
-            parts: parts.map { $0.transform(variable: from, to: to) })
+            expression: expression.transform(variable: from, to: to))
     }
 }
 
@@ -141,9 +131,7 @@ extension SimpleExpression {
 }
 
 extension AssignmentExpression {
-    init(to: VariableRef, _ parts: SyntaxPart...) {
-        self.to = to
-        self.parts = parts
+    init(to: VariableRef, expression parts: SyntaxPart...) {
+        self.init(to: to, expression: SimpleExpression(parts: parts))
     }
 }
-
