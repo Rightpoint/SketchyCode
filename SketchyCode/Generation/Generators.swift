@@ -45,6 +45,14 @@ extension VariableDeclaration: Generator {
     }
 }
 
+extension BlockExpression: Generator {
+    func generate(in scope: Scope, context: GeneratorContext) throws {
+        try context.writer.block(appending: "()") {
+            try children.forEach { try $0.generate(in: self, context: context) }
+        }
+    }
+}
+
 extension GlobalScope: Generator {
     func generate(in scope: Scope, context: GeneratorContext) throws {
         context.writer.append(line: "// Automatically generated. Do Not Edit!")

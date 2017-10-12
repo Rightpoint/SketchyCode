@@ -12,7 +12,7 @@ protocol VariableContainer {
     var contained: Set<VariableRef> { get }
 }
 
-extension GeneratorContainer {
+extension Scope: VariableContainer {
     var contained: Set<VariableRef> {
         return Set(children
             .flatMap { ($0 as? VariableContainer) }
@@ -20,12 +20,12 @@ extension GeneratorContainer {
     }
 }
 
-extension Scope: VariableContainer {}
-extension BlockExpression: VariableContainer {}
-
-protocol GeneratorContainer {
-    var children: [Generator] { get }
+extension Generator {
+    func allGenerators() -> [Generator] {
+        if let container = self as? Scope {
+            return container.children
+        } else {
+            return [self]
+        }
+    }
 }
-
-extension Scope: GeneratorContainer {}
-extension BlockExpression: GeneratorContainer {}

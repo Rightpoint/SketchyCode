@@ -43,17 +43,23 @@ extension AssignmentExpression: VariableMutation {
     }
 }
 
+// Generator is a poluted term in Collection, so use a free function instead
+func transform(generators: [Generator], from: VariableRef, to toVariable: VariableRef) -> [Generator] {
+    return generators.map { (child) -> Generator in
+        if let expr = child as? VariableMutation & Generator {
+            return expr.transform(variable: from, to: toVariable)
+        } else {
+            return child
+        }
+    }
+}
+
 extension BlockExpression: VariableMutation {
 
     func transform(variable from: VariableRef, to toVariable: VariableRef) -> BlockExpression {
-        let transformed = children.map { (child) -> Generator in
-            if let expr = child as? VariableMutation & Generator {
-                return expr.transform(variable: from, to: toVariable)
-            } else {
-                return child
-            }
-        }
-        return BlockExpression(children: transformed)
+        let transformed = SketchyCode.transform(generators: children, from: from, to: toVariable)
+
+        return try! parentConext().makeBlock(children: transformed)
     }
 }
 

@@ -16,7 +16,6 @@ struct AssignmentExpression: Generator {
     func generate(in scope: Scope, context: GeneratorContext) throws {
         try expression.generate(in: scope, context: context)
     }
-
 }
 
 extension AssignmentExpression {

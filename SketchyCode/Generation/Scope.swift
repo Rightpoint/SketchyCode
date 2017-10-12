@@ -95,7 +95,34 @@ extension Scope {
             add(generator)
         }
     }
+
+    func remove(_ generator: AnyObject & Generator) throws {
+        if let index = children
+            .flatMap({ $0 as? AnyObject & Generator })
+            .index(where: { $0 === generator}) {
+            children.remove(at: index)
+            if let scope = generator as? Scope {
+                scope.parent = nil
+            }
+        } else {
+            struct GeneratorNotInScopeError: Error {
+                let generator: Generator
+            }
+            throw GeneratorNotInScopeError(generator: generator)
+        }
+    }
 }
 
 // A very boring scope.
-class GlobalScope: Scope {}
+final class GlobalScope: Scope {}
+final class BlockExpression: Scope {}
+
+extension Scope {
+    func makeBlock(children: [Generator]) -> BlockExpression {
+        let block = BlockExpression()
+        block.children = children
+        block.parent = self
+        return block
+    }
+}
+

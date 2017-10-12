@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class BlockExpression {
+final class BlockExpression: Scope {
     var children: [Generator]
 
     init(children: [Generator] = []) {
