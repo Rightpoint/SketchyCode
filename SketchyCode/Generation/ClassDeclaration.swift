@@ -26,19 +26,6 @@ extension ClassDeclaration {
         return selfDeclaration.value == ref
     }
 
-    func contains(variable: VariableRef) -> Bool {
-        return path(for: variable).count > 0
-    }
-
-    func contains(anyOf variables: [VariableRef]) -> Bool {
-        for variable in variables {
-            if contains(variable: variable) {
-                return true
-            }
-        }
-        return false
-    }
-
     var typeRef: TypeRef {
         return selfDeclaration.value.type
     }
@@ -70,13 +57,5 @@ extension Scope {
             movedExpressions.insert(transferred, at: 0)
         }
         cls.add(contentsOf: movedExpressions)
-    }
-}
-
-extension ClassDeclaration {
-
-    func moveExpressionsToPropertyClosures(for variable: VariableDeclaration) {
-        for (index, child) in children.enumerated().reversed() {
-        }
     }
 }
