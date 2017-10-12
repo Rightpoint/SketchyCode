@@ -8,6 +8,7 @@
 
 import Foundation
 
+// A layer container represents a layer that contains other MSShapeLayer.
 protocol LayerContainer {
     var layers: [MSShapeLayer] { get }
 }

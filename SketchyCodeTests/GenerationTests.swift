@@ -98,7 +98,6 @@ class GenerationTests: XCTestCase {
 
     func testExpressionTransformations() throws {
         let view = global.makeVariable(ofType: "UIView", initializedWith: BasicExpression(.s("MyView()")))
-        // FIXME: Generate first without making a class
         let subview = global.makeClass(ofType: "MyView", for: view)
         let label = subview.makeVariable(ofType: "UILabel", initializedWith: BasicExpression(.s("UILabel()")))
         let heading = subview.makeVariable(ofType: "UILabel", initializedWith: BasicExpression(.s("UILabel()")))

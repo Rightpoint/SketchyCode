@@ -11,7 +11,7 @@ import AppKit
 extension MSShapeLayer {
     public override var description: String {
         var description = super.description
-//        description.removeLast()
+        description.removeLast()
         if let styled = self as? Styled {
             let info = styled.style.enabledAttributes.map { $0.description }.joined(separator: ", ")
             description.append(" attributes=[")

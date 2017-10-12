@@ -52,35 +52,3 @@ The following features are helping define the initial implementation:
 Part of generating good view code is to represent multiple view states. The most straight forward example of this concept is defining the selected state of a cell or button. However, this approach is also a great strategy to encapsulate common states like loading and error states, as well as domain specific states like 'Admin User' vs 'Normal User', or different appearances for course dificulty.
 
 SketchyCode aims to support this by tagging different layer hierarchies as representing different states of the UI. The complete IR will be generated for all of these layers. Then the IR that is shared between all of these states will be used to generate the basic class, then the configuration that is unique to each state will be managed by a `configureState` method.
-
-## Sketch File Format
-The Sketch document models a view hierarchy via the `MSShapeLayer` class hierarchy.
-
-- MSShapeLayer
-  - MSBitmapLayer -> UIImageView
-  - MSLayerGroup -> 
-  - MSOvalShape
-  - MSRectangleShape
-  - MSShapeGroup
-  - MSShapePathLayer 
-  - MSTextLayer -> UILabel | UITextField | UITextView
-  - MSSymbolInstance
-
-In addition to the view hierarchy, Sketch also has a handful of decoration objects that are attached in a various fashion to the layer types above.
-
-- MSStyle
-- MSTextStyle
-- MSStyleFill
-- MSStyleShadow
-- MSStyleInnerShadow
-- MSStyleBorder / MSStyleBorderOptions
-- MSStyleBlur
-- MSStyleReflection
-- MSGradient / MSGradientStop
-- MSShapePath / MSCurvePoint
-- MSImageData
-- MSGraphcsContextSettings
-- MSColor / NSColor / NSParagraphStyle / NSAttributedString
-
-
-This doesn't map perfectly to the UIView heirarchy in a number of places. The initial release will focus on layout, solid colors and text configuration.

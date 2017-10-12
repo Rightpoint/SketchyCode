@@ -8,6 +8,10 @@
 
 import XCTest
 
+struct GenericTestFailure: Error {
+    let description: String
+}
+
 extension Optional {
     struct UnexpectedNil: Error {}
     struct InvalidCast: Error {}

@@ -34,6 +34,8 @@
 		862EBEF01F72AFBF0086E52C /* PathContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862EBEEF1F72AFBF0086E52C /* PathContainer.swift */; };
 		8631B3EF1F8713C40029BF90 /* NamingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8631B3EE1F8713C40029BF90 /* NamingStrategy.swift */; };
 		8631B3F11F87B6B10029BF90 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8631B3F01F87B6B10029BF90 /* Utils.swift */; };
+		86425AA51F8FF81800D48C53 /* TransformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86425AA41F8FF81800D48C53 /* TransformationTests.swift */; };
+		86425AA71F9012BA00D48C53 /* FileFormat.md in Resources */ = {isa = PBXBuildFile; fileRef = 86425AA61F9012BA00D48C53 /* FileFormat.md */; };
 		864626341F8ED7E700F8047B /* VariableRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864626331F8ED7E700F8047B /* VariableRef.swift */; };
 		864626361F8ED87800F8047B /* AssignmentExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864626351F8ED87800F8047B /* AssignmentExpression.swift */; };
 		864626381F8ED89600F8047B /* BasicExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864626371F8ED89600F8047B /* BasicExpression.swift */; };
@@ -41,6 +43,8 @@
 		8646263C1F8EE5CF00F8047B /* GeneratorContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8646263B1F8EE5CF00F8047B /* GeneratorContext.swift */; };
 		867F448D1F8C5B8200B793E3 /* ClassDeclaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867F448C1F8C5B8200B793E3 /* ClassDeclaration.swift */; };
 		867F448F1F8C5BBB00B793E3 /* VariableDeclaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867F448E1F8C5BBB00B793E3 /* VariableDeclaration.swift */; };
+		8689092D1F8FCCFC008884E5 /* TransformDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8689092C1F8FCCFC008884E5 /* TransformDocument.swift */; };
+		8689092F1F8FE112008884E5 /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8689092E1F8FE112008884E5 /* Builder.swift */; };
 		86D827B31F8F00D9009042E7 /* Containers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D827B21F8F00D9009042E7 /* Containers.swift */; };
 		86D9E8BC1F843C0D008A6D70 /* GenerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9E8BB1F843C0D008A6D70 /* GenerationTests.swift */; };
 		86D9E8BF1F848BC1008A6D70 /* TypeRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9E8BE1F848BC1008A6D70 /* TypeRef.swift */; };
@@ -120,6 +124,8 @@
 		8631B3EE1F8713C40029BF90 /* NamingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamingStrategy.swift; sourceTree = "<group>"; };
 		8631B3F01F87B6B10029BF90 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		863E3E7F1ECFB1A7008AF9E5 /* SketchyCodeCLI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SketchyCodeCLI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		86425AA41F8FF81800D48C53 /* TransformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformationTests.swift; sourceTree = "<group>"; };
+		86425AA61F9012BA00D48C53 /* FileFormat.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = FileFormat.md; sourceTree = "<group>"; };
 		864626331F8ED7E700F8047B /* VariableRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableRef.swift; sourceTree = "<group>"; };
 		864626351F8ED87800F8047B /* AssignmentExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentExpression.swift; sourceTree = "<group>"; };
 		864626371F8ED89600F8047B /* BasicExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicExpression.swift; sourceTree = "<group>"; };
@@ -127,6 +133,8 @@
 		8646263B1F8EE5CF00F8047B /* GeneratorContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorContext.swift; sourceTree = "<group>"; };
 		867F448C1F8C5B8200B793E3 /* ClassDeclaration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassDeclaration.swift; sourceTree = "<group>"; };
 		867F448E1F8C5BBB00B793E3 /* VariableDeclaration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableDeclaration.swift; sourceTree = "<group>"; };
+		8689092C1F8FCCFC008884E5 /* TransformDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformDocument.swift; sourceTree = "<group>"; };
+		8689092E1F8FE112008884E5 /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
 		86D827B21F8F00D9009042E7 /* Containers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Containers.swift; sourceTree = "<group>"; };
 		86D9E8BB1F843C0D008A6D70 /* GenerationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenerationTests.swift; sourceTree = "<group>"; };
 		86D9E8BE1F848BC1008A6D70 /* TypeRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeRef.swift; sourceTree = "<group>"; };
@@ -204,6 +212,7 @@
 				862EBE9C1F71DFAE0086E52C /* SketchyCodeTests.swift */,
 				86D9E8BB1F843C0D008A6D70 /* GenerationTests.swift */,
 				862EBE9E1F71DFAE0086E52C /* Info.plist */,
+				86425AA41F8FF81800D48C53 /* TransformationTests.swift */,
 			);
 			path = SketchyCodeTests;
 			sourceTree = "<group>";
@@ -251,6 +260,7 @@
 		862EBEE71F72AEEE0086E52C /* SketchClasses */ = {
 			isa = PBXGroup;
 			children = (
+				86425AA61F9012BA00D48C53 /* FileFormat.md */,
 				862EBEEA1F72AF090086E52C /* SketchClasses+Generated.swift */,
 				862EBEE91F72AF090086E52C /* SketchClasses+Helpers.swift */,
 				862EBEED1F72AF410086E52C /* LayerContainer.swift */,
@@ -287,13 +297,23 @@
 			isa = PBXGroup;
 			children = (
 				862EBEAB1F71E0CB0086E52C /* CLI */,
-				862EBEE71F72AEEE0086E52C /* SketchClasses */,
 				8631B3F01F87B6B10029BF90 /* Utils.swift */,
+				862EBEE71F72AEEE0086E52C /* SketchClasses */,
+				8689092B1F8FCCA9008884E5 /* Transformation */,
 				86D9E8BD1F848BAD008A6D70 /* Generation */,
 				862EBEDD1F71E4340086E52C /* SketchyCode.h */,
 				862EBED91F71E2030086E52C /* Info.plist */,
 			);
 			path = SketchyCode;
+			sourceTree = "<group>";
+		};
+		8689092B1F8FCCA9008884E5 /* Transformation */ = {
+			isa = PBXGroup;
+			children = (
+				8689092C1F8FCCFC008884E5 /* TransformDocument.swift */,
+				8689092E1F8FE112008884E5 /* Builder.swift */,
+			);
+			path = Transformation;
 			sourceTree = "<group>";
 		};
 		86D9E8BD1F848BAD008A6D70 /* Generation */ = {
@@ -444,6 +464,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86425AA71F9012BA00D48C53 /* FileFormat.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +623,7 @@
 				862EBEEB1F72AF090086E52C /* SketchClasses+Helpers.swift in Sources */,
 				8646263C1F8EE5CF00F8047B /* GeneratorContext.swift in Sources */,
 				86D9E8C51F848C38008A6D70 /* Generators.swift in Sources */,
+				8689092D1F8FCCFC008884E5 /* TransformDocument.swift in Sources */,
 				8631B3F11F87B6B10029BF90 /* Utils.swift in Sources */,
 				864626361F8ED87800F8047B /* AssignmentExpression.swift in Sources */,
 				864626381F8ED89600F8047B /* BasicExpression.swift in Sources */,
@@ -616,6 +638,7 @@
 				8631B3EF1F8713C40029BF90 /* NamingStrategy.swift in Sources */,
 				864626341F8ED7E700F8047B /* VariableRef.swift in Sources */,
 				86066DA81F85B16E00130A65 /* VariableMutation.swift in Sources */,
+				8689092F1F8FE112008884E5 /* Builder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +650,7 @@
 				862EBEE61F7216F80086E52C /* Helpers.swift in Sources */,
 				862EBE9D1F71DFAE0086E52C /* SketchyCodeTests.swift in Sources */,
 				86D9E8BC1F843C0D008A6D70 /* GenerationTests.swift in Sources */,
+				86425AA51F8FF81800D48C53 /* TransformationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

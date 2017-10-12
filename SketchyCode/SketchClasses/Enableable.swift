@@ -41,7 +41,6 @@ extension MSStyle: EnableableContainer {
         shadows.forEach({ result.append($0) })
         fills.forEach({ result.append($0) })
         innerShadows.forEach({ result.append($0) })
-        borders.forEach({ result.append($0) })
         result.append(reflection)
         result.append(blur)
         result.append(colorControls)

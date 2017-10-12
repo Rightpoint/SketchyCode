@@ -96,6 +96,10 @@ extension Scope {
         }
     }
 
+    func add(expression parts: SyntaxPart...) {
+        add(BasicExpression(parts: parts))
+    }
+
     func remove(_ generator: AnyObject & Generator) throws {
         if let index = children
             .flatMap({ $0 as? AnyObject & Generator })
