@@ -18,17 +18,6 @@ class ClassDeclaration: Scope {
         super.init()
         add(selfDeclaration)
     }
-
-    override func generate(in scope: Scope, context: GeneratorContext) throws {
-        if let inheriting = inheriting {
-            context.writer.append(line: "class \(typeRef.name): \(inheriting.name) ", addNewline: false)
-        } else {
-            context.writer.append(line: "class \(typeRef.name) ", addNewline: false)
-        }
-        try context.writer.block() {
-            try super.generate(in: self, context: context)
-        }
-    }
 }
 
 extension ClassDeclaration {
@@ -71,14 +60,23 @@ extension Scope {
         var movedExpressions: [Generator] = []
         for (index, child) in children.enumerated().reversed() {
             guard let expression = child as? VariableMutation else { continue }
+
             children.remove(at: index)
             guard let transferred = expression.transform(
                 variable: variable.value,
                 to: cls.selfDeclaration.value) as? Generator else {
-                    fatalError("TransformableVariable \(child) does not conform to Generator")
+                    fatalError("\(VariableMutation.self) \(child) does not conform to \(Generator.self)")
             }
             movedExpressions.insert(transferred, at: 0)
         }
         cls.add(contentsOf: movedExpressions)
+    }
+}
+
+extension ClassDeclaration {
+
+    func moveExpressionsToPropertyClosures(for variable: VariableDeclaration) {
+        for (index, child) in children.enumerated().reversed() {
+        }
     }
 }

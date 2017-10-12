@@ -9,15 +9,10 @@
 import Foundation
 
 // Scope defines a scope for declarations to live.
-class Scope: Generator {
+class Scope {
     weak var parent: Scope?
     var children: [Generator] = []
-
-    func generate(in scope: Scope, context: GeneratorContext) throws {
-        try children.forEach { try $0.generate(in: self, context: context) }
-    }
 }
-
 
 extension Scope {
 
@@ -38,10 +33,6 @@ extension Scope {
             }
         }
         return []
-    }
-
-    func generate(context: GeneratorContext) throws {
-        try generate(in: self, context: context)
     }
 
     func parentConext() throws -> Scope {
@@ -105,3 +96,6 @@ extension Scope {
         }
     }
 }
+
+// A very boring scope.
+class GlobalScope: Scope {}

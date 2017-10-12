@@ -21,6 +21,12 @@ extension VariableRef {
     }
 }
 
+extension VariableRef: Hashable {
+    var hashValue: Int {
+        return uuid.hashValue
+    }
+}
+
 extension VariableRef: Equatable {
     static func ==(lhs: VariableRef, rhs: VariableRef) -> Bool {
         return lhs.uuid == rhs.uuid && lhs.type == rhs.type

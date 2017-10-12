@@ -9,14 +9,13 @@
 import Foundation
 
 // This protocol defines a contract to lookup and move protocols
-protocol VariableMutation {
-    var contained: [VariableRef] { get }
+protocol VariableMutation: VariableContainer {
     func transform(variable: VariableRef, to toVariable: VariableRef) -> Self
 }
 
 extension BasicExpression: VariableMutation {
-    var contained: [VariableRef] {
-        return parts.flatMap { $0.variableRef }
+    var contained: Set<VariableRef> {
+        return Set(parts.flatMap { $0.variableRef })
     }
 
     func transform(variable from: VariableRef, to: VariableRef) -> BasicExpression {
@@ -25,9 +24,10 @@ extension BasicExpression: VariableMutation {
 }
 
 extension AssignmentExpression: VariableMutation {
-    var contained: [VariableRef] {
-        let exprContained = (expression as? VariableMutation)?.contained ?? []
-        return exprContained + [to]
+    var contained: Set<VariableRef> {
+        var exprContained = Set((expression as? VariableMutation)?.contained ?? [])
+        exprContained.insert(to)
+        return exprContained
     }
 
     func transform(variable from: VariableRef, to: VariableRef) -> AssignmentExpression {
@@ -44,11 +44,6 @@ extension AssignmentExpression: VariableMutation {
 }
 
 extension BlockExpression: VariableMutation {
-    var contained: [VariableRef] {
-        return children
-            .flatMap { ($0 as? VariableMutation) }
-            .flatMap { $0.contained }
-    }
 
     func transform(variable from: VariableRef, to toVariable: VariableRef) -> BlockExpression {
         let transformed = children.map { (child) -> Generator in
