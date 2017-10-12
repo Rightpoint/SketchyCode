@@ -15,7 +15,10 @@ class GenerationTests: XCTestCase {
     let global = GlobalScope()
 
     func generate() throws -> String {
-        let context = GeneratorContext(namingStrategy: CounterNamingStrategy(), options: [])
+        let context = GeneratorContext(
+            namingStrategy: CounterNamingStrategy(),
+            options: GeneratorOptions())
+
         try global.generate(context: context)
         print(context.writer.content)
         return context.writer.content

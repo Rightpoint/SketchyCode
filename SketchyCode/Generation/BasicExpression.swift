@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct BasicExpression: Generator, Expression {
+struct BasicExpression: Generator {
     let parts: [SyntaxPart]
 
     func generate(in scope: Scope, context: GeneratorContext) throws {
@@ -18,10 +18,6 @@ struct BasicExpression: Generator, Expression {
                 return try context.code(in: scope, for: part, isLeadingVariable: index == 0)
             }
             .joined())
-    }
-
-    func transform(variable from: VariableRef, to: VariableRef) -> Expression {
-        return BasicExpression(parts: parts.map { $0.transform(variable: from, to: to) })
     }
 }
 
@@ -40,31 +36,6 @@ indirect enum SyntaxPart {
         case .v(let variable): return variable
         case .p(let variable): return variable
         case .debug(let part): return part.variableRef
-        }
-    }
-}
-
-
-extension VariableRef {
-    func transform(from: VariableRef, to: VariableRef) -> VariableRef {
-        if self == from {
-            return to
-        }
-        return self
-    }
-}
-
-extension SyntaxPart {
-    func transform(variable from: VariableRef, to: VariableRef) -> SyntaxPart {
-        switch self {
-        case .v(let variable):
-            return .v(variable.transform(from: from, to: to))
-        case .p(let variable):
-            return .p(variable.transform(from: from, to: to))
-        case .debug(let inner):
-            return .debug(inner.transform(variable: from, to: to))
-        default:
-            return self
         }
     }
 }

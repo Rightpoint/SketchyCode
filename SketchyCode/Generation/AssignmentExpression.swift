@@ -9,19 +9,14 @@
 import Foundation
 
 // An assignment expression is attached to a variable declaration.
-struct AssignmentExpression: Expression {
+struct AssignmentExpression: Generator {
     let to: VariableRef
-    let expression: Expression
+    let expression: Generator
 
     func generate(in scope: Scope, context: GeneratorContext) throws {
         try expression.generate(in: scope, context: context)
     }
 
-    func transform(variable from: VariableRef, to: VariableRef) -> Expression {
-        return AssignmentExpression(
-            to: to.transform(from: from, to: to),
-            expression: expression.transform(variable: from, to: to))
-    }
 }
 
 extension AssignmentExpression {

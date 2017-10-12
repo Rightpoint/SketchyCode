@@ -68,13 +68,15 @@ extension Scope {
     }
 
     func moveExpressions(for variable: VariableDeclaration, to cls: ClassDeclaration) {
-        var movedExpressions: [Expression] = []
+        var movedExpressions: [Generator] = []
         for (index, child) in children.enumerated().reversed() {
-            guard let expression = child as? Expression else { continue }
+            guard let expression = child as? VariableMutation else { continue }
             children.remove(at: index)
-            let transferred = expression.transform(
+            guard let transferred = expression.transform(
                 variable: variable.value,
-                to: cls.selfDeclaration.value)
+                to: cls.selfDeclaration.value) as? Generator else {
+                    fatalError("TransformableVariable \(child) does not conform to Generator")
+            }
             movedExpressions.insert(transferred, at: 0)
         }
         cls.add(contentsOf: movedExpressions)

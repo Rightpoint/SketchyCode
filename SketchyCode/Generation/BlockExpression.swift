@@ -8,7 +8,7 @@
 
 import Foundation
 
-class BlockExpression: Expression {
+final class BlockExpression {
     var children: [Generator]
 
     init(children: [Generator] = []) {
@@ -18,21 +18,14 @@ class BlockExpression: Expression {
     var hasContent: Bool {
         return children.count > 0
     }
+}
 
-    func transform(variable: VariableRef, to toVariable: VariableRef) -> Expression {
-        let transformed = children.map { (child) -> Generator in
-            if let expr = child as? Expression {
-                return expr.transform(variable: variable, to: toVariable)
-            } else {
-                return child
-            }
-        }
-        return BlockExpression(children: transformed)
-    }
-
+extension BlockExpression: Generator {
     func generate(in scope: Scope, context: GeneratorContext) throws {
         try context.writer.block(appending: "()") {
             try children.forEach { try $0.generate(in: scope, context: context) }
         }
     }
 }
+
+
