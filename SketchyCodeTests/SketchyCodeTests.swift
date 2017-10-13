@@ -15,7 +15,7 @@ class SketchyCodeTests: XCTestCase {
     
     func testPagesLoad() throws {
         let helper = try InputSketchHelper()
-        XCTAssert(helper.document.pages.count == 11)
+        XCTAssert(helper.document.pages.count == 12)
         XCTAssertNotNil(helper.shape)
         XCTAssertNotNil(helper.layout)
         XCTAssertNotNil(helper.fill)
@@ -27,6 +27,7 @@ class SketchyCodeTests: XCTestCase {
         XCTAssertNotNil(helper.images)
         XCTAssertNotNil(helper.artboard)
         XCTAssertNotNil(helper.symbols)
+        XCTAssertNotNil(helper.app)
     }
 
     func testShapeLoad() throws {

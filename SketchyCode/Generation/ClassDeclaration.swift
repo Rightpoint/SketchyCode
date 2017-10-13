@@ -55,6 +55,9 @@ extension Scope {
         var movedExpressions: [Generator] = []
         for (index, child) in children.enumerated().reversed() {
             guard let expression = child as? VariableMutation & Generator else { continue }
+
+            // This does not work because of more complex lookup rules with nested variables
+            //guard expression.contained.contains(variable.value) else { continue }
             children.remove(at: index)
             let transferred = expression.transform(
                 variable: variable.value,

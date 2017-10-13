@@ -12,24 +12,54 @@ protocol Builder {
     func build(layer: MSShapeLayer, in scope: Scope) throws -> VariableDeclaration?
 }
 
+class SwiftUIKitBuilder: Builder {
+    // Skip layers with no TypeRef
 
-
-struct SwiftUIKitBuilder: Builder {
     func build(layer: MSShapeLayer, in scope: Scope) throws -> VariableDeclaration? {
-        // Skip layers with no TypeRef
-        guard let name = className(for: layer) else { return nil }
-        let variable = scope.makeVariable(
-            ofType: TypeRef(name: name),
-            initializedWith: BasicExpression(.s(name.appending("()"))))
+        let hint = try GenerationHint.makeHint(input: layer.name, objectID: layer.objectID)
+        if let className = className(for: layer) {
 
-        scope.add(expression: .v(variable.value), .s("frame = \(layer.frame.asCGRect())"))
+            let variable = scope.makeVariable(ofType: TypeRef(name: className), initializedWith: nil)
 
+            var generationScope = scope
+            if let subClass = hint.className {
+                generationScope = scope.makeClass(ofType: TypeRef(name: subClass + "View"), for: variable)
+            }
+
+
+            variable.initialization = AssignmentExpression(to: variable.value, expression:
+                BasicExpression(.s(className.appending("()"))))
+
+//            generationScope.add(expression: .v(variable.value), .s("accessibilityIdentifier = \""), .v(variable.value), .s("\""))
+
+            configureFrameLayout(variable.value, in: generationScope, layer: layer)
+            try configureChildren(variable.value, in: generationScope, layer: layer)
+            if let classDeclaration = generationScope as? ClassDeclaration {
+//                scope.moveExpressions(for: variable, to: classDeclaration)
+                classDeclaration.moveExpressionsToPropertyClosures()
+            }
+            return variable
+        } else {
+            try configureChildren(nil, in: scope, layer: layer)
+        }
+
+        return nil
+    }
+
+    func configureFrameLayout(_ variableRef: VariableRef, in scope: Scope, layer: MSShapeLayer) {
+        scope.add(expression: .v(variableRef), .s("frame = \(layer.frame.asCGRect())"))
+        let options = ResizeOptions(rawValue: Int(layer.resizingConstraint))
+        scope.add(expression: .v(variableRef), .s("autoresizingMask = \(resizingMask(from: options))"))
+    }
+
+    func configureChildren(_ variableRef: VariableRef?, in scope: Scope, layer: MSShapeLayer) throws {
         if let layer = layer as? LayerContainer {
             for childVariable in try layer.layers.flatMap({ try build(layer: $0, in: scope) }) {
-                scope.add(BasicExpression(.v(variable.value), .s("addSubview"), .p(childVariable.value)))
+                if let variableRef = variableRef {
+                    scope.add(BasicExpression(.v(variableRef), .s("addSubview"), .p(childVariable.value)))
+                }
             }
         }
-        return variable
     }
 
     func className(for shapeLayer: MSShapeLayer) -> String? {
@@ -48,10 +78,15 @@ struct SwiftUIKitBuilder: Builder {
             return nil
         }
     }
-}
 
-extension MSRect {
-    func asCGRect() -> String {
-        return "CGRect(x: \(x), y: \(y), width: \(width), height: \(height))"
+    func resizingMask(from options: ResizeOptions) -> String {
+        var value = Array<String>()
+        if options.contains(.flexibleLeftMargin) { value.append(".flexibleLeftMargin")}
+        if options.contains(.flexibleWidth) { value.append(".flexibleWidth")}
+        if options.contains(.flexibleRightMargin) { value.append(".flexibleRightMargin")}
+        if options.contains(.flexibleTopMargin) { value.append(".flexibleTopMargin")}
+        if options.contains(.flexibleHeight) { value.append(".flexibleHeight")}
+        if options.contains(.flexibleBottomMargin) { value.append(".flexibleBottomMargin")}
+        return "[\(value.joined(separator: ", "))]"
     }
 }

@@ -54,7 +54,7 @@ extension VariableDeclaration {
 extension Scope {
 
     // FIXME: Replace initializedWith with an InitializationExpression that will infer types
-    func makeVariable(ofType type: TypeRef, initializedWith generator: Generator) -> VariableDeclaration {
+    func makeVariable(ofType type: TypeRef, initializedWith generator: Generator? = nil) -> VariableDeclaration {
         let variable = VariableDeclaration(type: type, expression: generator)
         add(variable)
         return variable

@@ -14,6 +14,7 @@ class InputSketchHelper {
         return Bundle(for: InputSketchHelper.self)
     }
 
+    // sketchtool dump InputSketch.sketch > .//SketchyCodeTests/InputSketch.dump.json
     static var JSON: [String: Any] = {
         guard let URL = bundle.url(forResource: "InputSketch.dump", withExtension: "json") else {
             fatalError("File does not exist")
@@ -54,4 +55,5 @@ class InputSketchHelper {
     var images: MSPage? { return document.page(withName: "Images") }
     var artboard: MSPage? { return document.page(withName: "Artboard") }
     var symbols: MSPage? { return document.page(withName: "Symbols") }
+    var app: MSPage? { return document.page(withName: "App") }
 }
