@@ -11,11 +11,19 @@ import Foundation
 struct BasicExpression: Generator {
     let parts: [SyntaxPart]
 
+    init(parts: [SyntaxPart]) {
+        var parts = parts
+        if var first = parts.first {
+            first.addLeadingHint()
+            parts[0] = first
+        }
+        self.parts = parts
+    }
+
     func generate(in scope: Scope, context: GeneratorContext) throws {
         context.writer.append(line: try parts
-            .enumerated()
-            .map { (index, part) -> String in
-                return try context.code(in: scope, for: part, isLeadingVariable: index == 0)
+            .map { part -> String in
+                return try context.code(in: scope, for: part)
             }
             .joined())
     }
@@ -38,10 +46,32 @@ indirect enum SyntaxPart {
         case .debug(let part): return part.variableRef
         }
     }
+
+    mutating func addLeadingHint() {
+        switch self {
+        case .s:
+            break
+        case .v(var variable):
+            variable.addLeadingHint()
+            self = .v(variable)
+        case .p(var variable):
+            variable.addLeadingHint()
+            self = .v(variable)
+        case .debug(var part):
+            part.addLeadingHint()
+        }
+    }
 }
 
 extension BasicExpression {
     init(_ parts: SyntaxPart...) {
-        self.parts = parts
+        self.init(parts: parts)
+    }
+}
+
+extension VariableRef {
+    mutating func addLeadingHint() {
+        guard !isLeading else { return }
+        self.hints = self.hints + [.isLeading]
     }
 }

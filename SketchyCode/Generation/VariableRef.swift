@@ -13,11 +13,49 @@ import Foundation
 struct VariableRef {
     let uuid: UUID
     let type: TypeRef
+    var hints: [VariableGenerationHint]
+}
+
+enum VariableGenerationHint {
+    case isSelf
+    case isLeading
+    case userHint(String)
 }
 
 extension VariableRef {
-    init(ofType name: String) {
-        self.init(uuid: UUID(), type: TypeRef(name: name))
+    init(ofType name: String, hints: VariableGenerationHint...) {
+        self.init(uuid: UUID(), type: TypeRef(name: name), hints: hints)
+    }
+
+    var isSelf: Bool {
+        return hints.contains { (hint) -> Bool in
+            if case .isSelf = hint {
+                return true
+            }
+            return false
+        }
+    }
+
+    var isLeading: Bool {
+        return hints.contains { (hint) -> Bool in
+            if case .isLeading = hint {
+                return true
+            }
+            return false
+        }
+    }
+
+    var isImplicitSelf: Bool {
+        return isSelf && isLeading
+    }
+
+    var userVariableName: String? {
+        return hints.flatMap {
+            if case .userHint(let value) = $0 {
+                return value
+            }
+            return nil
+        }.first
     }
 }
 

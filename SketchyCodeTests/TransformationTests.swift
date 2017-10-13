@@ -27,9 +27,9 @@ class TransformationLayoutTests: XCTestCase {
         XCTAssert(generated ==
         """
         // Automatically generated. Do Not Edit!
-        let view0: UIView = UIView()
-        view0.frame = CGRect(x: -396.0, y: -281.0, width: 188.0, height: 623.0)
-        view0.autoresizingMask = [.flexibleLeftMargin, .flexibleWidth, .flexibleRightMargin, .flexibleTopMargin, .flexibleHeight, .flexibleBottomMargin]
+        let view: UIView = UIView()
+        view.frame = CGRect(x: -396.0, y: -281.0, width: 188.0, height: 623.0)
+        view.autoresizingMask = [.flexibleLeftMargin, .flexibleWidth, .flexibleRightMargin, .flexibleTopMargin, .flexibleHeight, .flexibleBottomMargin]
         let view1: UIView = UIView()
         view1.frame = CGRect(x: 0.0, y: 0.0, width: 188.0, height: 623.0)
         view1.autoresizingMask = [.flexibleLeftMargin, .flexibleWidth, .flexibleRightMargin, .flexibleTopMargin, .flexibleHeight, .flexibleBottomMargin]
@@ -42,10 +42,10 @@ class TransformationLayoutTests: XCTestCase {
         let view4: UIView = UIView()
         view4.frame = CGRect(x: 111.0, y: 202.0, width: 56.0, height: 234.0)
         view4.autoresizingMask = [.flexibleRightMargin, .flexibleTopMargin, .flexibleHeight, .flexibleBottomMargin]
-        view0.addSubview(view1)
-        view0.addSubview(view2)
-        view0.addSubview(view3)
-        view0.addSubview(view4)
+        view.addSubview(view1)
+        view.addSubview(view2)
+        view.addSubview(view3)
+        view.addSubview(view4)
 
         """)
     }

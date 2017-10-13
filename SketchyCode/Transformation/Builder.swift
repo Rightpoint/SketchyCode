@@ -13,29 +13,33 @@ protocol Builder {
 }
 
 class SwiftUIKitBuilder: Builder {
-    // Skip layers with no TypeRef
 
     func build(layer: MSShapeLayer, in scope: Scope) throws -> VariableDeclaration? {
         let hint = try GenerationHint.makeHint(input: layer.name, objectID: layer.objectID)
         if let className = className(for: layer) {
 
-            let variable = scope.makeVariable(ofType: TypeRef(name: className), initializedWith: nil)
+            var variable = scope.makeVariable(ofType: TypeRef(name: className), initializedWith: nil)
 
             var generationScope = scope
             if let subClass = hint.className {
-                generationScope = scope.makeClass(ofType: TypeRef(name: subClass + "View"), for: variable)
+                let classDeclaration = scope.makeClass(ofType: TypeRef(name: subClass + "View"), for: variable)
+                variable = classDeclaration.selfDeclaration
+                generationScope = classDeclaration
+            }
+
+            if let variableName = hint.variableName {
+                variable.value.hints.append(.userHint(variableName))
+                generationScope.add(expression: .v(variable.value), .s("accessibilityIdentifier = \"\(variableName)\""))
             }
 
 
             variable.initialization = AssignmentExpression(to: variable.value, expression:
                 BasicExpression(.s(className.appending("()"))))
 
-//            generationScope.add(expression: .v(variable.value), .s("accessibilityIdentifier = \""), .v(variable.value), .s("\""))
 
             configureFrameLayout(variable.value, in: generationScope, layer: layer)
             try configureChildren(variable.value, in: generationScope, layer: layer)
             if let classDeclaration = generationScope as? ClassDeclaration {
-//                scope.moveExpressions(for: variable, to: classDeclaration)
                 classDeclaration.moveExpressionsToPropertyClosures()
             }
             return variable

@@ -14,6 +14,7 @@ class ClassDeclaration: Scope {
 
     init(typeRef: TypeRef, inheriting: TypeRef? = nil) {
         self.selfDeclaration = VariableDeclaration(type: typeRef)
+        self.selfDeclaration.value.hints = [.isSelf]
         self.inheriting = inheriting
         super.init()
         add(selfDeclaration)
@@ -21,10 +22,6 @@ class ClassDeclaration: Scope {
 }
 
 extension ClassDeclaration {
-
-    func isSelf(ref: VariableRef) -> Bool {
-        return selfDeclaration.value == ref
-    }
 
     var typeRef: TypeRef {
         return selfDeclaration.value.type
@@ -39,7 +36,7 @@ extension Scope {
             typeRef: type,
             inheriting: variable.value.type)
         add(cls)
-        variable.value = VariableRef(uuid: variable.value.uuid, type: type)
+        variable.value = VariableRef(uuid: variable.value.uuid, type: type, hints: [])
         return cls
     }
 

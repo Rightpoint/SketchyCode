@@ -22,21 +22,21 @@ class GeneratorContext {
         self.options = options
     }
 
-    func code(in scope: Scope, for syntaxPart: SyntaxPart, isLeadingVariable: Bool) throws -> String {
+    func code(in scope: Scope, for syntaxPart: SyntaxPart) throws -> String {
         switch syntaxPart {
         case .v(let object):
-            return try name(in: scope, for: object, isLeadingVariable: isLeadingVariable)
+            return try name(in: scope, for: object)
         case .s(let string):
             return string
         case .p(let object):
-            let variable = try name(in: scope, for: object, isLeadingVariable: false)
+            let variable = try name(in: scope, for: object)
             return "(\(variable))"
         case .debug(let part):
-            return try code(in: scope, for: part, isLeadingVariable: isLeadingVariable)
+            return try code(in: scope, for: part)
         }
     }
 
-    func name(in scope: Scope, for variable: VariableRef, isLeadingVariable: Bool) throws -> String {
+    func name(in scope: Scope, for variable: VariableRef) throws -> String {
         var path: [VariableRef] = scope.path(for: variable)
         var nextScope = scope.parent
         while path.count == 0 {
@@ -49,23 +49,14 @@ class GeneratorContext {
             }
         }
         assert(path.last == variable)
-        let classDeclaration: ClassDeclaration? = scope.lookupContainer(where: { _ in true })
-        let isSelfRef: Bool = classDeclaration?.isSelf(ref: variable) ?? false
         var variableNames: [String] = []
-        for (index, variable) in path.enumerated() {
-            let name = namingStrategy.name(for: variable)
-            if isSelfRef {
-                if isLeadingVariable && index == 0 {
-                    continue
-                } else {
-                    variableNames.append("self")
-                }
-            } else {
-                variableNames.append(name)
+        for variable in path {
+            if !variable.isImplicitSelf {
+                variableNames.append(namingStrategy.name(for: variable))
             }
         }
         var name = variableNames.joined(separator: ".")
-        if isLeadingVariable && !isSelfRef {
+        if variable.isLeading && variableNames.count > 0 {
             name.append(".")
         }
         return name

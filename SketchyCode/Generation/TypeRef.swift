@@ -12,9 +12,6 @@ import Foundation
 struct TypeRef {
     let name: String
 
-    var simpleName: String {
-        return name.objcnessRemoved().variabled
-    }
     var isOptional: Bool {
         return name.hasSuffix("?")
     }

@@ -15,20 +15,36 @@ protocol NamingStrategy {
 
 // A bad naming strategy.
 class CounterNamingStrategy: NamingStrategy {
-    var counter: Int = 0
+    var counter: [String: Int] = [:]
     var names: [UUID: String] = [:]
 
-    func name(for uuid: UUID, type: String) -> String {
-        if let name = names[uuid] {
+    func name(for variable: VariableRef) -> String {
+        if variable.isSelf {
+            return "self"
+        }
+        if let name = names[variable.uuid] {
             return name
         }
-        let name = type.appending(String(describing: counter))
+        if let hint = variable.userVariableName {
+            self.names[variable.uuid] = hint
+            return hint
+        }
+        let typeName = variable.type.name
+        var name = typeName
+        if name.hasPrefix("UI") {
+            name.removeFirst()
+            name.removeFirst()
+        }
+        if let first = name.indices.first {
+            name.replaceSubrange(first...first, with: String(name[first]).lowercased())
+        }
+        var counter = self.counter[typeName] ?? 0
+        if counter != 0 {
+            name.append(String(describing: counter))
+        }
         counter += 1
-        names[uuid] = name
+        self.counter[typeName] = counter
+        self.names[variable.uuid] = name
         return name
-    }
-
-    func name(for variable: VariableRef) -> String {
-        return name(for: variable.uuid, type: variable.type.simpleName)
     }
 }

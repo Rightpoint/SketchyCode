@@ -12,10 +12,6 @@ protocol Generator {
     func generate(in scope: Scope, context: GeneratorContext) throws
 }
 
-// This is done in the initial declaration because Scope is a base class, but
-// the base class implementation only calls fatalError.
-// extension Scope: Generator {}
-
 extension ClassDeclaration: Generator {
     func generate(in scope: Scope, context: GeneratorContext) throws {
         if let inheriting = inheriting {
@@ -34,7 +30,7 @@ extension VariableDeclaration: Generator {
         if let classDeclaration = scope as? ClassDeclaration, classDeclaration.selfDeclaration.value == self.value {
             return
         }
-        let name = try context.name(in: scope, for: value, isLeadingVariable: false)
+        let name = try context.name(in: scope, for: value)
 
         if let initialization = initialization {
             context.writer.append(line: "let \(name): \(value.type.name) = ", addNewline: false)

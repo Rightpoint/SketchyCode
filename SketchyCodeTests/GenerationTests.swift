@@ -40,13 +40,14 @@ class GenerationTests: XCTestCase {
         """
         // Automatically generated. Do Not Edit!
         class MyView: UIView {
-            let label0: UILabel = UILabel()
-            addSubview(label0)
+            let label: UILabel = UILabel()
+            addSubview(label)
             print(self)
         }
-        let view2: MyView = MyView()
+        let myView: MyView = MyView()
 
         """
+
         XCTAssert(try generate() == expected)
     }
 
@@ -59,9 +60,9 @@ class GenerationTests: XCTestCase {
         """
         // Automatically generated. Do Not Edit!
         class MyView: UIView {
-            let label0: UILabel = UILabel()
+            let label: UILabel = UILabel()
         }
-        let view1: MyView = MyView()
+        let myView: MyView = MyView()
 
         """
         XCTAssert(try generate() == expected)
@@ -85,12 +86,12 @@ class GenerationTests: XCTestCase {
         """
         // Automatically generated. Do Not Edit!
         class MyView: UIView {
-            let label0: UILabel = {
-                view1.label0.text = ring2
+            let label: UILabel = {
+                myView.label.text = string
             }()
         }
-        let view1: MyView = MyView()
-        let ring2: String = ""
+        let myView: MyView = MyView()
+        let string: String = ""
 
         """
         XCTAssert(try generate() == expected)
@@ -112,14 +113,14 @@ class GenerationTests: XCTestCase {
         """
         // Automatically generated. Do Not Edit!
         class MyView: UIView {
-            let label0: UILabel = UILabel()
+            let label: UILabel = UILabel()
             let label1: UILabel = UILabel()
         }
-        let view2: MyView = MyView()
-        view2.addSubview(view2.label1)
-        view2.addSubview(view2.label0)
-        view2.label1.text = "testing"
-        view2.label0.text = "label"
+        let myView: MyView = MyView()
+        myView.addSubview(myView.label1)
+        myView.addSubview(myView.label)
+        myView.label1.text = "testing"
+        myView.label.text = "label"
 
         """)
 
@@ -133,12 +134,12 @@ class GenerationTests: XCTestCase {
         """
         // Automatically generated. Do Not Edit!
         class MyView: UIView {
-            let label0: UILabel = UILabel()
+            let label: UILabel = UILabel()
             let label1: UILabel = UILabel()
             addSubview(label1)
-            addSubview(label0)
+            addSubview(label)
             label1.text = "testing"
-            label0.text = "label"
+            label.text = "label"
         }
 
         """)
@@ -150,7 +151,7 @@ class GenerationTests: XCTestCase {
         """
         // Automatically generated. Do Not Edit!
         class MyView: UIView {
-            let label0: UILabel = {
+            let label: UILabel = {
                 let label1: UILabel = UILabel()
                 label1.text = "label"
                 return label1
@@ -161,32 +162,33 @@ class GenerationTests: XCTestCase {
                 return label3
             }()
             addSubview(label2)
-            addSubview(label0)
+            addSubview(label)
         }
 
         """)
+
     }
 
     func testNestedVariableLookup() throws {
         let view = global.makeVariable(ofType: "UIView", initializedWith: BasicExpression(.s("MyView()")))
         let subview = global.makeClass(ofType: "MyView", for: view)
-        let bg = subview.makeVariable(ofType: TypeRef(name: "UIView"), initializedWith: BasicExpression(.s("BKBackgroundView()")))
+        let bg = subview.makeVariable(ofType: TypeRef(name: "UIView"), initializedWith: BasicExpression(.s("BackgroundView()")))
 
-        let bgView = global.makeClass(ofType: TypeRef(name: "BKBackgroundView"), for: bg)
-        let image = bgView.makeVariable(ofType: TypeRef(name: "UIImageView"), initializedWith: BasicExpression(.s("BKBackgroundView()")))
+        let bgView = global.makeClass(ofType: TypeRef(name: "BackgroundView"), for: bg)
+        let image = bgView.makeVariable(ofType: TypeRef(name: "UIImageView"), initializedWith: BasicExpression(.s("BackgroundView()")))
 
         global.add(BasicExpression(.v(image.value), .s("image = UIImage(named: \"test\")")))
         let expected =
         """
         // Automatically generated. Do Not Edit!
         class MyView: UIView {
-            let backgroundView0: BKBackgroundView = BKBackgroundView()
+            let backgroundView: BackgroundView = BackgroundView()
         }
-        class BKBackgroundView: UIView {
-            let imageView1: UIImageView = BKBackgroundView()
+        class BackgroundView: UIView {
+            let imageView: UIImageView = BackgroundView()
         }
-        let view2: MyView = MyView()
-        view2.backgroundView0.imageView1.image = UIImage(named: "test")
+        let myView: MyView = MyView()
+        myView.backgroundView.imageView.image = UIImage(named: "test")
 
         """
         XCTAssert(try generate() == expected)
