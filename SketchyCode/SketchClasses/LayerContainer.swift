@@ -41,6 +41,7 @@ extension MSPage: LayerContainer {}
 extension MSLayerGroup: LayerContainer {}
 extension MSShapeGroup: LayerContainer {}
 extension MSSymbolMaster: LayerContainer {}
+extension MSArtboardGroup: LayerContainer {}
 
 extension MSDocumentData {
 

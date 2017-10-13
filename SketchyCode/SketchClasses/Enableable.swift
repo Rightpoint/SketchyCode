@@ -23,6 +23,12 @@ extension MSStyleInnerShadow: Enableable {}
 extension MSStyleReflection: Enableable {}
 extension MSStyleShadow: Enableable {}
 
+// Need to verify the accuracy here:
+extension MSGradient: Enableable {
+    var isEnabled: Bool { return stops.count > 0 }
+}
+
+
 protocol EnableableContainer {
     var enablableAttributes: [Enableable] { get }
 }
