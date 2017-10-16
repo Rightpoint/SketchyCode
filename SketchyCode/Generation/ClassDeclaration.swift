@@ -36,7 +36,7 @@ extension Scope {
             typeRef: type,
             inheriting: variable.value.type)
         add(cls)
-        variable.value = VariableRef(uuid: variable.value.uuid, type: type, hints: [])
+        variable.value = VariableRef(identifier: variable.value.identifier, type: type, hints: [])
         return cls
     }
 

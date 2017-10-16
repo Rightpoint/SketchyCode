@@ -11,7 +11,8 @@ import Foundation
 // A variable managed by code generation. Variables do not have names
 // until code generation time, just a uniqueness identifier and a type.
 struct VariableRef {
-    let uuid: UUID
+    typealias Identifier = UUID
+    let identifier: Identifier
     let type: TypeRef
     var hints: [VariableGenerationHint]
 }
@@ -24,7 +25,7 @@ enum VariableGenerationHint {
 
 extension VariableRef {
     init(ofType name: String, hints: VariableGenerationHint...) {
-        self.init(uuid: UUID(), type: TypeRef(name: name), hints: hints)
+        self.init(identifier: UUID(), type: TypeRef(name: name), hints: hints)
     }
 
     var isSelf: Bool {
@@ -61,12 +62,12 @@ extension VariableRef {
 
 extension VariableRef: Hashable {
     var hashValue: Int {
-        return uuid.hashValue
+        return identifier.hashValue
     }
 }
 
 extension VariableRef: Equatable {
     static func ==(lhs: VariableRef, rhs: VariableRef) -> Bool {
-        return lhs.uuid == rhs.uuid && lhs.type == rhs.type
+        return lhs.identifier == rhs.identifier && lhs.type == rhs.type
     }
 }

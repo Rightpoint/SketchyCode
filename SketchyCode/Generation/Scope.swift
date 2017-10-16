@@ -12,6 +12,8 @@ import Foundation
 class Scope {
     weak var parent: Scope?
     var children: [Generator] = []
+
+    var registeredVariables: [VariableRef.Identifier: String] = [:]
 }
 
 extension Scope {
@@ -117,7 +119,6 @@ extension Scope {
     }
 }
 
-// A very boring scope.
 final class GlobalScope: Scope {}
 final class BlockExpression: Scope {
     var invoke: Bool = true

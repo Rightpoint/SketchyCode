@@ -16,7 +16,7 @@ class GenerationTests: XCTestCase {
 
     func generate() throws -> String {
         let context = GeneratorContext(
-            namingStrategy: CounterNamingStrategy(),
+            namingStrategy: SwiftUIKitNamingStrategy(),
             options: GeneratorOptions())
 
         try global.generate(context: context)
@@ -114,13 +114,13 @@ class GenerationTests: XCTestCase {
         // Automatically generated. Do Not Edit!
         class MyView: UIView {
             let label: UILabel = UILabel()
-            let label1: UILabel = UILabel()
+            let label2: UILabel = UILabel()
         }
         let myView: MyView = MyView()
-        myView.addSubview(myView.label1)
         myView.addSubview(myView.label)
-        myView.label1.text = "testing"
-        myView.label.text = "label"
+        myView.addSubview(myView.label2)
+        myView.label.text = "testing"
+        myView.label2.text = "label"
 
         """)
 
@@ -135,10 +135,10 @@ class GenerationTests: XCTestCase {
         // Automatically generated. Do Not Edit!
         class MyView: UIView {
             let label: UILabel = UILabel()
-            let label1: UILabel = UILabel()
-            addSubview(label1)
+            let label2: UILabel = UILabel()
+            addSubview(label2)
             addSubview(label)
-            label1.text = "testing"
+            label2.text = "testing"
             label.text = "label"
         }
 
@@ -152,14 +152,14 @@ class GenerationTests: XCTestCase {
         // Automatically generated. Do Not Edit!
         class MyView: UIView {
             let label: UILabel = {
-                let label1: UILabel = UILabel()
-                label1.text = "label"
-                return label1
+                let label: UILabel = UILabel()
+                label.text = "label"
+                return label
             }()
             let label2: UILabel = {
-                let label3: UILabel = UILabel()
-                label3.text = "testing"
-                return label3
+                let label: UILabel = UILabel()
+                label.text = "testing"
+                return label
             }()
             addSubview(label2)
             addSubview(label)

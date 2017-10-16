@@ -30,7 +30,8 @@ extension VariableDeclaration: Generator {
         if let classDeclaration = scope as? ClassDeclaration, classDeclaration.selfDeclaration.value == self.value {
             return
         }
-        let name = try context.name(in: scope, for: value)
+
+        let name = try context.namingStrategy.name(for: value, in: scope)
 
         if let initialization = initialization {
             context.writer.append(line: "let \(name): \(value.type.name) = ", addNewline: false)
@@ -69,7 +70,7 @@ extension BasicExpression: Generator {
     func generate(in scope: Scope, context: GeneratorContext) throws {
         context.writer.append(line: try parts
             .map { part -> String in
-                return try context.code(in: scope, for: part)
+                return try part.code(in: scope, with: context.namingStrategy)
             }
             .joined())
     }

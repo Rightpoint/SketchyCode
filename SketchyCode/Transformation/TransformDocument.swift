@@ -23,7 +23,7 @@ class TransformDocument {
 
     func generate() throws -> String {
         let context = GeneratorContext(
-            namingStrategy: CounterNamingStrategy(),
+            namingStrategy: SwiftUIKitNamingStrategy(),
             options: GeneratorOptions())
 
         try scope.generate(context: context)

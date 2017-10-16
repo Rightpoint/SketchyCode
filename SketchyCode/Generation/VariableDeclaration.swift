@@ -12,7 +12,7 @@ class VariableDeclaration {
     var value: VariableRef
     var initialization: AssignmentExpression?
     init(type: TypeRef, expression: Generator? = nil) {
-        self.value = VariableRef(uuid: UUID(), type: type, hints: [])
+        self.value = VariableRef(identifier: UUID(), type: type, hints: [])
         if let expression = expression {
             self.initialization = AssignmentExpression(to: value, expression: expression)
         }
