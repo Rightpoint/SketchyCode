@@ -24,6 +24,7 @@ extension CGSize: Unmarshaling {
         self.height = try object.value(for: "height")
     }
 }
+
 // FIXME: This should really be an `MSFont` object. I'm not sure how this will behave if fonts used don't exist on the mac, but I'm pretty sure everything will be nil.
 extension NSFont: ValueType {
     public static func value(from object: Any) throws -> Value {

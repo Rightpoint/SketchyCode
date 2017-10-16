@@ -35,12 +35,14 @@ indirect enum SyntaxPart {
     case v(VariableRef)
     // wrap a variable in `()`
     case p(VariableRef)
+    // Constant
+    case c(TypeRef, String)
     // Debug helper
     case debug(SyntaxPart)
 
     var variableRef: VariableRef? {
         switch self {
-        case .s: return nil
+        case .s, .c: return nil
         case .v(let variable): return variable
         case .p(let variable): return variable
         case .debug(let part): return part.variableRef
@@ -49,7 +51,7 @@ indirect enum SyntaxPart {
 
     mutating func addLeadingHint() {
         switch self {
-        case .s:
+        case .s, .c:
             break
         case .v(var variable):
             variable.addLeadingHint()

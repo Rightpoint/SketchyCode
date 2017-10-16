@@ -9,8 +9,8 @@
 import Foundation
 
 // A layer container represents a layer that contains other MSShapeLayer.
-protocol LayerContainer {
-    var layers: [MSShapeLayer] { get }
+protocol LayerContainer: AnyObject {
+    var layers: [MSShapeLayer] { get set }
 }
 
 extension LayerContainer {
@@ -34,6 +34,15 @@ extension LayerContainer {
 
     var visibleLayers: [MSShapeLayer] {
         return layers.filter({ $0.isVisible })
+    }
+
+    var lowestLayer: MSShapeLayer? {
+        // FIXME: Z index is reversed
+        return layers.first
+    }
+
+    func removeLowestLayer() {
+        layers.removeFirst()
     }
 }
 
