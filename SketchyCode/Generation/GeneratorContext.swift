@@ -28,8 +28,12 @@ class GeneratorContext {
             return try name(in: scope, for: object)
         case .s(let string):
             return string
-        case .c(_, let string):
-            return string
+        case .c(let type, let string):
+            if type.name == "String" {
+                return "\"\(string)\""
+            } else {
+                return string
+            }
         case .p(let object):
             let variable = try name(in: scope, for: object)
             return "(\(variable))"

@@ -119,7 +119,9 @@ extension Scope {
 
 // A very boring scope.
 final class GlobalScope: Scope {}
-final class BlockExpression: Scope {}
+final class BlockExpression: Scope {
+    var invoke: Bool = true
+}
 
 extension Scope {
     func makeBlock(children: [Generator]) -> BlockExpression {

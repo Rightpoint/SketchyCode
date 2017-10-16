@@ -87,4 +87,32 @@ extension ClassDeclaration {
         }
         variable.moveToInitializer(expressions: movedExpressions, from: self)
     }
+
+    func moveExpressionsToInitializer() {
+        var movedExpressions: [VariableMutation & Generator] = []
+        for (index, child) in children.enumerated().reversed() {
+            guard let expression = child as? VariableMutation & Generator else { continue }
+            children.remove(at: index)
+            movedExpressions.insert(expression, at: 0)
+        }
+        var options: DeclarationOptions = []
+        let parameters = inheriting?.requiredInitializerParameters ?? []
+        if let inheriting = inheriting {
+            options.insert(.overrideDeclaration)
+            movedExpressions.insert(BasicExpression(.s("super.init()")), at: 0)
+            if inheriting.conformsToNSCoding {
+                let function = FunctionDeclaration(
+                    initializerWith: [.requiredDeclaration],
+                    parameters: [Parameter(tag: "coder", variable: VariableRef(ofType: "NSCoder"))],
+                    block: makeBlock(children: [BasicExpression(.s("fatalError(\"Not implemented\")"))])
+                )
+                children.append(function)
+            }
+        }
+        let function = FunctionDeclaration(
+            initializerWith: options,
+            parameters: parameters,
+            block: makeBlock(children: movedExpressions))
+        children.append(function)
+    }
 }

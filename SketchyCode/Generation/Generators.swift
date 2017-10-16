@@ -41,9 +41,43 @@ extension VariableDeclaration: Generator {
     }
 }
 
+extension FunctionDeclaration: Generator {
+
+    var swiftPrefix: String {
+        switch definition {
+        case .initializer: return "\(options.swiftPrefix)init"
+        case .function(let name, _): return "\(options.swiftPrefix)func \(name)"
+        }
+    }
+
+    var swiftSuffix: String {
+        switch definition {
+        case .initializer: return ""
+        case .function(_, let result):
+            return result.isVoid ? "" : " -> \(result.name)"
+        }
+    }
+
+    func generate(in scope: Scope, context: GeneratorContext) throws {
+        let parameters = self.parameters.map { $0.swiftRepresentation }.joined(separator: ", ")
+        context.writer.append(line: "\(swiftPrefix)(\(parameters))\(swiftSuffix) ", addNewline: false)
+        try block.generate(in: scope, context: context)
+    }
+}
+
+extension BasicExpression: Generator {
+    func generate(in scope: Scope, context: GeneratorContext) throws {
+        context.writer.append(line: try parts
+            .map { part -> String in
+                return try context.code(in: scope, for: part)
+            }
+            .joined())
+    }
+}
+
 extension BlockExpression: Generator {
     func generate(in scope: Scope, context: GeneratorContext) throws {
-        try context.writer.block(appending: "()") {
+        try context.writer.block(appending: "\(invoke ? "()" : "")") {
             try children.forEach { try $0.generate(in: self, context: context) }
         }
     }

@@ -83,7 +83,6 @@ public class MSColor: NSObject, Unmarshaling {
     public required init(object: MarshaledObject) throws {
         self.value = try object.value(for: "value")
     }
-
 }
 
 public class MSCurvePoint: NSObject, Unmarshaling {

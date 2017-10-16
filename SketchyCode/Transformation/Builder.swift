@@ -21,10 +21,12 @@ class SwiftUIKitBuilder: Builder {
             var variable = scope.makeVariable(ofType: TypeRef(name: className), initializedWith: nil)
 
             var generationScope = scope
+            var inCustomClass = false
             if let subClass = hint.className {
                 let classDeclaration = scope.makeClass(ofType: TypeRef(name: subClass + "View"), for: variable)
                 variable = classDeclaration.selfDeclaration
                 generationScope = classDeclaration
+                inCustomClass = true
             }
 
             if let variableName = hint.variableName {
@@ -39,11 +41,15 @@ class SwiftUIKitBuilder: Builder {
 
             configureFrameLayout(variable.value, in: generationScope, layer: layer)
             if let style = layer as? Styled {
-                configureStyle(variable.value, in: generationScope, style:  style.style)
+                configureStyle(variable.value, in: generationScope, style: style.style)
+            }
+            if let textLayer = layer as? MSTextLayer {
+                configureLabel(variable.value, in: generationScope, attributedString: textLayer.attributedString)
             }
             try configureChildren(variable.value, in: generationScope, layer: layer)
-            if let classDeclaration = generationScope as? ClassDeclaration {
+            if let classDeclaration = generationScope as? ClassDeclaration, inCustomClass {
                 classDeclaration.moveExpressionsToPropertyClosures()
+                classDeclaration.moveExpressionsToInitializer()
             }
             return variable
         } else {
@@ -68,14 +74,14 @@ class SwiftUIKitBuilder: Builder {
                 assert(fill.fillType == 0, "Only solid fill is supported")
                 scope.add(expression: .v(variableRef),
                           .s("backgroundColor = "),
-                          .c("UIColor", fill.color.description))
+                          .c("UIColor", color(for: fill.color)))
             case let shadow as MSStyleShadow:
                 scope.add(expression: .v(variableRef),
                           .s("layer.shadowColor = "),
-                          .c("UIColor", shadow.color.description), .s(".cgColor"))
+                          .c("UIColor", color(for: shadow.color)), .s(".cgColor"))
                 scope.add(expression: .v(variableRef),
                           .s("layer.shadowOffset = "),
-                          .c("CGPoint", "CGPoint(x: \(shadow.offsetX), y: \(shadow.offsetY))"))
+                          .c("CGSize", "CGSize(width: \(shadow.offsetX), height: \(shadow.offsetY))"))
 
                 // I'm not sure how alpha is expressed.
                 scope.add(expression: .v(variableRef), .s("layer.shadowOpacity = 1"))
@@ -83,13 +89,26 @@ class SwiftUIKitBuilder: Builder {
                 assert(border.fillType == 0, "Only border fill is supported")
                 scope.add(expression: .v(variableRef),
                           .s("layer.borderColor = "),
-                          .c("UIColor", border.color.description), .s(".cgColor"))
+                          .c("UIColor", color(for: border.color)), .s(".cgColor"))
                 scope.add(expression: .v(variableRef),
                           .s("layer.borderWidth = "), .s("\(border.thickness)"))
             default:
                 print("Skipping: \(attribute)")
             }
         }
+    }
+
+    func configureLabel(_ variableRef: VariableRef, in scope: Scope, attributedString: NSAttributedString) {
+        scope.add(expression: .v(variableRef),
+                  .s("text = "),
+                  .c("String", attributedString.string))
+
+//        scope.add(expression: .v(variableRef),
+//                  .s("textColor = "),
+//                  .c("UIColor", color))
+//        scope.add(expression: .v(variableRef),
+//                  .s("font = "),
+//                  .c("UIFont", font))
     }
 
     func configureChildren(_ variableRef: VariableRef?, in scope: Scope, layer: MSShapeLayer) throws {
@@ -141,5 +160,20 @@ class SwiftUIKitBuilder: Builder {
         if options.contains(.flexibleHeight) { value.append(".flexibleHeight")}
         if options.contains(.flexibleBottomMargin) { value.append(".flexibleBottomMargin")}
         return "[\(value.joined(separator: ", "))]"
+    }
+
+    func color(for color: MSColor) -> String {
+        var value = color.value
+        if let range = value.range(of: "rgba(") {
+            value.removeSubrange(range)
+            value.removeLast()
+            let components = value
+                .split(separator: ",")
+                .map { $0.trimmingCharacters(in: .whitespaces) }
+            guard components.count == 4 else { fatalError("Invalid rgba definition: \(color.value)") }
+            let (red, green, blue, alpha) = (components[0], components[1], components[2], components[3])
+            return "UIColor(red: CGFloat(\(red)) / 255.0, green: CGFloat(\(green)) / 255.0, blue: CGFloat(\(blue)) / 255.0, alpha: CGFloat(\(alpha)) / 255.0)"
+        }
+        return "UIColor(unknownFormat: \"\(color.value)\")"
     }
 }

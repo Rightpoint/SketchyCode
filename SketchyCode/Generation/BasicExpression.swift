@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct BasicExpression: Generator {
+struct BasicExpression {
     let parts: [SyntaxPart]
 
     init(parts: [SyntaxPart]) {
@@ -18,14 +18,6 @@ struct BasicExpression: Generator {
             parts[0] = first
         }
         self.parts = parts
-    }
-
-    func generate(in scope: Scope, context: GeneratorContext) throws {
-        context.writer.append(line: try parts
-            .map { part -> String in
-                return try context.code(in: scope, for: part)
-            }
-            .joined())
     }
 }
 

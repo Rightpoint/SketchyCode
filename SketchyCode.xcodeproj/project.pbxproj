@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		34FD4DA99FF99A17CCBF1F72 /* Pods_SketchyCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F57022D6CC792DD283CE341 /* Pods_SketchyCode.framework */; };
 		86066DA81F85B16E00130A65 /* VariableMutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86066DA71F85B16E00130A65 /* VariableMutation.swift */; };
+		861890751F944C07007BBBA6 /* FunctionDeclaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861890741F944C07007BBBA6 /* FunctionDeclaration.swift */; };
 		8629C3251F73363D000877D2 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C3241F73363D000877D2 /* Debug.swift */; };
 		8629C3271F73370D000877D2 /* Enableable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C3261F73370D000877D2 /* Enableable.swift */; };
 		8629C3291F7339ED000877D2 /* Styled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629C3281F7339ED000877D2 /* Styled.swift */; };
@@ -98,6 +99,7 @@
 		5E44735FCFC8D2ED51E6DCA1 /* Pods_SketchGen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SketchGen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C44A7CBA3D8FCF53ABA6740 /* Pods-SketchyCodeCLI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SketchyCodeCLI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SketchyCodeCLI/Pods-SketchyCodeCLI.debug.xcconfig"; sourceTree = "<group>"; };
 		86066DA71F85B16E00130A65 /* VariableMutation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableMutation.swift; sourceTree = "<group>"; };
+		861890741F944C07007BBBA6 /* FunctionDeclaration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionDeclaration.swift; sourceTree = "<group>"; };
 		8629C3241F73363D000877D2 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		8629C3261F73370D000877D2 /* Enableable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enableable.swift; sourceTree = "<group>"; };
 		8629C3281F7339ED000877D2 /* Styled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styled.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				86D9E8C21F848C06008A6D70 /* Scope.swift */,
 				867F448C1F8C5B8200B793E3 /* ClassDeclaration.swift */,
 				867F448E1F8C5BBB00B793E3 /* VariableDeclaration.swift */,
+				861890741F944C07007BBBA6 /* FunctionDeclaration.swift */,
 				864626371F8ED89600F8047B /* BasicExpression.swift */,
 				864626351F8ED87800F8047B /* AssignmentExpression.swift */,
 				86D827B21F8F00D9009042E7 /* Containers.swift */,
@@ -645,6 +648,7 @@
 				8629C3291F7339ED000877D2 /* Styled.swift in Sources */,
 				8629C3271F73370D000877D2 /* Enableable.swift in Sources */,
 				862EBEEE1F72AF410086E52C /* LayerContainer.swift in Sources */,
+				861890751F944C07007BBBA6 /* FunctionDeclaration.swift in Sources */,
 				8646263A1F8EE4B700F8047B /* Errors.swift in Sources */,
 				8631B3EF1F8713C40029BF90 /* NamingStrategy.swift in Sources */,
 				864626341F8ED7E700F8047B /* VariableRef.swift in Sources */,

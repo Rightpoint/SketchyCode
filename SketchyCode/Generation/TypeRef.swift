@@ -10,10 +10,22 @@ import Foundation
 
 // TypeRef specifies the type to use
 struct TypeRef {
+    static var voidType = "Void"
     let name: String
 
     var isOptional: Bool {
         return name.hasSuffix("?")
+    }
+    var isVoid: Bool {
+        return name == "Void"
+    }
+
+    var conformsToNSCoding: Bool {
+        return true
+    }
+
+    var requiredInitializerParameters: [Parameter] {
+        return [Parameter(tag: "frame", variable: VariableRef(ofType: "CGRect"))]
     }
 }
 
