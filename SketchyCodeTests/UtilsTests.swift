@@ -19,5 +19,12 @@ class UtilsTests: XCTestCase {
         XCTAssertEqual("variable", try generation.variableName.unwrapped())
         XCTAssertEqual("state", try generation.stateName.unwrapped())
     }
+
+    func testSplitBySize() throws {
+        var split: [String] = "AABBCC".split(by: 2)
+        XCTAssertEqual(try split.popLast().unwrapped(), "CC")
+        XCTAssertEqual(try split.popLast().unwrapped(), "BB")
+        XCTAssertEqual(try split.popLast().unwrapped(), "AA")
+    }
 }
 

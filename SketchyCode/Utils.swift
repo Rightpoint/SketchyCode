@@ -36,4 +36,14 @@ extension String {
             return string
         }).joined(separator: "")
     }
+
+    public func split(by size: Int) -> [String] {
+        return stride(from: 0, to: characters.count, by: size)
+            .reversed()
+            .map { i -> String in
+                let endIndex = self.index(self.endIndex, offsetBy: -i)
+                let startIndex = self.index(endIndex, offsetBy: -size)
+                return self[startIndex..<endIndex]
+        }
+    }
 }

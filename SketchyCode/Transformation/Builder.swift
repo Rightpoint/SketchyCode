@@ -162,17 +162,46 @@ class SwiftUIKitBuilder: Builder {
         return "[\(value.joined(separator: ", "))]"
     }
 
+    // This named color approach is broken and will only work with black currently.
+    var namedColors: [String: String] = [
+        "0,0,0": "black"
+    ]
+
+    func color(with rgb: [String], alpha: String?) -> String {
+        if let name = namedColors[rgb.joined(separator: ",")] {
+            if let alpha = alpha {
+                return "UIColor.\(name).withAlphaComponent(\(alpha))"
+            } else {
+                return ".\(name)"
+            }
+        } else if let alpha = alpha {
+            return "UIColor(red: \(rgb[0]), green: \(rgb[1]), blue: \(rgb[2]), alpha: \(alpha))"
+        } else {
+            return "UIColor(red: \(rgb[0]), green: \(rgb[1]), blue: \(rgb[2]))"
+        }
+    }
+
     func color(for color: MSColor) -> String {
         var value = color.value
+        if value.hasPrefix("#"), let range = value.range(of: "#") {
+            value.removeSubrange(range)
+            guard value.lengthOfBytes(using: .utf8) == 6 else { fatalError("Invalid #RRGGBB definition: \(color.value)") }
+            let rgb = value.split(by: 2).map { "0x\($0) / 255.0" }
+            return self.color(with: rgb, alpha: nil)
+        }
         if let range = value.range(of: "rgba(") {
             value.removeSubrange(range)
             value.removeLast()
-            let components = value
+            var components = value
                 .split(separator: ",")
                 .map { $0.trimmingCharacters(in: .whitespaces) }
-            guard components.count == 4 else { fatalError("Invalid rgba definition: \(color.value)") }
-            let (red, green, blue, alpha) = (components[0], components[1], components[2], components[3])
-            return "UIColor(red: CGFloat(\(red)) / 255.0, green: CGFloat(\(green)) / 255.0, blue: CGFloat(\(blue)) / 255.0, alpha: CGFloat(\(alpha)) / 255.0)"
+
+            guard components.count == 4, let alpha = components.popLast() else { fatalError("Invalid rgba definition: \(color.value)") }
+            let rgb = components.map { (value: String) -> String in
+                if value == "0" { return "0" }
+                else { return "CGFloat(\(value)) / 255" }
+            }
+            return self.color(with: rgb, alpha: alpha)
         }
         return "UIColor(unknownFormat: \"\(color.value)\")"
     }
