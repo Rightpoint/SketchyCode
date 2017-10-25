@@ -20,6 +20,6 @@ FOUNDATION_EXPORT const unsigned char SketchyPluginVersionString[];
 
 @interface SketchyPlugin : NSObject
 
-+ (void)inject;
++ (void)reloadInspector;
 
 @end

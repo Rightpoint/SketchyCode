@@ -6,7 +6,10 @@
 //  Copyright © 2017 Brian King. All rights reserved.
 //
 
+@import ObjectiveC.runtime;
+
 #import "SKPInspector.h"
+#import "SKPInspectorStackView.h"
 #import "NSView+SKPExtensions.h"
 
 @implementation SKPInspector
@@ -37,7 +40,18 @@
         return nil;
     }
 
-    return [(NSScrollView *)inspectorScrollView contentView].documentView;
+    id content = [(NSScrollView *)inspectorScrollView contentView].documentView;
+
+    if ( ![content isKindOfClass:objc_getClass("MSInspectorStackView")] ) {
+        SKPLog("Inspector content type mistmatch. Expected MSInspectorStackView, found: %@", [content class]);
+        return nil;
+    }
+
+    if ( ![content isKindOfClass:[SKPInspectorStackView class]] ) {
+        object_setClass(content, [SKPInspectorStackView class]);
+    }
+
+    return content;
 }
 
 @end

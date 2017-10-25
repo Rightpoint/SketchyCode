@@ -11,7 +11,7 @@
 
 @implementation SketchyPlugin
 
-+ (void)inject {
++ (void)reloadInspector {
     id<MSDocumentInterface> document = [SketchInterface currentDocument];
     SKPInspector *inspector = [[SKPInspector alloc] initWithRootView:document.splitViewController.inspectorView];
     id<MSInspectorStackViewInterface> inspectorContent = inspector.contentStack;
@@ -21,9 +21,7 @@
         return;
     }
 
-    // TODO: inject actual UI
-
-    ((NSView *)inspectorContent).layer.backgroundColor = NSColor.redColor.CGColor;
+    [inspectorContent reloadWithViewControllers:inspectorContent.sectionViewControllers];
 }
 
 @end

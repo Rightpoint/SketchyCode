@@ -6,7 +6,7 @@
     "compatibleVersion": "47.0.0",
     "bundleVersion": 1,
     "commands": [{
-        "script": "inject.js",
+        "script": "plugin.js",
         "handlers" : {
             "actions" : {
                 "SelectionChanged.finish" : "onSelectionChanged",
