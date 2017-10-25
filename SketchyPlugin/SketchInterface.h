@@ -12,6 +12,7 @@
 @protocol MSMainSplitViewControllerInterface;
 @protocol MSInspectorStackViewInterface;
 @protocol MSLayerInterface;
+@protocol MSLayerArrayInterface;
 
 @interface SketchInterface : NSObject
 
@@ -25,7 +26,7 @@
 
 @property (nonatomic, readonly) id<MSMainSplitViewControllerInterface> splitViewController;
 
-@property (nonatomic, readonly) NSArray<id<MSLayerInterface>> *selectedLayers;
+@property (nonatomic, readonly) id<MSLayerArrayInterface> selectedLayers;
 
 @end
 
@@ -52,5 +53,13 @@
 @protocol MSLayerInterface
 
 @property (strong, nonatomic) NSDictionary *userInfo;
+
+@end
+
+#pragma mark - MSLayerArray
+
+@protocol MSLayerArrayInterface
+
+@property (strong, nonatomic) NSArray<id<MSLayerInterface>> *layers;
 
 @end

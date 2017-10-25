@@ -7,10 +7,12 @@
 //
 
 #import "SKPInspectorViewController.h"
+#import "SketchyPlugin.h"
 
 @interface SKPInspectorViewController ()
 
 @property (strong, nonatomic) IBOutlet NSView *headerView;
+@property (strong, nonatomic) IBOutlet NSView *namingView;
 
 @end
 
@@ -21,9 +23,29 @@
 }
 
 - (NSArray<NSView *> *)views {
-    // Ensure view is loaded
     __unused NSView *view = self.view;
-    return @[self.headerView];
+    return @[self.headerView, self.namingView];
+}
+
+- (id)valueForUndefinedKey:(NSString *)key {
+    NSArray *layers = [SketchInterface currentDocument].selectedLayers.layers;
+
+    NSString *keyPath = [NSString stringWithFormat:@"userInfo.%@", key];
+    return [[layers firstObject] valueForKeyPath:keyPath];
+}
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
+    NSArray<id<MSLayerInterface>> *layers = [SketchInterface currentDocument].selectedLayers.layers;
+
+    for ( id<MSLayerInterface> layer in layers ) {
+        NSMutableDictionary *userInfo = [layer.userInfo mutableCopy];
+        if ( userInfo == nil ) {
+            userInfo = [NSMutableDictionary dictionary];
+        }
+
+        userInfo[key] = value;
+        layer.userInfo = userInfo;
+    }
 }
 
 @end

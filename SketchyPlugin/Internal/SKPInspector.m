@@ -33,7 +33,7 @@
 }
 
 - (id<MSInspectorStackViewInterface>)contentStack {
-    id inspectorScrollView = [_rootView skp_subviewAtIndexPath:SKP_INDEX_PATH(0, 1, 0, 0, 0)];
+    id inspectorScrollView = [self.containerStack skp_subviewAtIndexPath:SKP_INDEX_PATH(1, 0, 0, 0)];
 
     if ( ![inspectorScrollView isKindOfClass:[NSScrollView class]] ) {
         SKPLog("Failed to lookup inspector scroll view!");
