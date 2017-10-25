@@ -17,4 +17,9 @@ FOUNDATION_EXPORT const unsigned char SketchyPluginVersionString[];
 #define SKPLog(fmt, ...) NSLog((@"(Sketchy Plugin) %s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 
 #import <SketchyPlugin/SketchInterface.h>
-#import <SketchyPlugin/NSView+SKPExtensions.h>
+
+@interface SketchyPlugin : NSObject
+
++ (void)inject;
+
+@end

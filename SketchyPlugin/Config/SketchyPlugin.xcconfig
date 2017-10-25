@@ -1,0 +1,10 @@
+//
+//  SketchyPlugin-Debug.xcconfig
+//  SketchyCode
+//
+//  Created by Rob Visentin on 10/25/17.
+//  Copyright © 2017 Brian King. All rights reserved.
+//
+
+CONFIGURATION_BUILD_DIR = $(SRCROOT)/SketchyCode.sketchplugin/Contents/Sketch
+BUILT_PRODUCTS_DIR = $(SRCROOT)/SketchyCode.sketchplugin/Contents/Sketch

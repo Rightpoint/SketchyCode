@@ -16,9 +16,9 @@
 
 + (id<MSDocumentInterface>)currentDocument;
 
-+ (id<MSInspectorStackViewInterface>)inspectorStackView;
-
 @end
+
+#pragma mark - MSDocument
 
 @protocol MSDocumentInterface
 
@@ -26,16 +26,20 @@
 
 @end
 
+#pragma mark - MSMainSplitViewController
+
 @protocol MSMainSplitViewControllerInterface
 
 @property (nonatomic, readonly) NSView *inspectorView;
 
 @end
 
+#pragma mark - MSInspectorStackView
+
 @protocol MSInspectorStackViewInterface
 
-@property (nonatomic, readonly) NSArray<NSViewController *> sectionViewControllers;
+@property (nonatomic, readonly) NSArray<NSViewController *> *sectionViewControllers;
 
-- (void)reloadWithViewControllers:(NSArray<NSViewController *>)viewControllers;
+- (void)reloadWithViewControllers:(NSArray<NSViewController *> *)viewControllers;
 
 @end

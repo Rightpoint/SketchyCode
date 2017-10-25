@@ -1,0 +1,16 @@
+{
+    "name": "Sketchy Code",
+    "identifier": "com.raizlabs.sketchy-code",
+    "version": "1.0.0",
+    "description": "Code generation from Sketch files.",
+    "compatibleVersion": "47.0.0",
+    "bundleVersion": 1,
+    "commands": [{
+        "script": "inject.js",
+        "handlers" : {
+            "actions" : {
+                "SelectionChanged.finish" : "onSelectionChanged",
+            }
+        }
+    }]
+}

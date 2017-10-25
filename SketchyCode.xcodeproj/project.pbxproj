@@ -60,10 +60,13 @@
 		C0C2FF1DDFF9C80DBFD2DA10 /* Pods_SketchyCodeCLI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494DBC26DE170D3998EEE3D4 /* Pods_SketchyCodeCLI.framework */; };
 		D43432631F9FCE4C008A0B20 /* SketchyPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D43432611F9FCE4C008A0B20 /* SketchyPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D434326E1F9FCF76008A0B20 /* load.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = D434326B1F9FCEDE008A0B20 /* load.js */; };
-		D43432711F9FD264008A0B20 /* SketchInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = D434326F1F9FD264008A0B20 /* SketchInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D43432721F9FD264008A0B20 /* SketchInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = D43432701F9FD264008A0B20 /* SketchInterface.m */; };
-		D43432751F9FD7F4008A0B20 /* NSView+SKPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = D43432731F9FD7F4008A0B20 /* NSView+SKPExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D43432761F9FD7F4008A0B20 /* NSView+SKPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D43432741F9FD7F4008A0B20 /* NSView+SKPExtensions.m */; };
+		D434327A1FA09332008A0B20 /* SketchyPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = D43432781FA09332008A0B20 /* SketchyPlugin.m */; };
+		D43432861FA099A7008A0B20 /* NSView+SKPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = D43432801FA09986008A0B20 /* NSView+SKPExtensions.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		D43432881FA099B0008A0B20 /* SKPInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = D43432841FA09986008A0B20 /* SKPInspector.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		D434328B1FA099F8008A0B20 /* SketchInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = D434328A1FA099F7008A0B20 /* SketchInterface.m */; };
+		D434328C1FA099FA008A0B20 /* SketchInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = D43432891FA099F7008A0B20 /* SketchInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D434328D1FA09AC1008A0B20 /* SKPInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = D43432851FA09986008A0B20 /* SKPInspector.m */; };
+		D434328E1FA09BA5008A0B20 /* NSView+SKPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D43432811FA09986008A0B20 /* NSView+SKPExtensions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,10 +175,14 @@
 		D43432611F9FCE4C008A0B20 /* SketchyPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SketchyPlugin.h; sourceTree = "<group>"; };
 		D43432621F9FCE4C008A0B20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D434326B1F9FCEDE008A0B20 /* load.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = load.js; sourceTree = "<group>"; };
-		D434326F1F9FD264008A0B20 /* SketchInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SketchInterface.h; sourceTree = "<group>"; };
-		D43432701F9FD264008A0B20 /* SketchInterface.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SketchInterface.m; sourceTree = "<group>"; };
-		D43432731F9FD7F4008A0B20 /* NSView+SKPExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+SKPExtensions.h"; sourceTree = "<group>"; };
-		D43432741F9FD7F4008A0B20 /* NSView+SKPExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+SKPExtensions.m"; sourceTree = "<group>"; };
+		D43432781FA09332008A0B20 /* SketchyPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SketchyPlugin.m; sourceTree = "<group>"; };
+		D43432801FA09986008A0B20 /* NSView+SKPExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+SKPExtensions.h"; sourceTree = "<group>"; };
+		D43432811FA09986008A0B20 /* NSView+SKPExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+SKPExtensions.m"; sourceTree = "<group>"; };
+		D43432841FA09986008A0B20 /* SKPInspector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPInspector.h; sourceTree = "<group>"; };
+		D43432851FA09986008A0B20 /* SKPInspector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKPInspector.m; sourceTree = "<group>"; };
+		D43432891FA099F7008A0B20 /* SketchInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SketchInterface.h; sourceTree = "<group>"; };
+		D434328A1FA099F7008A0B20 /* SketchInterface.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SketchInterface.m; sourceTree = "<group>"; };
+		D43432941FA0A2BF008A0B20 /* SketchyPlugin.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SketchyPlugin.xcconfig; sourceTree = "<group>"; };
 		D51799568B333AB48B63723E /* Pods-SketchyCode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SketchyCode.release.xcconfig"; path = "Pods/Target Support Files/Pods-SketchyCode/Pods-SketchyCode.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -386,14 +393,34 @@
 			isa = PBXGroup;
 			children = (
 				D43432611F9FCE4C008A0B20 /* SketchyPlugin.h */,
-				D434326F1F9FD264008A0B20 /* SketchInterface.h */,
-				D43432701F9FD264008A0B20 /* SketchInterface.m */,
-				D43432731F9FD7F4008A0B20 /* NSView+SKPExtensions.h */,
-				D43432741F9FD7F4008A0B20 /* NSView+SKPExtensions.m */,
-				D43432621F9FCE4C008A0B20 /* Info.plist */,
+				D43432781FA09332008A0B20 /* SketchyPlugin.m */,
+				D43432891FA099F7008A0B20 /* SketchInterface.h */,
+				D434328A1FA099F7008A0B20 /* SketchInterface.m */,
 				D434326B1F9FCEDE008A0B20 /* load.js */,
+				D43432621F9FCE4C008A0B20 /* Info.plist */,
+				D434327F1FA09986008A0B20 /* Internal */,
+				D43432931FA0A2A9008A0B20 /* Config */,
 			);
 			path = SketchyPlugin;
+			sourceTree = "<group>";
+		};
+		D434327F1FA09986008A0B20 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				D43432801FA09986008A0B20 /* NSView+SKPExtensions.h */,
+				D43432811FA09986008A0B20 /* NSView+SKPExtensions.m */,
+				D43432841FA09986008A0B20 /* SKPInspector.h */,
+				D43432851FA09986008A0B20 /* SKPInspector.m */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		D43432931FA0A2A9008A0B20 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				D43432941FA0A2BF008A0B20 /* SketchyPlugin.xcconfig */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -411,9 +438,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D43432881FA099B0008A0B20 /* SKPInspector.h in Headers */,
 				D43432631F9FCE4C008A0B20 /* SketchyPlugin.h in Headers */,
-				D43432711F9FD264008A0B20 /* SketchInterface.h in Headers */,
-				D43432751F9FD7F4008A0B20 /* NSView+SKPExtensions.h in Headers */,
+				D434328C1FA099FA008A0B20 /* SketchInterface.h in Headers */,
+				D43432861FA099A7008A0B20 /* NSView+SKPExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +520,8 @@
 				D434325C1F9FCE4C008A0B20 /* Headers */,
 				D434325D1F9FCE4C008A0B20 /* Resources */,
 				D434326D1F9FCF66008A0B20 /* CopyFiles */,
+				D43432921FA0A151008A0B20 /* Copy Products */,
+				D43432961FA0A85A008A0B20 /* Install Plugin */,
 			);
 			buildRules = (
 			);
@@ -693,6 +723,34 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SketchyCode/Pods-SketchyCode-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D43432921FA0A151008A0B20 /* Copy Products */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Products";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo $BUILT_PRODUCTS_DIR";
+		};
+		D43432961FA0A85A008A0B20 /* Install Plugin */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Install Plugin";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ln -sf ${PROJECT_DIR}/SketchyCode.sketchplugin ~/Library/Application\\ Support/com.bohemiancoding.sketch3/Plugins/";
+		};
 		F43EE122ED059BD803B58CF0 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -775,8 +833,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D43432761F9FD7F4008A0B20 /* NSView+SKPExtensions.m in Sources */,
-				D43432721F9FD264008A0B20 /* SketchInterface.m in Sources */,
+				D434327A1FA09332008A0B20 /* SketchyPlugin.m in Sources */,
+				D434328D1FA09AC1008A0B20 /* SKPInspector.m in Sources */,
+				D434328E1FA09BA5008A0B20 /* NSView+SKPExtensions.m in Sources */,
+				D434328B1FA099F8008A0B20 /* SketchInterface.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -994,6 +1054,7 @@
 		};
 		D43432641F9FCE4C008A0B20 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D43432941FA0A2BF008A0B20 /* SketchyPlugin.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
@@ -1028,6 +1089,7 @@
 		};
 		D43432651F9FCE4C008A0B20 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D43432941FA0A2BF008A0B20 /* SketchyPlugin.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;

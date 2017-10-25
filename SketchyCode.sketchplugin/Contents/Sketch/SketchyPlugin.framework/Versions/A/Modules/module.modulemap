@@ -1,0 +1,6 @@
+framework module SketchyPlugin {
+  umbrella header "SketchyPlugin.h"
+
+  export *
+  module * { export * }
+}
