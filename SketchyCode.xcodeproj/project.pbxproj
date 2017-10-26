@@ -530,7 +530,6 @@
 				D434325C1F9FCE4C008A0B20 /* Headers */,
 				D434325D1F9FCE4C008A0B20 /* Resources */,
 				D434326D1F9FCF66008A0B20 /* CopyFiles */,
-				D43432921FA0A151008A0B20 /* Copy Products */,
 				D43432961FA0A85A008A0B20 /* Install Plugin */,
 			);
 			buildRules = (
@@ -733,20 +732,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SketchyCode/Pods-SketchyCode-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		D43432921FA0A151008A0B20 /* Copy Products */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Products";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "echo $BUILT_PRODUCTS_DIR";
 		};
 		D43432961FA0A85A008A0B20 /* Install Plugin */ = {
 			isa = PBXShellScriptBuildPhase;
