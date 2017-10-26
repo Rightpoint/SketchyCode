@@ -61,11 +61,11 @@
 		D43432631F9FCE4C008A0B20 /* SketchyPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D43432611F9FCE4C008A0B20 /* SketchyPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D434326E1F9FCF76008A0B20 /* load.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = D434326B1F9FCEDE008A0B20 /* load.js */; };
 		D434327A1FA09332008A0B20 /* SketchyPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = D43432781FA09332008A0B20 /* SketchyPlugin.m */; };
-		D43432881FA099B0008A0B20 /* SKPInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = D43432841FA09986008A0B20 /* SKPInspector.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		D43432881FA099B0008A0B20 /* SKPInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = D43432841FA09986008A0B20 /* SKPInspector.h */; };
 		D434328B1FA099F8008A0B20 /* SketchInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = D434328A1FA099F7008A0B20 /* SketchInterface.m */; };
 		D434328C1FA099FA008A0B20 /* SketchInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = D43432891FA099F7008A0B20 /* SketchInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D434328D1FA09AC1008A0B20 /* SKPInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = D43432851FA09986008A0B20 /* SKPInspector.m */; };
-		D43432991FA0DD4D008A0B20 /* SKPInspectorStackView.h in Headers */ = {isa = PBXBuildFile; fileRef = D43432971FA0DD4D008A0B20 /* SKPInspectorStackView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		D43432991FA0DD4D008A0B20 /* SKPInspectorStackView.h in Headers */ = {isa = PBXBuildFile; fileRef = D43432971FA0DD4D008A0B20 /* SKPInspectorStackView.h */; };
 		D434329A1FA0DD4D008A0B20 /* SKPInspectorStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = D43432981FA0DD4D008A0B20 /* SKPInspectorStackView.m */; };
 		D43432A01FA0F374008A0B20 /* SKPInspectorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D434329D1FA0F374008A0B20 /* SKPInspectorViewController.h */; };
 		D43432A11FA0F374008A0B20 /* SKPInspectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D434329E1FA0F374008A0B20 /* SKPInspectorViewController.m */; };
