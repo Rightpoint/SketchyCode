@@ -71,7 +71,13 @@
             userInfo = [NSMutableDictionary dictionary];
         }
 
-        userInfo[key] = value;
+        if ( value == nil || ([value isKindOfClass:[NSString class]] && [value length] == 0) ) {
+            [userInfo removeObjectForKey:key];
+        }
+        else {
+            [userInfo setObject:value forKey:key];
+        }
+
         layer.userInfo = userInfo;
     }
 }
