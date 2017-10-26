@@ -9,7 +9,6 @@
 @import ObjectiveC.message;
 
 #import "SketchyPlugin.h"
-#import "NSView+SKPExtensions.h"
 
 @implementation SketchInterface
 

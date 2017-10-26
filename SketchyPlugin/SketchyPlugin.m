@@ -14,14 +14,8 @@
 + (void)reloadInspector {
     id<MSDocumentInterface> document = [SketchInterface currentDocument];
     SKPInspector *inspector = [[SKPInspector alloc] initWithRootView:document.splitViewController.inspectorView];
-    id<MSInspectorStackViewInterface> inspectorContent = inspector.contentStack;
 
-    if ( inspectorContent == nil ) {
-        SKPLog(@"Failed to inject SketchyPlugin interface: Inspector content stack not found.");
-        return;
-    }
-
-    [inspectorContent reloadWithViewControllers:inspectorContent.sectionViewControllers];
+    [inspector.inspectorController reload];
 }
 
 @end

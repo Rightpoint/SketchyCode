@@ -10,6 +10,8 @@
 
 @protocol MSDocumentInterface;
 @protocol MSMainSplitViewControllerInterface;
+@protocol MSInspectorControllerInterface;
+@protocol MSNormalInspectorInterface;
 @protocol MSInspectorStackViewInterface;
 @protocol MSLayerInterface;
 @protocol MSLayerArrayInterface;
@@ -35,6 +37,24 @@
 @protocol MSMainSplitViewControllerInterface
 
 @property (nonatomic, readonly) NSView *inspectorView;
+
+@end
+
+#pragma mark - MSInspectorControllerInterface
+
+@protocol MSInspectorControllerInterface
+
+@property (nonatomic, readonly) id<MSNormalInspectorInterface> normalInspector;
+
+- (void)reload;
+
+@end
+
+#pragma mark - MSNormalInspectorInterface
+
+@protocol MSNormalInspectorInterface
+
+@property (nonatomic, readonly) id<MSInspectorStackViewInterface> stackView;
 
 @end
 

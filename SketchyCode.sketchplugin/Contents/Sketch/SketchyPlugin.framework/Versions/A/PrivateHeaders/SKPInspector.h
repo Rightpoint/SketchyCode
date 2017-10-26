@@ -14,8 +14,7 @@
 
 @property (nonatomic, readonly) NSView *rootView;
 
-@property (nonatomic, readonly) NSStackView *containerStack;
-@property (nonatomic, readonly) id<MSInspectorStackViewInterface> contentStack;
+@property (nonatomic, readonly) id<MSInspectorControllerInterface> inspectorController;
 
 - (instancetype)initWithRootView:(NSView *)rootView;
 
