@@ -67,9 +67,9 @@
 		D434328D1FA09AC1008A0B20 /* SKPInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = D43432851FA09986008A0B20 /* SKPInspector.m */; };
 		D43432991FA0DD4D008A0B20 /* SKPInspectorStackView.h in Headers */ = {isa = PBXBuildFile; fileRef = D43432971FA0DD4D008A0B20 /* SKPInspectorStackView.h */; };
 		D434329A1FA0DD4D008A0B20 /* SKPInspectorStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = D43432981FA0DD4D008A0B20 /* SKPInspectorStackView.m */; };
-		D43432A01FA0F374008A0B20 /* SKPInspectorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D434329D1FA0F374008A0B20 /* SKPInspectorViewController.h */; };
-		D43432A11FA0F374008A0B20 /* SKPInspectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D434329E1FA0F374008A0B20 /* SKPInspectorViewController.m */; };
-		D43432A21FA0F374008A0B20 /* SKPInspectorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D434329F1FA0F374008A0B20 /* SKPInspectorViewController.xib */; };
+		D43432A01FA0F374008A0B20 /* SKPCodeGenViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D434329D1FA0F374008A0B20 /* SKPCodeGenViewController.h */; };
+		D43432A11FA0F374008A0B20 /* SKPCodeGenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D434329E1FA0F374008A0B20 /* SKPCodeGenViewController.m */; };
+		D43432A21FA0F374008A0B20 /* SKPCodeGenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D434329F1FA0F374008A0B20 /* SKPCodeGenViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,9 +186,9 @@
 		D43432941FA0A2BF008A0B20 /* SketchyPlugin.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SketchyPlugin.xcconfig; sourceTree = "<group>"; };
 		D43432971FA0DD4D008A0B20 /* SKPInspectorStackView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPInspectorStackView.h; sourceTree = "<group>"; };
 		D43432981FA0DD4D008A0B20 /* SKPInspectorStackView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKPInspectorStackView.m; sourceTree = "<group>"; };
-		D434329D1FA0F374008A0B20 /* SKPInspectorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPInspectorViewController.h; sourceTree = "<group>"; };
-		D434329E1FA0F374008A0B20 /* SKPInspectorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKPInspectorViewController.m; sourceTree = "<group>"; };
-		D434329F1FA0F374008A0B20 /* SKPInspectorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SKPInspectorViewController.xib; sourceTree = "<group>"; };
+		D434329D1FA0F374008A0B20 /* SKPCodeGenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPCodeGenViewController.h; sourceTree = "<group>"; };
+		D434329E1FA0F374008A0B20 /* SKPCodeGenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKPCodeGenViewController.m; sourceTree = "<group>"; };
+		D434329F1FA0F374008A0B20 /* SKPCodeGenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SKPCodeGenViewController.xib; sourceTree = "<group>"; };
 		D51799568B333AB48B63723E /* Pods-SketchyCode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SketchyCode.release.xcconfig"; path = "Pods/Target Support Files/Pods-SketchyCode/Pods-SketchyCode.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -417,9 +417,9 @@
 				D43432851FA09986008A0B20 /* SKPInspector.m */,
 				D43432971FA0DD4D008A0B20 /* SKPInspectorStackView.h */,
 				D43432981FA0DD4D008A0B20 /* SKPInspectorStackView.m */,
-				D434329D1FA0F374008A0B20 /* SKPInspectorViewController.h */,
-				D434329E1FA0F374008A0B20 /* SKPInspectorViewController.m */,
-				D434329F1FA0F374008A0B20 /* SKPInspectorViewController.xib */,
+				D434329D1FA0F374008A0B20 /* SKPCodeGenViewController.h */,
+				D434329E1FA0F374008A0B20 /* SKPCodeGenViewController.m */,
+				D434329F1FA0F374008A0B20 /* SKPCodeGenViewController.xib */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -447,7 +447,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D43432A01FA0F374008A0B20 /* SKPInspectorViewController.h in Headers */,
+				D43432A01FA0F374008A0B20 /* SKPCodeGenViewController.h in Headers */,
 				D43432881FA099B0008A0B20 /* SKPInspector.h in Headers */,
 				D43432631F9FCE4C008A0B20 /* SketchyPlugin.h in Headers */,
 				D434328C1FA099FA008A0B20 /* SketchInterface.h in Headers */,
@@ -621,7 +621,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D43432A21FA0F374008A0B20 /* SKPInspectorViewController.xib in Resources */,
+				D43432A21FA0F374008A0B20 /* SKPCodeGenViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,7 +830,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D434327A1FA09332008A0B20 /* SketchyPlugin.m in Sources */,
-				D43432A11FA0F374008A0B20 /* SKPInspectorViewController.m in Sources */,
+				D43432A11FA0F374008A0B20 /* SKPCodeGenViewController.m in Sources */,
 				D434328D1FA09AC1008A0B20 /* SKPInspector.m in Sources */,
 				D434328B1FA099F8008A0B20 /* SketchInterface.m in Sources */,
 				D434329A1FA0DD4D008A0B20 /* SKPInspectorStackView.m in Sources */,

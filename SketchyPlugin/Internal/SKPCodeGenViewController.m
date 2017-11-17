@@ -1,5 +1,5 @@
 //
-//  SKPInspectorViewController.m
+//  SKPCodeGenViewController.m
 //  SketchyPlugin
 //
 //  Created by Rob Visentin on 10/25/17.
@@ -8,10 +8,10 @@
 
 @import ObjectiveC.runtime;
 
-#import "SKPInspectorViewController.h"
+#import "SKPCodeGenViewController.h"
 #import "SketchyPlugin.h"
 
-@interface SKPInspectorViewController ()
+@interface SKPCodeGenViewController ()
 
 @property (strong, nonatomic) IBOutlet NSView *headerView;
 @property (strong, nonatomic) IBOutlet NSView *namingView;
@@ -19,10 +19,10 @@
 
 @end
 
-@implementation SKPInspectorViewController
+@implementation SKPCodeGenViewController
 
 - (instancetype)init {
-    return [super initWithNibName:NSStringFromClass([SKPInspectorViewController class]) bundle:[NSBundle bundleForClass:[SKPInspectorViewController class]]];
+    return [super initWithNibName:NSStringFromClass([SKPCodeGenViewController class]) bundle:[NSBundle bundleForClass:[SKPCodeGenViewController class]]];
 }
 
 - (NSArray<NSView *> *)views {

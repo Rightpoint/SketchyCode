@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="SKPInspectorViewController">
+        <customObject id="-2" userLabel="File's Owner" customClass="SKPCodeGenViewController">
             <connections>
                 <outlet property="headerView" destination="Hv8-eL-8dl" id="OiH-F9-YkR"/>
                 <outlet property="namingView" destination="h4k-fE-yoC" id="gME-2D-app"/>
@@ -49,7 +49,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Content is user-driven" bezelStyle="regularSquare" imagePosition="left" controlSize="small" inset="2" id="FBQ-iZ-fDk">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system" size="11"/>
+                        <font key="font" metaFont="smallSystem"/>
                     </buttonCell>
                     <connections>
                         <binding destination="-2" name="value" keyPath="userDriven" id="KRi-qE-8lc"/>

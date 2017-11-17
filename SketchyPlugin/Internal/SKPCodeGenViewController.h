@@ -1,5 +1,5 @@
 //
-//  SKPInspectorViewController.h
+//  SKPCodeGenViewController.h
 //  SketchyPlugin
 //
 //  Created by Rob Visentin on 10/25/17.
@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SKPInspectorViewController : NSViewController
+@interface SKPCodeGenViewController : NSViewController
 
 @property (nonatomic, readonly) NSArray<NSView *>* views;
 

@@ -9,7 +9,7 @@
 @import ObjectiveC.message;
 
 #import "SKPInspectorStackView.h"
-#import "SKPInspectorViewController.h"
+#import "SKPCodeGenViewController.h"
 
 @implementation SKPInspectorStackView
 
@@ -28,8 +28,8 @@
         [self superclass]
     };
 
-    if ( ![[viewControllers lastObject] isKindOfClass:[SKPInspectorViewController class]] ) {
-        viewControllers = [viewControllers arrayByAddingObject:[SKPInspectorViewController new]];
+    if ( ![[viewControllers lastObject] isKindOfClass:[SKPCodeGenViewController class]] ) {
+        viewControllers = [viewControllers arrayByAddingObject:[SKPCodeGenViewController new]];
     }
     
     ((void (*)(struct objc_super*, SEL, id))objc_msgSendSuper)(&sup, _cmd, viewControllers);
