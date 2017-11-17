@@ -70,6 +70,11 @@
 		D43432A01FA0F374008A0B20 /* SKPCodeGenViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D434329D1FA0F374008A0B20 /* SKPCodeGenViewController.h */; };
 		D43432A11FA0F374008A0B20 /* SKPCodeGenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D434329E1FA0F374008A0B20 /* SKPCodeGenViewController.m */; };
 		D43432A21FA0F374008A0B20 /* SKPCodeGenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D434329F1FA0F374008A0B20 /* SKPCodeGenViewController.xib */; };
+		D4996E471FBF2EBD00DAE72B /* SKPStackOptionsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D4996E441FBF2EBD00DAE72B /* SKPStackOptionsViewController.h */; };
+		D4996E481FBF2EBD00DAE72B /* SKPStackOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4996E451FBF2EBD00DAE72B /* SKPStackOptionsViewController.m */; };
+		D4996E491FBF2EBD00DAE72B /* SKPStackOptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4996E461FBF2EBD00DAE72B /* SKPStackOptionsViewController.xib */; };
+		D4996E4D1FBF2F7200DAE72B /* NSArray+SKPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = D4996E4B1FBF2F7200DAE72B /* NSArray+SKPExtensions.h */; };
+		D4996E4E1FBF2F7200DAE72B /* NSArray+SKPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D4996E4C1FBF2F7200DAE72B /* NSArray+SKPExtensions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +194,11 @@
 		D434329D1FA0F374008A0B20 /* SKPCodeGenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPCodeGenViewController.h; sourceTree = "<group>"; };
 		D434329E1FA0F374008A0B20 /* SKPCodeGenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKPCodeGenViewController.m; sourceTree = "<group>"; };
 		D434329F1FA0F374008A0B20 /* SKPCodeGenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SKPCodeGenViewController.xib; sourceTree = "<group>"; };
+		D4996E441FBF2EBD00DAE72B /* SKPStackOptionsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPStackOptionsViewController.h; sourceTree = "<group>"; };
+		D4996E451FBF2EBD00DAE72B /* SKPStackOptionsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKPStackOptionsViewController.m; sourceTree = "<group>"; };
+		D4996E461FBF2EBD00DAE72B /* SKPStackOptionsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SKPStackOptionsViewController.xib; sourceTree = "<group>"; };
+		D4996E4B1FBF2F7200DAE72B /* NSArray+SKPExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+SKPExtensions.h"; sourceTree = "<group>"; };
+		D4996E4C1FBF2F7200DAE72B /* NSArray+SKPExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SKPExtensions.m"; sourceTree = "<group>"; };
 		D51799568B333AB48B63723E /* Pods-SketchyCode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SketchyCode.release.xcconfig"; path = "Pods/Target Support Files/Pods-SketchyCode/Pods-SketchyCode.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -413,6 +423,7 @@
 		D434327F1FA09986008A0B20 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
+				D4996E4A1FBF2F5B00DAE72B /* Extensions */,
 				D43432841FA09986008A0B20 /* SKPInspector.h */,
 				D43432851FA09986008A0B20 /* SKPInspector.m */,
 				D43432971FA0DD4D008A0B20 /* SKPInspectorStackView.h */,
@@ -420,6 +431,9 @@
 				D434329D1FA0F374008A0B20 /* SKPCodeGenViewController.h */,
 				D434329E1FA0F374008A0B20 /* SKPCodeGenViewController.m */,
 				D434329F1FA0F374008A0B20 /* SKPCodeGenViewController.xib */,
+				D4996E441FBF2EBD00DAE72B /* SKPStackOptionsViewController.h */,
+				D4996E451FBF2EBD00DAE72B /* SKPStackOptionsViewController.m */,
+				D4996E461FBF2EBD00DAE72B /* SKPStackOptionsViewController.xib */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -430,6 +444,15 @@
 				D43432941FA0A2BF008A0B20 /* SketchyPlugin.xcconfig */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		D4996E4A1FBF2F5B00DAE72B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D4996E4B1FBF2F7200DAE72B /* NSArray+SKPExtensions.h */,
+				D4996E4C1FBF2F7200DAE72B /* NSArray+SKPExtensions.m */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,9 +472,11 @@
 			files = (
 				D43432A01FA0F374008A0B20 /* SKPCodeGenViewController.h in Headers */,
 				D43432881FA099B0008A0B20 /* SKPInspector.h in Headers */,
+				D4996E4D1FBF2F7200DAE72B /* NSArray+SKPExtensions.h in Headers */,
 				D43432631F9FCE4C008A0B20 /* SketchyPlugin.h in Headers */,
 				D434328C1FA099FA008A0B20 /* SketchInterface.h in Headers */,
 				D43432991FA0DD4D008A0B20 /* SKPInspectorStackView.h in Headers */,
+				D4996E471FBF2EBD00DAE72B /* SKPStackOptionsViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,6 +646,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4996E491FBF2EBD00DAE72B /* SKPStackOptionsViewController.xib in Resources */,
 				D43432A21FA0F374008A0B20 /* SKPCodeGenViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -831,9 +857,11 @@
 			files = (
 				D434327A1FA09332008A0B20 /* SketchyPlugin.m in Sources */,
 				D43432A11FA0F374008A0B20 /* SKPCodeGenViewController.m in Sources */,
+				D4996E481FBF2EBD00DAE72B /* SKPStackOptionsViewController.m in Sources */,
 				D434328D1FA09AC1008A0B20 /* SKPInspector.m in Sources */,
 				D434328B1FA099F8008A0B20 /* SketchInterface.m in Sources */,
 				D434329A1FA0DD4D008A0B20 /* SKPInspectorStackView.m in Sources */,
+				D4996E4E1FBF2F7200DAE72B /* NSArray+SKPExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

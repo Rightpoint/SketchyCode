@@ -10,6 +10,8 @@
 
 #import "SKPInspectorStackView.h"
 #import "SKPCodeGenViewController.h"
+#import "SKPStackOptionsViewController.h"
+#import "NSArray+SKPExtensions.h"
 
 @implementation SKPInspectorStackView
 
@@ -28,11 +30,20 @@
         [self superclass]
     };
 
-    if ( ![[viewControllers lastObject] isKindOfClass:[SKPCodeGenViewController class]] ) {
-        viewControllers = [viewControllers arrayByAddingObject:[SKPCodeGenViewController new]];
+    NSMutableArray *vcs = [viewControllers mutableCopy];
+
+    if ( [SketchInterface.currentDocument.selectedLayers.layers skp_areAllKindOfClass:objc_getClass("MSLayerGroup")] && ![viewControllers skp_containsKindOfClass:[SKPStackOptionsViewController class]] ) {
+        [vcs addObject:[SKPStackOptionsViewController new]];
+    }
+    else {
+        [vcs skp_removeKindsOfClass:[SKPStackOptionsViewController class]];
+    }
+
+    if ( ![viewControllers skp_containsKindOfClass:[SKPCodeGenViewController class]] ) {
+        [vcs addObject:[SKPCodeGenViewController new]];
     }
     
-    ((void (*)(struct objc_super*, SEL, id))objc_msgSendSuper)(&sup, _cmd, viewControllers);
+    ((void (*)(struct objc_super*, SEL, id))objc_msgSendSuper)(&sup, _cmd, vcs);
 }
 
 @end

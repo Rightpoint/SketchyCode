@@ -10,6 +10,7 @@
 
 @interface SKPCodeGenViewController : NSViewController
 
+/// This property is requires by children of MKInspectorStackView
 @property (nonatomic, readonly) NSArray<NSView *>* views;
 
 @end
