@@ -10,6 +10,7 @@
 
 #import "SketchyPlugin.h"
 
+/// Superclass is dynamically set to MSInspectorStackView
 @interface SKPInspectorStackView : NSObject<MSInspectorStackViewInterface>
 
 @end

@@ -10,6 +10,7 @@
 
 #import "SKPInspector.h"
 #import "SKPInspectorStackView.h"
+#import "SKPMacros.h"
 
 @implementation SKPInspector
 

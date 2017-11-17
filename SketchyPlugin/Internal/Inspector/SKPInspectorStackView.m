@@ -12,19 +12,19 @@
 #import "SKPCodeGenViewController.h"
 #import "SKPStackOptionsViewController.h"
 #import "NSArray+SKPExtensions.h"
+#import "SKPMacros.h"
 
 @implementation SKPInspectorStackView
 
 @dynamic sectionViewControllers;
 
 + (void)load {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    class_setSuperclass(self, objc_getClass("MSInspectorStackView"));
-#pragma clang diagnostic pop
+    SKP_SET_SUPERCLASS(MSInspectorStackView);
 }
 
 - (void)reloadWithViewControllers:(NSArray<NSViewController *> *)viewControllers {
+    SKP_ENSURE_SUPER_RESPONDS
+
     struct objc_super sup = {
         self,
         [self superclass]
@@ -32,7 +32,7 @@
 
     NSMutableArray *vcs = [viewControllers mutableCopy];
 
-    if ( [SketchInterface.currentDocument.selectedLayers.layers skp_areAllKindOfClass:objc_getClass("MSLayerGroup")] && ![viewControllers skp_containsKindOfClass:[SKPStackOptionsViewController class]] ) {
+    if ( [SketchInterface.selectedLayers skp_areAllKindOfClass:objc_getClass("MSLayerGroup")] && ![viewControllers skp_containsKindOfClass:[SKPStackOptionsViewController class]] ) {
         [vcs addObject:[SKPStackOptionsViewController new]];
     }
     else {

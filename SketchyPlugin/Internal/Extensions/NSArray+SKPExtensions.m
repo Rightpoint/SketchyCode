@@ -34,7 +34,7 @@
             return NO;
         }
     }
-    return YES;
+    return (self.count > 0);
 }
 
 - (BOOL)skp_areAllMemberOfClass:(Class)cls {
@@ -43,7 +43,7 @@
             return NO;
         }
     }
-    return YES;
+    return (self.count > 0);
 }
 
 @end

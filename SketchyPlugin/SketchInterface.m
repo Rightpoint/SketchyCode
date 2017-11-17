@@ -16,4 +16,8 @@
     return ((id<MSDocumentInterface>(*)(id, SEL))objc_msgSend)(objc_getClass("MSDocument"), sel_getUid("currentDocument"));
 }
 
++ (NSArray<id<MSLayerInterface>> *)selectedLayers {
+     return self.currentDocument.selectedLayers.layers;
+}
+
 @end

@@ -14,8 +14,6 @@ FOUNDATION_EXPORT double SketchyPluginVersionNumber;
 //! Project version string for SketchyPlugin.
 FOUNDATION_EXPORT const unsigned char SketchyPluginVersionString[];
 
-#define SKPLog(fmt, ...) NSLog((@"(Sketchy Plugin) %s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
-
 #import <SketchyPlugin/SketchInterface.h>
 
 @interface SketchyPlugin : NSObject

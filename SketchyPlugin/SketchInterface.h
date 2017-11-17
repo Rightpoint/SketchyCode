@@ -15,10 +15,13 @@
 @protocol MSInspectorStackViewInterface;
 @protocol MSLayerInterface;
 @protocol MSLayerArrayInterface;
+@protocol MSTextLabelForUpDownFieldInterface;
 
 @interface SketchInterface : NSObject
 
 + (id<MSDocumentInterface>)currentDocument;
+
++ (NSArray<id<MSLayerInterface>> *)selectedLayers;
 
 @end
 
@@ -72,7 +75,22 @@
 
 @protocol MSLayerInterface
 
+@property(nonatomic, readonly) NSString *objectID;
+
+@property (nonatomic, readonly) CGRect rect;
+@property (nonatomic, readonly) CGRect bounds;
+
 @property (strong, nonatomic) NSDictionary *userInfo;
+
+- (void)object:(id)object didChangeProperty:(NSString *)property;
+
+@end
+
+#pragma mark - MSLayerGroup
+
+@protocol MSLayerGroupInterface<MSLayerInterface>
+
+@property (nonatomic, readonly) NSArray<id<MSLayerInterface>> *children;
 
 @end
 
@@ -81,5 +99,13 @@
 @protocol MSLayerArrayInterface
 
 @property (strong, nonatomic) NSArray<id<MSLayerInterface>> *layers;
+
+@end
+
+#pragma mark - MSTextLabelForUpDownField
+
+@protocol MSTextLabelForUpDownFieldInterface
+
+- (void)setTextFields:(NSArray *)textFields;
 
 @end

@@ -75,6 +75,10 @@
 		D4996E491FBF2EBD00DAE72B /* SKPStackOptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4996E461FBF2EBD00DAE72B /* SKPStackOptionsViewController.xib */; };
 		D4996E4D1FBF2F7200DAE72B /* NSArray+SKPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = D4996E4B1FBF2F7200DAE72B /* NSArray+SKPExtensions.h */; };
 		D4996E4E1FBF2F7200DAE72B /* NSArray+SKPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D4996E4C1FBF2F7200DAE72B /* NSArray+SKPExtensions.m */; };
+		D4996E5B1FBF589B00DAE72B /* SKPStackViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = D4996E591FBF589B00DAE72B /* SKPStackViewProxy.h */; };
+		D4996E5C1FBF589B00DAE72B /* SKPStackViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = D4996E5A1FBF589B00DAE72B /* SKPStackViewProxy.m */; };
+		D4A20BF31FBF91F300CBC7DF /* SKPLayerObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = D4A20BF11FBF91F300CBC7DF /* SKPLayerObserver.h */; };
+		D4A20BF41FBF91F300CBC7DF /* SKPLayerObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A20BF21FBF91F300CBC7DF /* SKPLayerObserver.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -199,6 +203,11 @@
 		D4996E461FBF2EBD00DAE72B /* SKPStackOptionsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SKPStackOptionsViewController.xib; sourceTree = "<group>"; };
 		D4996E4B1FBF2F7200DAE72B /* NSArray+SKPExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+SKPExtensions.h"; sourceTree = "<group>"; };
 		D4996E4C1FBF2F7200DAE72B /* NSArray+SKPExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SKPExtensions.m"; sourceTree = "<group>"; };
+		D4996E581FBF556600DAE72B /* SKPMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPMacros.h; sourceTree = "<group>"; };
+		D4996E591FBF589B00DAE72B /* SKPStackViewProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPStackViewProxy.h; sourceTree = "<group>"; };
+		D4996E5A1FBF589B00DAE72B /* SKPStackViewProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKPStackViewProxy.m; sourceTree = "<group>"; };
+		D4A20BF11FBF91F300CBC7DF /* SKPLayerObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPLayerObserver.h; sourceTree = "<group>"; };
+		D4A20BF21FBF91F300CBC7DF /* SKPLayerObserver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKPLayerObserver.m; sourceTree = "<group>"; };
 		D51799568B333AB48B63723E /* Pods-SketchyCode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SketchyCode.release.xcconfig"; path = "Pods/Target Support Files/Pods-SketchyCode/Pods-SketchyCode.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -423,17 +432,13 @@
 		D434327F1FA09986008A0B20 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
+				D4996E581FBF556600DAE72B /* SKPMacros.h */,
+				D4A20BF11FBF91F300CBC7DF /* SKPLayerObserver.h */,
+				D4A20BF21FBF91F300CBC7DF /* SKPLayerObserver.m */,
+				D4996E591FBF589B00DAE72B /* SKPStackViewProxy.h */,
+				D4996E5A1FBF589B00DAE72B /* SKPStackViewProxy.m */,
 				D4996E4A1FBF2F5B00DAE72B /* Extensions */,
-				D43432841FA09986008A0B20 /* SKPInspector.h */,
-				D43432851FA09986008A0B20 /* SKPInspector.m */,
-				D43432971FA0DD4D008A0B20 /* SKPInspectorStackView.h */,
-				D43432981FA0DD4D008A0B20 /* SKPInspectorStackView.m */,
-				D434329D1FA0F374008A0B20 /* SKPCodeGenViewController.h */,
-				D434329E1FA0F374008A0B20 /* SKPCodeGenViewController.m */,
-				D434329F1FA0F374008A0B20 /* SKPCodeGenViewController.xib */,
-				D4996E441FBF2EBD00DAE72B /* SKPStackOptionsViewController.h */,
-				D4996E451FBF2EBD00DAE72B /* SKPStackOptionsViewController.m */,
-				D4996E461FBF2EBD00DAE72B /* SKPStackOptionsViewController.xib */,
+				D4996E5D1FBF58CD00DAE72B /* Inspector */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -455,6 +460,23 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		D4996E5D1FBF58CD00DAE72B /* Inspector */ = {
+			isa = PBXGroup;
+			children = (
+				D43432841FA09986008A0B20 /* SKPInspector.h */,
+				D43432851FA09986008A0B20 /* SKPInspector.m */,
+				D43432971FA0DD4D008A0B20 /* SKPInspectorStackView.h */,
+				D43432981FA0DD4D008A0B20 /* SKPInspectorStackView.m */,
+				D434329D1FA0F374008A0B20 /* SKPCodeGenViewController.h */,
+				D434329E1FA0F374008A0B20 /* SKPCodeGenViewController.m */,
+				D434329F1FA0F374008A0B20 /* SKPCodeGenViewController.xib */,
+				D4996E441FBF2EBD00DAE72B /* SKPStackOptionsViewController.h */,
+				D4996E451FBF2EBD00DAE72B /* SKPStackOptionsViewController.m */,
+				D4996E461FBF2EBD00DAE72B /* SKPStackOptionsViewController.xib */,
+			);
+			path = Inspector;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -472,8 +494,10 @@
 			files = (
 				D43432A01FA0F374008A0B20 /* SKPCodeGenViewController.h in Headers */,
 				D43432881FA099B0008A0B20 /* SKPInspector.h in Headers */,
+				D4996E5B1FBF589B00DAE72B /* SKPStackViewProxy.h in Headers */,
 				D4996E4D1FBF2F7200DAE72B /* NSArray+SKPExtensions.h in Headers */,
 				D43432631F9FCE4C008A0B20 /* SketchyPlugin.h in Headers */,
+				D4A20BF31FBF91F300CBC7DF /* SKPLayerObserver.h in Headers */,
 				D434328C1FA099FA008A0B20 /* SketchInterface.h in Headers */,
 				D43432991FA0DD4D008A0B20 /* SKPInspectorStackView.h in Headers */,
 				D4996E471FBF2EBD00DAE72B /* SKPStackOptionsViewController.h in Headers */,
@@ -862,6 +886,8 @@
 				D434328B1FA099F8008A0B20 /* SketchInterface.m in Sources */,
 				D434329A1FA0DD4D008A0B20 /* SKPInspectorStackView.m in Sources */,
 				D4996E4E1FBF2F7200DAE72B /* NSArray+SKPExtensions.m in Sources */,
+				D4996E5C1FBF589B00DAE72B /* SKPStackViewProxy.m in Sources */,
+				D4A20BF41FBF91F300CBC7DF /* SKPLayerObserver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
