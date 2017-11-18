@@ -16,6 +16,7 @@
 @protocol MSLayerInterface;
 @protocol MSLayerArrayInterface;
 @protocol MSTextLabelForUpDownFieldInterface;
+@protocol MSRectInterface;
 
 @interface SketchInterface : NSObject
 
@@ -27,7 +28,7 @@
 
 #pragma mark - MSDocument
 
-@protocol MSDocumentInterface
+@protocol MSDocumentInterface <NSObject>
 
 @property (nonatomic, readonly) id<MSMainSplitViewControllerInterface> splitViewController;
 
@@ -37,7 +38,7 @@
 
 #pragma mark - MSMainSplitViewController
 
-@protocol MSMainSplitViewControllerInterface
+@protocol MSMainSplitViewControllerInterface <NSObject>
 
 @property (nonatomic, readonly) NSView *inspectorView;
 
@@ -45,7 +46,7 @@
 
 #pragma mark - MSInspectorControllerInterface
 
-@protocol MSInspectorControllerInterface
+@protocol MSInspectorControllerInterface <NSObject>
 
 @property (nonatomic, readonly) id<MSNormalInspectorInterface> normalInspector;
 
@@ -55,7 +56,7 @@
 
 #pragma mark - MSNormalInspectorInterface
 
-@protocol MSNormalInspectorInterface
+@protocol MSNormalInspectorInterface <NSObject>
 
 @property (nonatomic, readonly) id<MSInspectorStackViewInterface> stackView;
 
@@ -63,7 +64,7 @@
 
 #pragma mark - MSInspectorStackView
 
-@protocol MSInspectorStackViewInterface
+@protocol MSInspectorStackViewInterface <NSObject>
 
 @property (nonatomic, readonly) NSArray<NSViewController *> *sectionViewControllers;
 
@@ -73,12 +74,13 @@
 
 #pragma mark - MSLayer
 
-@protocol MSLayerInterface
+@protocol MSLayerInterface <NSObject>
 
 @property(nonatomic, readonly) NSString *objectID;
 
-@property (nonatomic, readonly) CGRect rect;
-@property (nonatomic, readonly) CGRect bounds;
+@property (nonatomic, readonly) id<MSRectInterface> frame;
+
+@property (assign, nonatomic) CGRect rect;
 
 @property (strong, nonatomic) NSDictionary *userInfo;
 
@@ -90,13 +92,15 @@
 
 @protocol MSLayerGroupInterface<MSLayerInterface>
 
-@property (nonatomic, readonly) NSArray<id<MSLayerInterface>> *children;
+@property (nonatomic, readonly) NSArray<id<MSLayerInterface>> *layers;
+
+- (void)disableAutomaticScalingInBlock:(void (^)(void))block;
 
 @end
 
 #pragma mark - MSLayerArray
 
-@protocol MSLayerArrayInterface
+@protocol MSLayerArrayInterface <NSObject>
 
 @property (strong, nonatomic) NSArray<id<MSLayerInterface>> *layers;
 
@@ -104,8 +108,21 @@
 
 #pragma mark - MSTextLabelForUpDownField
 
-@protocol MSTextLabelForUpDownFieldInterface
+@protocol MSTextLabelForUpDownFieldInterface <NSObject>
 
 - (void)setTextFields:(NSArray *)textFields;
+
+@end
+
+#pragma mark - MSRectInterface
+
+@protocol MSRectInterface <NSObject>
+
+@property (assign, nonatomic) CGRect rect;
+
+- (void)setY:(CGFloat)y;
+- (void)setX:(CGFloat)x;
+- (void)setHeight:(CGFloat)height;
+- (void)setWidth:(CGFloat)width;
 
 @end

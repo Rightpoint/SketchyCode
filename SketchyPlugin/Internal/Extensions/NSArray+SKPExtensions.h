@@ -14,7 +14,7 @@
 - (BOOL)skp_containsMemberOfClass:(Class)cls;
 
 - (BOOL)skp_areAllKindOfClass:(Class)cls;
-- (BOOL)skp_areAllMemberOfClass:(Class)cls;
+- (BOOL)skp_areAllMembersOfClass:(Class)cls;
 
 @end
 

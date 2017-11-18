@@ -75,10 +75,14 @@
 		D4996E491FBF2EBD00DAE72B /* SKPStackOptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4996E461FBF2EBD00DAE72B /* SKPStackOptionsViewController.xib */; };
 		D4996E4D1FBF2F7200DAE72B /* NSArray+SKPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = D4996E4B1FBF2F7200DAE72B /* NSArray+SKPExtensions.h */; };
 		D4996E4E1FBF2F7200DAE72B /* NSArray+SKPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D4996E4C1FBF2F7200DAE72B /* NSArray+SKPExtensions.m */; };
-		D4996E5B1FBF589B00DAE72B /* SKPStackViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = D4996E591FBF589B00DAE72B /* SKPStackViewProxy.h */; };
-		D4996E5C1FBF589B00DAE72B /* SKPStackViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = D4996E5A1FBF589B00DAE72B /* SKPStackViewProxy.m */; };
+		D4996E5B1FBF589B00DAE72B /* SKPStackGroupProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = D4996E591FBF589B00DAE72B /* SKPStackGroupProxy.h */; };
 		D4A20BF31FBF91F300CBC7DF /* SKPLayerObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = D4A20BF11FBF91F300CBC7DF /* SKPLayerObserver.h */; };
 		D4A20BF41FBF91F300CBC7DF /* SKPLayerObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A20BF21FBF91F300CBC7DF /* SKPLayerObserver.m */; };
+		D4BE88C31FBFB7E800AB858C /* SKPLayerProxyView.h in Headers */ = {isa = PBXBuildFile; fileRef = D4BE88C11FBFB7E800AB858C /* SKPLayerProxyView.h */; };
+		D4BE88C41FBFB7E800AB858C /* SKPLayerProxyView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BE88C21FBFB7E800AB858C /* SKPLayerProxyView.m */; };
+		D4BE88C71FC0A67600AB858C /* SKPBaseInspectorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D4BE88C51FC0A67600AB858C /* SKPBaseInspectorViewController.h */; };
+		D4BE88C81FC0A67600AB858C /* SKPBaseInspectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BE88C61FC0A67600AB858C /* SKPBaseInspectorViewController.m */; };
+		D4BE88CB1FC0AA4800AB858C /* SKPStackGroupProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BE88CA1FC0AA4800AB858C /* SKPStackGroupProxy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -204,10 +208,14 @@
 		D4996E4B1FBF2F7200DAE72B /* NSArray+SKPExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+SKPExtensions.h"; sourceTree = "<group>"; };
 		D4996E4C1FBF2F7200DAE72B /* NSArray+SKPExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SKPExtensions.m"; sourceTree = "<group>"; };
 		D4996E581FBF556600DAE72B /* SKPMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPMacros.h; sourceTree = "<group>"; };
-		D4996E591FBF589B00DAE72B /* SKPStackViewProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPStackViewProxy.h; sourceTree = "<group>"; };
-		D4996E5A1FBF589B00DAE72B /* SKPStackViewProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKPStackViewProxy.m; sourceTree = "<group>"; };
+		D4996E591FBF589B00DAE72B /* SKPStackGroupProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPStackGroupProxy.h; sourceTree = "<group>"; };
 		D4A20BF11FBF91F300CBC7DF /* SKPLayerObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPLayerObserver.h; sourceTree = "<group>"; };
 		D4A20BF21FBF91F300CBC7DF /* SKPLayerObserver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKPLayerObserver.m; sourceTree = "<group>"; };
+		D4BE88C11FBFB7E800AB858C /* SKPLayerProxyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPLayerProxyView.h; sourceTree = "<group>"; };
+		D4BE88C21FBFB7E800AB858C /* SKPLayerProxyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKPLayerProxyView.m; sourceTree = "<group>"; };
+		D4BE88C51FC0A67600AB858C /* SKPBaseInspectorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPBaseInspectorViewController.h; sourceTree = "<group>"; };
+		D4BE88C61FC0A67600AB858C /* SKPBaseInspectorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKPBaseInspectorViewController.m; sourceTree = "<group>"; };
+		D4BE88CA1FC0AA4800AB858C /* SKPStackGroupProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKPStackGroupProxy.m; sourceTree = "<group>"; };
 		D51799568B333AB48B63723E /* Pods-SketchyCode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SketchyCode.release.xcconfig"; path = "Pods/Target Support Files/Pods-SketchyCode/Pods-SketchyCode.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -435,8 +443,10 @@
 				D4996E581FBF556600DAE72B /* SKPMacros.h */,
 				D4A20BF11FBF91F300CBC7DF /* SKPLayerObserver.h */,
 				D4A20BF21FBF91F300CBC7DF /* SKPLayerObserver.m */,
-				D4996E591FBF589B00DAE72B /* SKPStackViewProxy.h */,
-				D4996E5A1FBF589B00DAE72B /* SKPStackViewProxy.m */,
+				D4BE88C11FBFB7E800AB858C /* SKPLayerProxyView.h */,
+				D4BE88C21FBFB7E800AB858C /* SKPLayerProxyView.m */,
+				D4996E591FBF589B00DAE72B /* SKPStackGroupProxy.h */,
+				D4BE88CA1FC0AA4800AB858C /* SKPStackGroupProxy.m */,
 				D4996E4A1FBF2F5B00DAE72B /* Extensions */,
 				D4996E5D1FBF58CD00DAE72B /* Inspector */,
 			);
@@ -467,6 +477,16 @@
 				D43432851FA09986008A0B20 /* SKPInspector.m */,
 				D43432971FA0DD4D008A0B20 /* SKPInspectorStackView.h */,
 				D43432981FA0DD4D008A0B20 /* SKPInspectorStackView.m */,
+				D4BE88C91FC0A68B00AB858C /* View Controllers */,
+			);
+			path = Inspector;
+			sourceTree = "<group>";
+		};
+		D4BE88C91FC0A68B00AB858C /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D4BE88C51FC0A67600AB858C /* SKPBaseInspectorViewController.h */,
+				D4BE88C61FC0A67600AB858C /* SKPBaseInspectorViewController.m */,
 				D434329D1FA0F374008A0B20 /* SKPCodeGenViewController.h */,
 				D434329E1FA0F374008A0B20 /* SKPCodeGenViewController.m */,
 				D434329F1FA0F374008A0B20 /* SKPCodeGenViewController.xib */,
@@ -474,7 +494,7 @@
 				D4996E451FBF2EBD00DAE72B /* SKPStackOptionsViewController.m */,
 				D4996E461FBF2EBD00DAE72B /* SKPStackOptionsViewController.xib */,
 			);
-			path = Inspector;
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -494,13 +514,15 @@
 			files = (
 				D43432A01FA0F374008A0B20 /* SKPCodeGenViewController.h in Headers */,
 				D43432881FA099B0008A0B20 /* SKPInspector.h in Headers */,
-				D4996E5B1FBF589B00DAE72B /* SKPStackViewProxy.h in Headers */,
+				D4996E5B1FBF589B00DAE72B /* SKPStackGroupProxy.h in Headers */,
 				D4996E4D1FBF2F7200DAE72B /* NSArray+SKPExtensions.h in Headers */,
+				D4BE88C71FC0A67600AB858C /* SKPBaseInspectorViewController.h in Headers */,
 				D43432631F9FCE4C008A0B20 /* SketchyPlugin.h in Headers */,
 				D4A20BF31FBF91F300CBC7DF /* SKPLayerObserver.h in Headers */,
 				D434328C1FA099FA008A0B20 /* SketchInterface.h in Headers */,
 				D43432991FA0DD4D008A0B20 /* SKPInspectorStackView.h in Headers */,
 				D4996E471FBF2EBD00DAE72B /* SKPStackOptionsViewController.h in Headers */,
+				D4BE88C31FBFB7E800AB858C /* SKPLayerProxyView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -882,11 +904,13 @@
 				D434327A1FA09332008A0B20 /* SketchyPlugin.m in Sources */,
 				D43432A11FA0F374008A0B20 /* SKPCodeGenViewController.m in Sources */,
 				D4996E481FBF2EBD00DAE72B /* SKPStackOptionsViewController.m in Sources */,
+				D4BE88C81FC0A67600AB858C /* SKPBaseInspectorViewController.m in Sources */,
 				D434328D1FA09AC1008A0B20 /* SKPInspector.m in Sources */,
+				D4BE88C41FBFB7E800AB858C /* SKPLayerProxyView.m in Sources */,
 				D434328B1FA099F8008A0B20 /* SketchInterface.m in Sources */,
+				D4BE88CB1FC0AA4800AB858C /* SKPStackGroupProxy.m in Sources */,
 				D434329A1FA0DD4D008A0B20 /* SKPInspectorStackView.m in Sources */,
 				D4996E4E1FBF2F7200DAE72B /* NSArray+SKPExtensions.m in Sources */,
-				D4996E5C1FBF589B00DAE72B /* SKPStackViewProxy.m in Sources */,
 				D4A20BF41FBF91F300CBC7DF /* SKPLayerObserver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

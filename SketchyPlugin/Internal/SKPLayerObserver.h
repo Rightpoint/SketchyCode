@@ -10,12 +10,13 @@
 
 @protocol SKPLayerObserver
 
-- (void)object:(id)object didChangeProperty:(NSString *)property;
+- (void)object:(id)object didChangeProperty:(NSString *)property inLayer:(id<MSLayerInterface>)layer;
 
 @end
 
 @interface NSObject (SKPLayerObserver)
 
-@property (strong, nonatomic) id<SKPLayerObserver> skp_layerObserver;
+- (void)skp_addLayerObserver:(id<SKPLayerObserver>)observer;
+- (void)skp_removeLayerObserver:(id<SKPLayerObserver>)observer;
 
 @end

@@ -32,7 +32,7 @@
 
     NSMutableArray *vcs = [viewControllers mutableCopy];
 
-    if ( [SketchInterface.selectedLayers skp_areAllKindOfClass:objc_getClass("MSLayerGroup")] && ![viewControllers skp_containsKindOfClass:[SKPStackOptionsViewController class]] ) {
+    if ( [SketchInterface.selectedLayers skp_areAllMembersOfClass:objc_getClass("MSLayerGroup")] && ![viewControllers skp_containsKindOfClass:[SKPStackOptionsViewController class]] ) {
         [vcs addObject:[SKPStackOptionsViewController new]];
     }
     else {

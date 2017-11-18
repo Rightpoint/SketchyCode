@@ -37,7 +37,7 @@
     return (self.count > 0);
 }
 
-- (BOOL)skp_areAllMemberOfClass:(Class)cls {
+- (BOOL)skp_areAllMembersOfClass:(Class)cls {
     for ( id obj in self ) {
         if ( ![obj isMemberOfClass:cls] ) {
             return NO;

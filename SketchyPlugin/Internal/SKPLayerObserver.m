@@ -27,17 +27,28 @@
     }
 
     __block IMP originalIMP = method_setImplementation(callback, imp_implementationWithBlock(^(id self, id obj, id prop) {
+        for ( id<SKPLayerObserver> observer in [self skp_layerObservers].allObjects ) {
+            [observer object:obj didChangeProperty:prop inLayer:self];
+        }
         ((void(*)(id, SEL, id, id))originalIMP)(self, callbackSEL, obj, prop);
-        [[self skp_layerObserver] object:obj didChangeProperty:prop];
     }));
 }
 
-- (id<SKPLayerObserver>)skp_layerObserver {
-    return objc_getAssociatedObject(self, _cmd);
+- (void)skp_addLayerObserver:(id<SKPLayerObserver>)observer {
+    [[self skp_layerObservers] addObject:observer];
 }
 
-- (void)setSkp_layerObserver:(id<SKPLayerObserver>)observer {
-    objc_setAssociatedObject(self, @selector(skp_layerObserver), observer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)skp_removeLayerObserver:(id<SKPLayerObserver>)observer {
+    [[self skp_layerObservers] removeObject:observer];
+}
+
+- (NSHashTable *)skp_layerObservers {
+    NSHashTable *observers = objc_getAssociatedObject(self, _cmd);
+    if ( observers == nil ) {
+        observers = [NSHashTable weakObjectsHashTable];
+        objc_setAssociatedObject(self, _cmd, observers, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return observers;
 }
 
 @end
