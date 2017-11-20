@@ -83,9 +83,6 @@
         key = [[key stringByReplacingOccurrencesOfString:@"stack" withString:@""] lowercaseString];
         NSArray *values = [self.stackProxies valueForKey:key];
 
-        // This should already be enforced by the -views getter
-        NSAssert(values.count <= 1, @"Mutli-editing is not yet supported.");
-
         if ( [[values firstObject] isEqual:[NSNull null]] ) {
             return nil;
         }

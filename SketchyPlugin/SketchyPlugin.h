@@ -19,5 +19,6 @@ FOUNDATION_EXPORT const unsigned char SketchyPluginVersionString[];
 @interface SketchyPlugin : NSObject
 
 + (void)reloadInspector;
++ (void)reloadLayerPosition;
 
 @end

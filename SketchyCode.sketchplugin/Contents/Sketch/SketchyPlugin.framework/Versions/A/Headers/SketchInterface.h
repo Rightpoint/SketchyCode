@@ -50,6 +50,7 @@
 
 @property (nonatomic, readonly) id<MSNormalInspectorInterface> normalInspector;
 
+- (void)layerPositionPossiblyChanged;
 - (void)reload;
 
 @end
@@ -74,15 +75,24 @@
 
 #pragma mark - MSLayer
 
+typedef NS_ENUM(NSUInteger, SKPLayerResizingConstraint) {
+    SKPLayerResizingConstraintNone = 63,
+    SKPLayerResizingConstraintFixedWidth = 61,
+    SKPLayerResizingConstraintFixedHeight = 47,
+    SKPLayerResizingConstraintFixedDimensions = 45,
+    SKPLayerResizingConstraintFixedAxes = 18
+};
+
 @protocol MSLayerInterface <NSObject>
 
 @property(nonatomic, readonly) NSString *objectID;
 
 @property (nonatomic, readonly) id<MSRectInterface> frame;
-
 @property (assign, nonatomic) CGRect rect;
 
 @property (strong, nonatomic) NSDictionary *userInfo;
+
+- (void)setResizingConstraint:(NSInteger)constraint;
 
 - (void)object:(id)object didChangeProperty:(NSString *)property;
 

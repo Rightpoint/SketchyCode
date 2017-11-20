@@ -18,4 +18,11 @@
     [inspector.inspectorController reload];
 }
 
++ (void)reloadLayerPosition {
+    id<MSDocumentInterface> document = [SketchInterface currentDocument];
+    SKPInspector *inspector = [[SKPInspector alloc] initWithRootView:document.splitViewController.inspectorView];
+
+    [inspector.inspectorController layerPositionPossiblyChanged];
+}
+
 @end

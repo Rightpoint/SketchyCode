@@ -14,6 +14,6 @@
 
 @property (weak, nonatomic) id<MSLayerInterface> proxiedLayer;
 
-- (instancetype)initProxying:(id<MSLayerGroupInterface>)layer;
+- (instancetype)initProxying:(id<MSLayerInterface>)layer;
 
 @end

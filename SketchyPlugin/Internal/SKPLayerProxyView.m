@@ -18,7 +18,7 @@
 
 @implementation SKPLayerProxyView
 
-- (instancetype)initProxying:(id<MSLayerGroupInterface>)layer {
+- (instancetype)initProxying:(id<MSLayerInterface>)layer {
     if ( (self = [super init]) ) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
 

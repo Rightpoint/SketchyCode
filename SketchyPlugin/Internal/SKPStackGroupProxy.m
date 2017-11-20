@@ -162,7 +162,11 @@ static NSString* const kSKPStackConfigurationKey = @"stackConfiguration";
     [self.stackView.arrangedSubviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 
     // Layers in sketch are rendered last child -> first child, which is opposite of AppKit
-    for ( id layer in [self.proxiedLayer.layers reverseObjectEnumerator] ) {
+    for ( id<MSLayerInterface> layer in [self.proxiedLayer.layers reverseObjectEnumerator] ) {
+        // Don't let Sketch resize children automatically when resizing the group
+        // (this will be managed by the stack view layout)
+        [layer setResizingConstraint:SKPLayerResizingConstraintFixedDimensions];
+
         SKPLayerProxyView *proxyView = [[SKPLayerProxyView alloc] initProxying:layer];
         [self.stackView addArrangedSubview:proxyView];
     }
@@ -202,6 +206,8 @@ static NSString* const kSKPStackConfigurationKey = @"stackConfiguration";
         [self.proxiedLayer.frame setWidth:size.width];
         [self.proxiedLayer.frame setHeight:size.height];
     }];
+
+    [SketchyPlugin reloadLayerPosition];
 
     self.performingLayout = NO;
 }
