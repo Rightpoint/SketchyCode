@@ -11,10 +11,8 @@
 
 @interface SKPLayerProxyView() <SKPLayerObserver>
 
+@property (assign, nonatomic) CGSize layerDefinedSize;
 @property (assign, nonatomic) BOOL performingLayout;
-
-@property (strong, nonatomic) NSLayoutConstraint *widthConstraint;
-@property (strong, nonatomic) NSLayoutConstraint *heightConstraint;
 
 @end
 
@@ -24,13 +22,11 @@
     if ( (self = [super init]) ) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
 
-        self.widthConstraint = [self.widthAnchor constraintEqualToConstant:0];
-        self.widthConstraint.priority = NSLayoutPriorityDefaultHigh;
-        self.widthConstraint.active = true;
+        [self setContentCompressionResistancePriority:NSLayoutPriorityDefaultHigh forOrientation:NSLayoutConstraintOrientationHorizontal];
+        [self setContentCompressionResistancePriority:NSLayoutPriorityDefaultHigh forOrientation:NSLayoutConstraintOrientationVertical];
 
-        self.heightConstraint = [self.heightAnchor constraintEqualToConstant:0];
-        self.heightConstraint.priority = NSLayoutPriorityDefaultHigh;
-        self.heightConstraint.active = true;
+        [self setContentHuggingPriority:NSLayoutPriorityDefaultLow forOrientation:NSLayoutConstraintOrientationHorizontal];
+        [self setContentHuggingPriority:NSLayoutPriorityDefaultLow forOrientation:NSLayoutConstraintOrientationVertical];
 
         self.proxiedLayer = layer;
     }
@@ -46,14 +42,20 @@
     _proxiedLayer = proxiedLayer;
     [(id)_proxiedLayer skp_addLayerObserver:self];
 
-    [self syncConstraints];
+    self.layerDefinedSize = proxiedLayer.rect.size;
+
+    [self invalidateIntrinsicContentSize];
+}
+
+- (NSSize)intrinsicContentSize {
+    return self.layerDefinedSize;
 }
 
 - (void)layout {
     self.performingLayout = YES;
 
     [super layout];
-    self.proxiedLayer.rect = self.frame;
+    self.proxiedLayer.rect = CGRectIntegral(self.frame);
 
     self.performingLayout = NO;
 }
@@ -66,18 +68,18 @@
         return;
     }
 
-    // Any number of property changes could affect the layer's frame,
-    // so always update the layout as a shotgun approach
-    [self setNeedsLayout:YES];
+    if ( layer == self.proxiedLayer && [object isKindOfClass:NSClassFromString(@"MSRect")] ) {
+        self.layerDefinedSize = layer.rect.size;
+    }
 }
 
 #pragma mark - Private
 
-- (void)syncConstraints {
-    CGSize layerSize = self.proxiedLayer.rect.size;
-
-    self.widthConstraint.constant = layerSize.width;
-    self.heightConstraint.constant = layerSize.height;
+- (void)setLayerDefinedSize:(CGSize)layerDefinedSize {
+    _layerDefinedSize = layerDefinedSize;
+    
+    [self invalidateIntrinsicContentSize];
+    [self setNeedsLayout:YES];
 }
 
 @end

@@ -127,10 +127,8 @@
                             <items>
                                 <menuItem title="Fill" state="on" id="SjA-T7-KdZ"/>
                                 <menuItem title="Leading" id="DTu-mH-NcY"/>
-                                <menuItem title="First Baseline" id="ROT-2t-KDG"/>
-                                <menuItem title="Center" id="oFg-1x-AQV"/>
-                                <menuItem title="Trailing" id="eEO-Rk-LF5"/>
-                                <menuItem title="Last Baseline" id="ZPc-LL-XER"/>
+                                <menuItem title="Center" id="ROT-2t-KDG"/>
+                                <menuItem title="Trailing" id="oFg-1x-AQV"/>
                             </items>
                         </menu>
                     </popUpButtonCell>

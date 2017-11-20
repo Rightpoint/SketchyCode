@@ -20,7 +20,8 @@ static NSString* const kSKPStackConfigurationKey = @"stackConfiguration";
 @interface SKPStackGroupProxy() <SKPLayerObserver>
 
 @property (strong, nonatomic, readonly) NSStackView *stackView;
-@property (strong, nonatomic, readonly) NSMapTable *viewMap;
+
+@property (strong, nonatomic, readonly) NSMutableArray *alignmentConstraints;
 
 @property (assign, nonatomic) BOOL performingLayout;
 
@@ -28,7 +29,7 @@ static NSString* const kSKPStackConfigurationKey = @"stackConfiguration";
 
 @implementation SKPStackGroupProxy
 
-@synthesize viewMap = _viewMap;
+@synthesize alignmentConstraints = _alignmentConstraints;
 
 + (BOOL)layerHasBeenProxied:(id<MSLayerGroupInterface>)layer {
     return ([layer.userInfo objectForKey:kSKPStackConfigurationKey] != nil);
@@ -106,11 +107,11 @@ static NSString* const kSKPStackConfigurationKey = @"stackConfiguration";
     return self;
 }
 
-- (NSMapTable *)viewMap {
-    if ( _viewMap == nil ) {
-        _viewMap = [NSMapTable strongToWeakObjectsMapTable];
+- (NSMutableArray *)alignmentConstraints {
+    if ( _alignmentConstraints == nil ) {
+        _alignmentConstraints = [NSMutableArray array];
     }
-    return _viewMap;
+    return _alignmentConstraints;
 }
 
 - (NSDictionary *)configurationDictionary {
@@ -122,10 +123,11 @@ static NSString* const kSKPStackConfigurationKey = @"stackConfiguration";
 
 - (void)importProperties:(NSDictionary *)dict {
     if ( dict != nil ) {
-        self.axis = [dict[@"axis"] integerValue];
-        self.alignment = [dict[@"alignment"] integerValue];
-        self.distribution = [dict[@"distribution"] integerValue];
-        self.spacing = [dict[@"spacing"] doubleValue];
+        _axis = [dict[@"axis"] integerValue];
+        _alignment = [dict[@"alignment"] integerValue];
+        _distribution = [dict[@"distribution"] integerValue];
+        _spacing = [dict[@"spacing"] doubleValue];
+        [self applyProperties];
     }
 }
 
@@ -134,31 +136,66 @@ static NSString* const kSKPStackConfigurationKey = @"stackConfiguration";
     self.stackView.distribution = (NSStackViewDistribution)self.distribution;
     self.stackView.spacing = self.spacing;
 
+    switch ( self.alignment ) {
+        case SKPStackAlignmentFill:
+        case SKPStackAlignmentCenter:
+            self.stackView.alignment = (self.axis) == SKPStackAxisHorizontal ? NSLayoutAttributeCenterY : NSLayoutAttributeCenterX;
+            break;
+
+        case SKPStackAlignmentLeading:
+            self.stackView.alignment = (self.axis) == SKPStackAxisHorizontal ? NSLayoutAttributeBottom : NSLayoutAttributeLeading;
+            break;
+
+        case SKPStackAlignmentTrailing:
+            self.stackView.alignment = (self.axis) == SKPStackAxisHorizontal ? NSLayoutAttributeTop : NSLayoutAttributeTrailing;
+            break;
+    }
+
+    [self updateAlignmentConstraints];
+
     NSMutableDictionary *userInfo = [self.proxiedLayer.userInfo ?: @{} mutableCopy];
     userInfo[kSKPStackConfigurationKey] = [self configurationDictionary];
     self.proxiedLayer.userInfo = userInfo;
 }
 
 - (void)rebuildViews {
-    [self.viewMap removeAllObjects];
     [self.stackView.arrangedSubviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 
     // Layers in sketch are rendered last child -> first child, which is opposite of AppKit
     for ( id layer in [self.proxiedLayer.layers reverseObjectEnumerator] ) {
         SKPLayerProxyView *proxyView = [[SKPLayerProxyView alloc] initProxying:layer];
-
-        [self.viewMap setObject:proxyView forKey:layer];
         [self.stackView addArrangedSubview:proxyView];
     }
+
+    [self updateAlignmentConstraints];
+}
+
+- (void)updateAlignmentConstraints {
+    [NSLayoutConstraint deactivateConstraints:self.alignmentConstraints];
+    [self.alignmentConstraints removeAllObjects];
+
+    if ( self.alignment == SKPStackAlignmentFill ) {
+        for ( NSView *view in self.stackView.arrangedSubviews ) {
+            if ( self.axis == SKPStackAxisHorizontal ) {
+                [self.alignmentConstraints addObject:[view.heightAnchor constraintEqualToAnchor:self.stackView.heightAnchor]];
+            }
+            else {
+                [self.alignmentConstraints addObject:[view.widthAnchor constraintEqualToAnchor:self.stackView.widthAnchor]];
+            }
+        }
+    }
+
+    [NSLayoutConstraint activateConstraints:self.alignmentConstraints];
 }
 
 - (void)performLayout {
     self.performingLayout = YES;
 
     [self.proxiedLayer disableAutomaticScalingInBlock:^{
-        [self.stackView setNeedsLayout:YES];
+        CGSize size = self.stackView.fittingSize;
+        self.stackView.bounds = CGRectIntegral(CGRectMake(0, 0, size.width, size.height));
+
         [self.stackView layoutSubtreeIfNeeded];
-        CGSize size = self.stackView.bounds.size;
 
         // For some reason, the setSize: setter doesn't notify delegate (confirmed in Hopper)
         // Instead, set dimensions individually to notify the delegate for redraw

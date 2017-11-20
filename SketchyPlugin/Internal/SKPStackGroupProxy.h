@@ -16,10 +16,8 @@ typedef NS_ENUM(NSUInteger, SKPStackAxis) {
 typedef NS_ENUM(NSUInteger, SKPStackAlignment) {
     SKPStackAlignmentFill = 0,
     SKPStackAlignmentLeading,
-    SKPStackAlignmentFirstBaseline,
     SKPStackAlignmentCenter,
-    SKPStackAlignmentTrailing,
-    SKPStackAlignmentLastBaseline
+    SKPStackAlignmentTrailing
 };
 
 typedef NS_ENUM(NSUInteger, SKPStackDistribution) {
