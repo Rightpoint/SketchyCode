@@ -23,7 +23,7 @@ static NSString* const kSKPStackConfigurationKey = @"stackConfiguration";
 
 @property (strong, nonatomic, readonly) NSMutableArray *alignmentConstraints;
 
-@property (assign, nonatomic) BOOL performingLayout;
+@property (assign, nonatomic) BOOL ignoreChangeEvents;
 
 @end
 
@@ -159,6 +159,8 @@ static NSString* const kSKPStackConfigurationKey = @"stackConfiguration";
 }
 
 - (void)rebuildViews {
+    self.ignoreChangeEvents = YES;
+
     [self.stackView.arrangedSubviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 
     // Layers in sketch are rendered last child -> first child, which is opposite of AppKit
@@ -172,6 +174,8 @@ static NSString* const kSKPStackConfigurationKey = @"stackConfiguration";
     }
 
     [self updateAlignmentConstraints];
+
+    self.ignoreChangeEvents = NO;
 }
 
 - (void)updateAlignmentConstraints {
@@ -193,7 +197,7 @@ static NSString* const kSKPStackConfigurationKey = @"stackConfiguration";
 }
 
 - (void)performLayout {
-    self.performingLayout = YES;
+    self.ignoreChangeEvents = YES;
 
     [self.proxiedLayer disableAutomaticScalingInBlock:^{
         CGSize size = self.stackView.fittingSize;
@@ -209,14 +213,14 @@ static NSString* const kSKPStackConfigurationKey = @"stackConfiguration";
 
     [SketchyPlugin reloadLayerPosition];
 
-    self.performingLayout = NO;
+    self.ignoreChangeEvents = NO;
 }
 
 #pragma mark - SKPLayerObserver
 
 - (void)object:(id)object didChangeProperty:(NSString *)property inLayer:(id<MSLayerInterface>)layer {
     // Prevent recursion
-    if ( self.performingLayout ) {
+    if ( self.ignoreChangeEvents ) {
         return;
     }
 
