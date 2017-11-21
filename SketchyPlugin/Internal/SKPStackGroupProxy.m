@@ -237,6 +237,10 @@ static NSString* const kSKPStackConfigurationKey = @"stackConfiguration";
 
 @implementation SKPStackView
 
+- (BOOL)isFlipped {
+    return YES;
+}
+
 - (void)setNeedsLayout:(BOOL)needsLayout {
     for ( NSView *view in self.arrangedSubviews ) {
         [view setNeedsLayout:needsLayout];
