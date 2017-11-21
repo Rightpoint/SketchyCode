@@ -201,7 +201,7 @@ static NSString* const kSKPStackConfigurationKey = @"stackConfiguration";
 
     [self.proxiedLayer disableAutomaticScalingInBlock:^{
         CGSize size = self.stackView.fittingSize;
-        self.stackView.bounds = CGRectIntegral(CGRectMake(0, 0, size.width, size.height));
+        [self.stackView setFrameSize:size];
 
         [self.stackView layoutSubtreeIfNeeded];
 
